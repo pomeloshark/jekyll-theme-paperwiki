@@ -1,0 +1,183 @@
+/*------------------------------------*\
+  # REFERENCE DESK STYLING
+\*------------------------------------*/
+
+.collections-sidebar {
+   grid-column: span 2 / auto;
+   padding: 4.5em 2em;
+
+   background-color: $color-paperdark;
+
+   font-size: $fontsize-small;
+
+   ul {
+      margin-bottom: 0;
+      padding-left: 0;
+      list-style-type: none;
+   }
+}
+
+.collections-content {
+   grid-column: span 10 / auto;
+
+//   display: grid;
+//   grid-template-columns: repeat(12, 1fr);
+//   grid-gap: 2em;
+
+   padding: 1.56em 2em 1.56em*2;
+
+   h1 {
+      grid-column: span 12 / auto;
+   }
+
+   ul {
+      list-style-type: none;
+   }
+}
+
+.reference-desk {
+   display: grid;
+   grid-template-columns: repeat(12, 1fr);
+   grid-gap: 2em;
+}
+
+.collections-portals {
+   grid-column: span 12 / auto;
+
+   display: grid;
+   grid-template-columns: repeat(12, 1fr);
+
+}
+
+.collections-portals_header {
+   grid-column: span 12 / auto;
+}
+
+.collections-portals_grid {
+   grid-column: span 12 / auto;
+
+   display: grid;
+   grid-template-columns: repeat(12, 1fr);
+   grid-gap: 1em;
+
+//   padding: 0 0 0 3em;
+}
+
+.portal {
+   grid-column: span 2 / auto;
+   padding: 1em;
+}
+
+.collections-portal_card {
+   grid-column: span 3 / auto;
+
+   padding: 28px 28px;
+
+   border-radius: 1.5rem;
+   border: 1px solid $color-projectborder;
+
+   text-decoration: none;
+   color: $color-bodytext;
+
+   header {
+      display: flex;
+
+      font-family: $fontfamily-header;
+      font-size: $fontsize-med;
+   }
+
+   .portal-icon {
+      margin-right: 0.4em;
+      padding: 0;
+
+      color: $color-bodytext;
+      font-size: 1em;
+
+      transition: 0.2s;
+   }
+}
+
+.collections-portal_card:link {
+   color: $color-bodytext;
+}
+
+.collections-portal_card:hover {
+   .portal-icon {
+      color: $color-projectcard;
+
+      transition: 0.2s;
+   }
+   color: $color-bodytext;
+}
+
+.collections-portal_card:visited {
+   color: $color-bodytext;
+}
+
+
+
+.collections-wrapper {
+   grid-column: span 12 / auto;
+
+   display: grid;
+   grid-template-columns: repeat(12, 1fr);
+   grid-gap: 1em;
+}
+
+.collections-featured {
+   grid-column: span 7 / auto;
+}
+.collections-facts {
+   grid-column: span 5 / auto;
+}
+.collections-recent {
+   grid-column: span 6 / auto;
+}
+
+.collections-featured,
+.collections-facts,
+.collections-recent {
+   padding: 14px 28px;
+
+   border-radius: 1.5rem;
+   border: 1px solid $color-projectborder;
+}
+
+
+
+.portal-list {
+//   border: 1px solid pink;
+//   padding: 8px;
+}
+
+.portal-cat {
+//   border: 1px solid coral;
+//   padding: 8px;
+   margin-bottom: 1rem;
+}
+
+.portal-subcat_list {
+//   border: 1px solid orange;
+//   padding: 8px;
+}
+
+.portal-subcat_inline {
+   padding-left: 1rem;
+//   border: 1px solid gold;
+//   padding: 8px;
+}
+
+.portal-subcat {
+   font-size: $fontsize-small;
+   text-transform: uppercase;
+//   border: 1px solid darkgoldenrod;
+//   padding: 8px;
+}
+
+.portal-tag {
+//   border: 1px solid goldenrod;
+//   padding: 8px;
+   font-size: $fontsize-small;
+//   text-transform: uppercase;
+   margin-right: 0.65rem;
+}

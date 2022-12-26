@@ -1,0 +1,150 @@
+/*------------------------------------*\
+  # BASE STYLING
+  # styling universal to all pages
+\*------------------------------------*/
+
+* {
+   /* Correct box-sizing in IE. */
+   box-sizing: border-box;
+
+   /* Hard reset on spacing, for the insane. */
+   margin: 0;
+   padding: 0;
+
+   color: $color-bodytext;
+   line-height: $lineheight-body;
+}
+
+body {
+   width: 85%;
+
+   display: grid;
+   grid-template-columns: repeat(12, 1fr);
+
+   margin: 0 auto;
+
+   background-color: $color-bodybg;
+   font-family: $fontfamily-body;
+   font-size: $fontsize-body;
+}
+
+main {
+   width: 100%;
+
+   grid-column: span 12 / auto;
+
+   display: grid;
+   grid-template-columns: repeat(12, 1fr);
+
+   background-color: $color-contentbg;
+}
+
+h1,
+h2,
+h3 {
+   font-family: $fontfamily-header;
+   font-weight: normal;
+}
+
+h1 {
+   font-size: $fontsize-h1;
+   padding: 0 0 0.19em;
+}
+
+h2 {
+   font-size: $fontsize-h2;
+   padding: 0.32em 0 0.61em;
+}
+
+h3 {
+   font-size: $fontsize-h3;
+   font-variant: small-caps;
+   padding: 0.71em 0 0.9em 0;
+   color: #828077;
+//   opacity: 0.8;
+}
+
+a,
+a:link,
+a:active {
+   color: $color-link;
+   transition: .2s;
+}
+
+a:hover {
+   color: $color-linkhover;
+}
+/*
+a:visited {
+   color: $color-linkvisited;
+}
+*/
+a:active {
+   color: $color-linkactive;
+}
+
+p {
+   margin-bottom: 1.75em;
+}
+
+hr {
+   margin: 2*1.75rem 6em 2*1.68rem;
+
+   border-style: solid;
+   border-color: $color-hr;
+}
+
+img {
+   border: 0;
+}
+
+blockquote {
+   margin-left: 3em;
+   margin-right: 3em;
+   margin-bottom: 1.75rem;
+   padding-left: 1em;
+
+   border-left: 0.25em solid $color-linen;
+
+   cite {
+      display: block;
+      width: 100%;
+      text-align: right;
+   }
+}
+
+ul ul {
+   list-style-type: circle;
+}
+
+sup,
+sub {
+   font-size: $fontsize-small;
+   line-height: 0;
+}
+
+figcaption {
+   font-size: $fontsize-small;
+   text-align: center;
+}
+
+code,
+pre,
+kbd,
+samp {
+   font-family: $fontfamily-code;
+}
+
+code,
+kbd,
+.ipa {
+   padding: 0.1em 0.2em;
+
+   background-color: $color-codebg;
+   color: $color-codetext;
+   border-radius: 0.3em;
+}
+
+input[type="search"] {
+   background-color: $color-searchbg;
+}

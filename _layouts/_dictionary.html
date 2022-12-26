@@ -1,0 +1,10 @@
+<!---No front matter bc this is a work in progress lol--->
+
+<dl>
+   {% for item in site.data.lexicon %}
+      <dt>{{ item.term }}</dt>
+      <dd>{{ item.def }}</dd>
+   {% endfor %}
+</dl>
+
+<!---Idk if it's possible to set a template that can retrieve the name of the correct file from the url or if I'm just gonna have to do them all individually--->

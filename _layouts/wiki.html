@@ -1,0 +1,96 @@
+---
+layout: default
+---
+
+<nav class="entry-index">
+
+</nav>
+
+<article class="entry entry-wiki">
+
+   <h1>
+      {{ page.title }}
+   </h1>
+
+   <section class="entry-tags">
+      <ul>
+         <ul>
+            <li>Portals:</li>
+            <li><a href="/wiki/portal:{{ page.portal }}">{{ page.portal }}</a></li>
+         </ul>
+         <ul>
+            <li>Categories:</li>
+            {% for item in page.categories %}
+               <li>
+                  <a href="/wiki/category:{{ item | slugify }}">
+                     {{ item }}
+                  </a>
+               </li>
+            {% endfor %}
+         </ul>
+         <ul>
+            <li>Tags:</li>
+            {% for item in page.tags %}
+               <li>
+                  <a href="/wiki/tag:{{ item | slugify }}">
+                     {{ item }}
+                  </a>
+               </li>
+            {% endfor %}
+            </li>
+         </ul>
+      </ul>
+   </section>
+
+   {{ content }}
+
+</article>
+
+{% if page.quickstats %}
+
+   <section class="entry-quickstats">
+
+      {% if page.image %}
+         <figure>
+            <img src="{{ page.image }}" width=auto class="stats-image">
+            <figcaption>{{ page.image_caption }}</figcaption>
+         </figure>
+      {% endif %}
+
+      <section class="stats-facts">
+
+         <table class="stats-table">
+            {% if page.type == "person" %}
+               <tr><td>Name</td><td>{{ page.fullname }}</td></tr>
+               <tr><td>Birthday</td><td>{{ page.birthday }}</td></tr>
+               <tr><td>Birthplace</td><td>{{ page.birthplace }}</td></tr>
+               <tr><td>Known for</td><td>{{ page.known_for }}</td></tr>
+            {% endif %}
+            {% if page.type == "planet" %}
+               <tr><td>Orbital period</td><td>{{ page.orbital_period }}</td></tr>
+               <tr><td>Semimajor axis</td><td>{{ page.semimajor_axis }}</td></tr>
+               <tr><td>Orbital eccentricity</td><td>{{ page.eccentricity }}</td></tr>
+               <tr><td>Aphelion</td><td>{{ page.aphelion }}</td></tr>
+               <tr><td>Perihelion</td><td>{{ page.perihelion }}</td></tr>
+               <tr><td>Orbital speed</td><td>{{ page.orbital_speed }}</td></tr>
+               <tr><td>Orbital period</td><td>{{ page.orbital_period }}</td></tr>
+               <tr><td>Orbital inclination</td><td>{{ page.orbital_inclination }}</td></tr>
+               <tr><td>Satellites</td><td>{{ page.satellites }}</td></tr>
+               <tr><td>Radius (mean)</td><td>{{ page.radius }}</td></tr>
+               <tr><td>Radius (equatorial)</td><td>{{ page.radius_equatorial }}</td></tr>
+               <tr><td>Radius (polar)</td><td>{{ page.radius_polar }}</td></tr>
+               <tr><td>Circumference</td><td>{{ page.circumference }}</td></tr>
+               <tr><td>Surface area</td><td>{{ page.surface_area }}</td></tr>
+               <tr><td>Sidereal day</td><td>{{ page.sidereal_day }}</td></tr>
+               <tr><td>Synodic day</td><td>{{ page.synodic_day }}</td></tr>
+               <tr><td>Axial tilt</td><td>{{ page.axial_tilt }}</td></tr>
+            {% endif %}
+         </table>
+
+      </section>
+
+   </section>
+
+{% endif %}
+
+<script src="/assets/js/toc.js"></script>

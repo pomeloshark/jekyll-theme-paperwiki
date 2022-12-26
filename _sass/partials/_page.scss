@@ -1,0 +1,13 @@
+/*------------------------------------*\
+  # BASIC PAGE STYLING
+  # for text with no frills
+\*------------------------------------*/
+
+.page-content {
+   grid-column: span 12 / auto;
+   width: 60%;
+
+   margin-left: auto;
+   margin-right: auto;
+   padding: 1.56em 0;
+}

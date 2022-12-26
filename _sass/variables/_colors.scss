@@ -1,0 +1,49 @@
+/*------------------------------------*\
+  # COLOUR SCHEME
+\*------------------------------------*/
+
+$color-paperlight: #fdfcfc; // off white
+$color-paperdark: #fbf9f8;
+$color-linen: #f6f2ef; // shortbread
+$color-ink: #4b4a46; // dark umber
+$color-limeade: #e2edbf;
+$color-pistachio: #f1f5e1;
+$color-kiwi: #a7c854;
+$color-melon: #f1a393;
+$color-peach: #f7dcd3;
+$color-inkwarm: #504b38;
+
+$color-bluelight: #4083ae;
+$color-bluedark: #356d90;
+$color-purple: #61609d;
+
+/*------------------------------------*\
+  # COLOUR SCHEME values
+\*------------------------------------*/
+
+$color-bodybg: $color-linen;
+$color-contentbg: $color-paperlight;
+$color-globalbg: $color-paperdark;
+$color-globalborder: #f7f2ef;
+
+$color-bodytext: $color-ink;
+$color-link: $color-bluelight;
+$color-linkhover: $color-bluedark;
+$color-linkactive: $color-purple;
+$color-linkvisited: $color-purple;
+
+$color-globalsearchbar: $color-peach;
+
+$color-launchpadsearch: $color-linen;
+$color-launchpadborder: $color-linen;
+$color-launchpadsearchbar: $color-melon;
+$color-projectcard: $color-kiwi;
+$color-projectborder: $color-linen;
+$color-projecthover: $color-limeade;
+
+$color-articleborder: $color-linen;
+
+$color-searchbg: $color-paperlight;
+$color-codebg: $color-pistachio;
+$color-codetext: $color-inkwarm;
+$color-hr: $color-linen;
