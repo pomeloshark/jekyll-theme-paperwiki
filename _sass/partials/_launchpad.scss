@@ -72,6 +72,44 @@
    grid-gap: 32px;
 }
 
+
+
+/*------------------------------------*\
+  # !IF ONLY ONE PROJECT IS SHOWN
+\*------------------------------------*/
+
+.launchpad-wiki_card {
+   grid-column: span 12 / auto;
+   padding: 28px;
+
+   background-color: $color-projecthover;
+   border-radius: 1.5rem;
+   border: 1px solid $color-projectborder;
+
+   text-decoration: none;
+   color: $color-bodytext;
+}
+
+.launchpad-wiki_card:link {
+   color: $color-bodytext;
+}
+
+.launchpad-wiki_card:hover {
+   background-color: $color-projecthover;
+
+   color: $color-projectcard;
+
+   transition: 0.2s;
+}
+
+.launchpad-project_card:visited {
+   color: $color-bodytext;
+}
+
+/*------------------------------------*\
+  # !IF MULTIPLE PROJECTS ARE SHOWN
+\*------------------------------------*/
+
 .launchpad-project_card {
    grid-column: span 4 / auto;
 

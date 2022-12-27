@@ -1,15 +1,31 @@
 # jekyll-theme-paperwiki
 
-Welcome to your new Jekyll theme! In this directory, you'll find the files you need to be able to package up your theme into a gem. Put your layouts in `_layouts`, your includes in `_includes`, your sass files in `_sass` and any other assets in `assets`.
+The intent of this theme is to get all the code out of the way and to allow you to write Markdown articles.
 
-To experiment with this code, add some sample content and run `bundle exec jekyll serve` – this directory is setup just like a Jekyll site!
 
-TODO: Delete this and the text above, and describe your gem
+
+## Usage
+
+In case you're unfamiliar with it, a basic Jekyll site includes the following:
++ The `_includes` folder contains snippets of HTML that are frequently reused on pages throughout the website. This saves us from having to copy and paste the HTML on multiple pages, and we only have to edit it in one file in order to change every instance of it.
++ The `_layouts` folder contains the formatting for different types of pages, meaning that instead of formatting each page individually we can just specify which layout template to use.
++ The `_sass` folder contains all the styling for the site, written in SCSS.
++ The `_site` folder contains everything that Jekyll outputs when it builds the site. Don't edit anything in this folder, as it will be rewritten the next time you serve the site.
++ The `assets` folder contains things like fonts, images, and Javascript files. It also contains a `.scss` file importing all of your SCSS so that Jekyll can convert it to regular CSS.
+
+This theme comes with all of these prepackaged, so most of what you have to do is edit the `_config.yaml` file. The theme has some default config set already, but you can override these in your own config file if you wish. You can also add any of the above folders with includes, layouts, or SCSS to override the theme's own files. For example, you will want to add your own `assets` folder to store your own images, including one titled `favicon.png` in order to override the placeholder one i've included.
+
 
 
 ## Installation
 
-Add this line to your Jekyll site's `Gemfile`:
+[Install Jekyll](https://jekyllrb.com/docs/). Create a new site by running the following in your terminal:
+
+   $ jekyll new MYSITENAME
+
+This will give you a very bare bones Jekyll site, with an index page, a folder for blog posts, a config file, and a Gemfile. You will want to add a folder called `collections`, and inside of that another folder called `_wiki`.
+
+To use this theme, open your Jekyll site's `Gemfile`, delete the line that says `gem "minima"` and replace it with this line:
 
 ```ruby
 gem "jekyll-theme-paperwiki"
@@ -23,32 +39,64 @@ theme: jekyll-theme-paperwiki
 
 And then execute:
 
-    $ bundle
+```
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install jekyll-theme-paperwiki
+```
+$ gem install jekyll-theme-paperwiki
+```
 
-## Usage
 
-TODO: Write usage instructions here. Describe your available layouts, includes, sass and/or assets.
 
-## Contributing
+## Config
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/hello. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+By default, PaperWiki is set up to just be a collection of articles, with a handful of navigational pages, similar to Wikipedia. The articles are organized into the `collections` folder, in a subfolder titled `_wiki`. This is defined in the theme's config file like so:
+
+```yaml
+collections_dir: collections
+collections:
+   wiki:
+      output: true
+      permalink: /:collection/:name
+```
+
+`/:collection/:name` means the url to each wiki entry will be `wiki/article_title` without the article file extension.
+
+However, if you would like to have additional collections akin to the Wikimedia Foundation's other projects - such as Wikisource, Wikispecies, or Wiktionary - then you can specify them in the same format as above, also under the `collections` key:
+
+```yaml
+   collection_name:
+      output: true
+      permalink: /:collection/:name
+```
+
+Make sure to add the corresponding folders within `collections`, including the preceding underscore.
+
+Add into your `_config.yml`:
+
+```yaml
+multi_projects: true
+```
+
+This will add links to each different collection on your homepage, and allow you to limit the scope of your searches to a single collection or expand it to cover all of them at once.
+
+
 
 ## Development
-
-To set up your environment to develop this theme, run `bundle install`.
-
-Your theme is setup just like a normal Jekyll site! To test your theme, run `bundle exec jekyll serve` and open your browser at `http://localhost:4000`. This starts a Jekyll server using your theme. Add pages, documents, data, etc. like normal to test your theme's contents. As you make modifications to your theme and to your content, your site will regenerate and you should see the changes in the browser after a refresh, just like normal.
 
 When your theme is released, only the files in `_layouts`, `_includes`, `_sass` and `assets` tracked with Git will be bundled.
 To add a custom directory to your theme-gem, please edit the regexp in `jekyll-theme-paperwiki.gemspec` accordingly.
 
+
+
 ## License
 
 The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+
 
 ## Credits
 

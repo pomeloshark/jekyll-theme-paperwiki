@@ -35,6 +35,12 @@
 
    font-size: $fontsize-small;
    text-align: center;
+
+   p {
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+   }
 }
 
 .global-logo {
