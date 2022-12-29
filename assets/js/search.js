@@ -40,7 +40,7 @@ var resultPages = results.map(function (match) {
 resultsString = "";
 resultPages.forEach(function (r) {
     resultsString += "<dt>";
-    resultsString +=   "<a class='result' href='" + r.url + "'>" + r.title + "</a></dt>";
-    resultsString +=   "<dd>" + r.content.substring(0, 200) + "..." + "</dd>";
+    resultsString += "<a class='result' href='" + r.url + "'>" + r.title + "</a></dt>";
+    resultsString += "<dd>" + r.content.substring(0, 200) + "..." + "</dd>";
 });
 document.querySelector("#search-results").innerHTML = resultsString;

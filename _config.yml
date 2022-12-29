@@ -50,6 +50,11 @@ collections:
       output: true
       permalink: /:collection/:name
 
+
+random_redirect:
+   pages: true
+
+
 # Front matter defaults, so you don't need to set layouts on every new page.
 # As long as pages are in the correct folder, they'll automatically have the
 # correct layout. You can override this via each page's front matter.
@@ -59,7 +64,7 @@ defaults:
          path: "" # an empty string here means all files in the project
          type: "pages"
       values:
-         layout: "page"
+         layout: "page" # all pages will have the page.html layout unless overridden
          permalink: "/:path/:basename"
    -
       scope:

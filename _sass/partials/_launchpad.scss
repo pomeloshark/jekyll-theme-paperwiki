@@ -26,26 +26,28 @@
 }
 
 .launchpad-searchbar {
-   width: 40%;
-
+   width: 60%;
    padding: 12px 16px;
 
+   border: 1px solid transparent;
    border-radius: 1rem;
-   border: 1px solid $color-launchpadsearchbar;
 
    font-size: $fontsize-body;
 
    transition: 0.25s;
+   appearance: none;
+   outline: none;
 }
 
-.launchpad-searchbar::placeholder {
-   color: #f5a79d;
+.launchpad-searchbar:hover {
+   border: 1px solid $color-launchpadsearch;
+   box-shadow: 0 0 6px $color-globalsearchbar;
 }
 
 .launchpad-searchbar:focus {
    outline: none;
-   border-color: $color-launchpadsearchbar;
-   box-shadow: 0 0 10px $color-launchpadsearchbar;
+   border-color: $color-globalsearchbar;
+   box-shadow: 0 0 6px $color-globalsearchbar;
    transition: 0.25s;
 }
 
@@ -54,14 +56,53 @@
    font-size: $fontsize-larger;
 }
 
+.launchpad-search_select {
+   padding: 16px 16px 17px 16px;
+
+   border: 1px solid transparent;
+   border-radius: 1rem;
+
+   background-color: $color-globalsearchbar;
+
+   font-size: $fontsize-body;
+
+   transition: 0.25s;
+//   appearance: none;
+}
+
+.launchpad-search_select:hover {
+   border: 1px solid $color-launchpadsearch;
+   box-shadow: 0 0 6px $color-globalsearchbar;
+}
+
+.launchpad-search_select:focus {
+   outline: none;
+   border-color: $color-globalsearchbar;
+   box-shadow: 0 0 6px $color-globalsearchbar;
+   transition: 0.25s;
+}
+
 .launchpad-search_submit {
    padding: 12px 20px;
 
    background: $color-launchpadsearchbar;
-   border: 1px solid $color-launchpadsearchbar;
+   border: 1px solid transparent;
    border-radius: 1rem;
 
    font-size: $fontsize-body;
+}
+
+.launchpad-search_submit:hover {
+   border: 1px solid $color-launchpadsearch;
+   box-shadow: 0 0 6px $color-globalsearchbar;
+   transition: 0.25s;
+}
+
+.launchpad-search_submit:focus {
+   outline: none;
+   border-color: $color-globalsearchbar;
+   box-shadow: 0 0 6px $color-globalsearchbar;
+   transition: 0.25s;
 }
 
 .launchpad-projects {
@@ -75,42 +116,10 @@
 
 
 /*------------------------------------*\
-  # !IF ONLY ONE PROJECT IS SHOWN
-\*------------------------------------*/
-
-.launchpad-wiki_card {
-   grid-column: span 12 / auto;
-   padding: 28px;
-
-   background-color: $color-projecthover;
-   border-radius: 1.5rem;
-   border: 1px solid $color-projectborder;
-
-   text-decoration: none;
-   color: $color-bodytext;
-}
-
-.launchpad-wiki_card:link {
-   color: $color-bodytext;
-}
-
-.launchpad-wiki_card:hover {
-   background-color: $color-projecthover;
-
-   color: $color-projectcard;
-
-   transition: 0.2s;
-}
-
-.launchpad-project_card:visited {
-   color: $color-bodytext;
-}
-
-/*------------------------------------*\
   # !IF MULTIPLE PROJECTS ARE SHOWN
 \*------------------------------------*/
 
-.launchpad-project_card {
+.launchpad-card {
    grid-column: span 4 / auto;
 
    padding: 36px 28px 28px;
@@ -141,11 +150,13 @@
    }
 }
 
-.launchpad-project_card:link {
+.launchpad-card:link {
    color: $color-bodytext;
 }
 
-.launchpad-project_card:hover {
+.launchpad-card:hover {
+   border: 1px solid transparent;
+   box-shadow: 0 0 6px $color-projectborder;
    .project-icon {
       background-color: $color-projecthover;
 
@@ -156,6 +167,31 @@
    color: $color-bodytext;
 }
 
-.launchpad-project_card:visited {
+.launchpad-card:visited {
    color: $color-bodytext;
+}
+
+
+
+/*------------------------------------*\
+  # !IF ONLY ONE PROJECT IS SHOWN
+\*------------------------------------*/
+
+.launchpad-card_wiki {
+   background-color: $color-projecthover;
+   border-radius: 1.5rem;
+   border: 1px solid $color-projecthover;
+}
+
+.launchpad-card_wiki:hover {
+   background-color: $color-projecthover;
+
+   color: $color-projectcard;
+   .project-icon {
+      background-color: $color-paperlight;
+
+      color: $color-projectcard;
+
+      transition: 0.2s;
+   }
 }

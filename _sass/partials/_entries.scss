@@ -68,6 +68,21 @@
 
 .entry-summary {}
 
+.entry-other_projects {
+   padding: 1rem;
+   margin: 1em 0;
+   border-radius: 1em;
+   background-color: #f9f7f6;
+   font-size: $fontsize-small;
+
+   ul {
+      list-style: none;
+      margin-left: 1rem;
+      padding: 0;
+      margin-bottom: 0;
+   }
+}
+
 .entry-quickstats {
    grid-column: span 3 / auto;
    padding: 0.5em;
@@ -104,33 +119,60 @@
 
 .entry-tags {
    margin-bottom: 2em;
+   padding: 1rem;
+   border-radius: 1em;
+   background-color: #f9f7f6;
    font-size: $fontsize-small;
    text-transform: uppercase;
 
-   ul {
-      display: inline-flex;
-      flex-wrap: wrap;
-      list-style-type: none;
-      margin: 0 1em 0 0;
-//      border: 1px solid pink;
-   }
-
-   ul ul {
-      display: inline-flex;
-      flex-wrap: wrap;
-      margin-right: .5em;
-//      border: 1px solid pink;
-   }
-
-   li {
-//      display: inline-flex;
-//      flex-wrap: wrap;
-      padding-right: .5em;
-//      border: 1px solid pink;
-      color: #9f9b97;
-   }
-
    a {
       text-decoration: none;
+   }
+}
+
+.entry-subhead_pair {
+   display: inline;
+   margin-right: 1em;
+}
+
+.entry-subhead_key,
+.entry-subhead_value {
+   display: inline;
+}
+
+.entry-subhead_key {
+   margin-right: 0.4em;
+}
+
+.entry-subhead_value {
+   margin-right: 0.9em;
+}
+
+
+
+a.footnote {
+   text-decoration: none;
+}
+a.footnote::before {
+   content: "[";
+}
+a.footnote::after {
+   content: "]";
+}
+
+.footnotes {
+//   grid-column: span 7 / auto;
+
+   padding: 1rem;
+   border-radius: 1em;
+   background-color: #f9f7f6;
+   font-size: $fontsize-small;
+   ol {
+      padding-left: 1rem;
+      margin: 0;
+      li {
+         margin: 0;
+         padding: 0;
+      }
    }
 }

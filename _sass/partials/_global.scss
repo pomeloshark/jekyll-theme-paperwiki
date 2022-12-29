@@ -62,16 +62,18 @@
 }
 
 .global-search {
-   padding-bottom: 4px;
-//   border-bottom: 1px solid $color-bodytext;
+   padding-bottom: 2px;
 }
 
 .global-searchbar {
-   padding: 0 0.5em;
-   border: 1px solid #f5f2ef;
+   padding: 0.2rem 1rem;
+   border: 1px solid transparent;
    border-radius: 8px;
    font-size: $fontsize-small;
    transition: 0.25s;
+   appearance: none;
+   outline: none;
+   line-height: 2rem;
 }
 
 .global-searchbar::placeholder {
@@ -79,13 +81,14 @@
 }
 
 .global-searchbar:hover {
-   border: 1px solid $color-globalsearchbar;
+   border: 1px solid $color-launchpadsearch;
+   box-shadow: 0 0 6px $color-globalsearchbar;
 }
 
 .global-searchbar:focus {
    outline: none;
    border-color: $color-globalsearchbar;
-   box-shadow: 0 0 10px $color-globalsearchbar;
+   box-shadow: 0 0 6px $color-globalsearchbar;
    transition: 0.25s;
 }
 
@@ -104,12 +107,18 @@
 
 .global-nav-link {
    display: inline-block;
+   padding-top: 0.3rem;
 
    margin-right: 1.75rem;
+
+   border-bottom: 2px solid #f6bf5d;
 
    font-size: $fontsize-small;
    text-decoration: none;
    text-transform: uppercase;
+   &:hover {
+      opacity: 0.75;
+   }
 }
 
 .global-nav-link:visited {

@@ -100,6 +100,6 @@ The theme is available as open source under the terms of the [MIT License](https
 
 ## Credits
 
-This theme uses the fonts [Inter](https://rsms.me/inter/), [Libertinus Serif](https://github.com/alerque/libertinus), and [Liberation Mono](https://fontlibrary.org/en/font/liberation-mono), all of which are released under the SIL Open Font License; and the icon font [RemixIcon](https://remixicon.com/), which is available under the Apache License 2.0. The [example favicon](https://www.flaticon.com/free-icon/picture_4671171) is by Royyan Wijaya at Flaticon.
+This theme uses the fonts [Inter](https://rsms.me/inter/), [Libertinus Serif](https://github.com/alerque/libertinus), and [Liberation Mono](https://fontlibrary.org/en/font/liberation-mono), all of which are released under the SIL Open Font License; and the icon font [RemixIcon](https://remixicon.com/), which is available under the Apache License 2.0. The [example favicon](https://www.flaticon.com/free-icon/toucan_3002355) is by Freepik at Flaticon.
 
 The search function uses [Lunr.js](https://lunrjs.com/).

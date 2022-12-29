@@ -1,4 +1,6 @@
 - name: About
   link: /about
+- name: Random
+  link: /random
 - name: Blog
   link: /blog

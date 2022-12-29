@@ -1,50 +1,80 @@
 ---
-   layout: default
+   layout: entry
 ---
 
-<nav class="entry-index">
-
-</nav>
-
 <article class="entry entry-wiki">
+
+
 
    <h1>
       {{ page.title }}
    </h1>
 
+
+
+   {% if page.other_projects %}
+
+      <section class="entry-other_projects">
+         View in other collections:
+         <ul>
+            {% for item in page.other_projects %}
+               <li>
+                  <a href="/{{ item }}{{ page.url | remove_first: "/wiki" }}">{{ item | capitalize }}</a>
+               </li>
+            {% endfor %}
+         </ul>
+      </section>
+
+   {% endif %}
+
+
+
    <section class="entry-tags">
-      <ul>
-         <ul>
-            <li>Portals:</li>
-            <li><a href="/wiki/portal:{{ page.portal }}">{{ page.portal }}</a></li>
-         </ul>
-         <ul>
-            <li>Categories:</li>
+
+      <div class="entry-subhead_pair">
+
+         <span class="entry-subhead_key">Portals:</span>
+         <span>
+            <a href="/wiki/portal:{{ page.portal }} class="entry-subhead_value"">
+               {{ page.portal }}
+            </a>
+         </span>
+
+      </div>
+
+      <div class="entry-subhead_pair">
+
+         <span class="entry-subhead_key">Categories:</span>
+         <span>
             {% for item in page.categories %}
-               <li>
-                  <a href="/wiki/category:{{ item | slugify }}">
-                     {{ item }}
-                  </a>
-               </li>
+               <a href="/wiki/category:{{ item | slugify }}" class="entry-subhead_value">
+                  {{ item }}
+               </a>
             {% endfor %}
-         </ul>
-         <ul>
-            <li>Tags:</li>
+         </span>
+
+      </div>
+
+      <div class="entry-subhead_pair">
+
+         <span class="entry-subhead_key">Tags:</span>
+         <span>
             {% for item in page.tags %}
-               <li>
-                  <a href="/wiki/tag:{{ item | slugify }}">
-                     {{ item }}
-                  </a>
-               </li>
+               <a href="/wiki/tag:{{ item }}" class="entry-subhead_value">
+                  {{ item }}
+               </a>
             {% endfor %}
-            </li>
-         </ul>
-      </ul>
+         </span>
+
+      </div>
+
    </section>
 
    {{ content }}
 
 </article>
+
+
 
 {% if page.quickstats %}
 
@@ -92,5 +122,3 @@
    </section>
 
 {% endif %}
-
-<script src="/assets/js/toc.js"></script>

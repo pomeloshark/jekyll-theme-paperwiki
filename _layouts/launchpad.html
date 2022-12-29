@@ -1,3 +1,86 @@
 ---
    layout: default
 ---
+
+<div class="launchpad">
+
+
+
+   <section class="launchpad-search">
+
+      {% if site.multi_projects %}
+
+         <form action="/search" method="GET">
+
+            <label for="input__text">What do you want to know?</label><br>
+
+            <input id="input__text" name="q" class="launchpad-searchbar" required type="search" placeholder="Search">
+
+            <select id="select__project" name="p" class="launchpad-search_select">
+               <option value="all" class="launchpad-select_default">All projects</option>
+               {% for item in site.data.projects %}
+                  <option value="{{ item.name | slugify }}">{{ item.name }}</option>
+               {% endfor %}
+            </select>
+
+            <input type="submit" class="launchpad-search_submit" value="Go">
+
+         </form>
+
+      {% else %}
+
+         <form action="/search" method="GET">
+
+            <label for="input__text">What do you want to know?</label><br>
+            <input id="input__text" name="q" class="launchpad-searchbar" required type="search" placeholder="Search">
+
+            <input type="submit" class="launchpad-search_submit" value="Go">
+
+         </form>
+
+      {% endif %}
+
+   </section>
+
+
+
+   <section class="launchpad-projects">
+
+      {% if site.multi_projects %}
+
+         {% for item in site.data.projects %}
+
+            <a href="{{ item.link }}" class="launchpad-card">
+               <i class="{{ item.icon }} project-icon"></i>
+               <header>{{ item.name }}</header>
+               {{ item.desc }}
+            </a>
+
+         {% endfor %}
+
+      {% else %}
+
+         <a href="/wiki" class="launchpad-card launchpad-card_wiki">
+            <i class="ri-footprint-line project-icon"></i>
+            <header>Explore the wiki!</header>
+         </a>
+
+         <a href="/wiki:contents" class="launchpad-card">
+            <i class="ri-file-list-2-line project-icon"></i>
+            <header>Contents</header>
+            Navigate the wiki
+         </a>
+
+         <a href="/random" class="launchpad-card">
+            <i class="ri-question-line project-icon"></i>
+            <header>Random</header>
+            Visit a random article
+         </a>
+
+      {% endif %}
+
+   </section>
+
+
+
+</div>
