@@ -41,6 +41,7 @@ resultsString = "";
 resultPages.forEach(function (r) {
     resultsString += "<dt>";
     resultsString += "<a class='result' href='" + r.url + "'>" + r.title + "</a></dt>";
+//    resultsString += "<dd><a href='/" + r.collection + "'>" + r.collection + "</a>";
     resultsString += "<dd>" + r.content.substring(0, 200) + "..." + "</dd>";
 });
 document.querySelector("#search-results").innerHTML = resultsString;

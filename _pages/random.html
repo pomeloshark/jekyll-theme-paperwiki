@@ -8,7 +8,7 @@
 {%- assign docs = site.posts -%}
 
 {%- if site.random_redirect.pages == true -%}
-  {%- assign pages = site.html_pages | where_exp:"page","page.url != '/random/'" -%}
+  {%- assign pages = site.documents | where_exp:"page","page.url != '/random/'" -%}
   {%- assign docs = docs | concat: pages -%}
 {%- endif -%}
 

@@ -2,25 +2,30 @@
    layout: collections
 ---
 
+{% include collections_header.html %}
+
+
 <section class="reference-desk">
 
-   {% if page.url == "/wiki" %}
       <header class="collections-portals">
-         <h1 class="collections-portals_header">Pick a topic</h1>
          <nav class="collections-portals_grid">
 
-            {% for item in site.data.portals_wiki %}
-               <a href="{{ item.link }}" class="collections-portal_card">
-                  <header>
-                     <i class="{{ item.icon }} portal-icon"></i>
-                     {{ item.name }}
-                  </header>
-                  {{ item.summary }}
-               </a>
+            {% for item in site.data.projects %}
+               {% if page.url contains item.link %}
+                  {% for item in item.portals %}
+                     <a href="{{ item.link }}" class="collections-portal_card">
+                        <header>
+                           <i class="{{ item.icon }} portal-icon"></i>
+                           {{ item.portal }}
+                        </header>
+                        {{ item.summary }}
+                     </a>
+                  {% endfor %}
+               {% endif %}
             {% endfor %}
+            
          </nav>
       </header>
-   {% endif %}
 
    <section class="collections-wrapper">
 

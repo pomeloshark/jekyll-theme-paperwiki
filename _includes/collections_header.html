@@ -1,0 +1,30 @@
+<section class="collections-header">
+
+   <section class="collections-stats">
+      {% for item in site.data.projects %}
+         {% if page.url contains item.link %}
+            Total number of {{ item.name | downcase }} entries:
+            {% if item.name == "Wiki" %}
+               {{ site.wiki.size }}
+            {% else %}
+               ? for now
+            {% endif %}
+         {% endif %}
+      {% endfor %}
+   </section>
+
+
+
+   <section class="collections-search">
+
+      {% for item in site.data.projects %}
+         {% if page.url contains item.link %}
+            <form action="{{ item.link }}:search" method="GET">
+               <input required type="search" class="collections-searchbar" placeholder="Search all {{ item.name | downcase }} entries" name="q">
+            </form>
+         {% endif %}
+      {% endfor %}
+
+   </section>
+
+</section>

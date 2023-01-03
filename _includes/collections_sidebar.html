@@ -1,3 +1,15 @@
 <nav class="collections-sidebar">
 
+   {% for item in site.data.projects %}
+      {% if page.url contains item.link %}
+      <ul>
+         <li><a href="{{ item.link }}">Main page</a></li>
+         <li><a href="{{ item.link }}:contents">Contents</a></li>
+         <li><a href="{{ item.link }}:all">All entries</a></li>
+         <li><a href="{{ item.link }}:random">Random article</a></li>
+         <li><a href="{{ item.link }}:about">About</a></li>
+      </ul>
+      {% endif %}
+   {% endfor %}
+
 </nav>

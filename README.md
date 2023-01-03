@@ -21,7 +21,9 @@ This theme comes with all of these prepackaged, so most of what you have to do i
 
 [Install Jekyll](https://jekyllrb.com/docs/). Create a new site by running the following in your terminal:
 
-   $ jekyll new MYSITENAME
+```
+$ jekyll new MYSITENAME
+```
 
 This will give you a very bare bones Jekyll site, with an index page, a folder for blog posts, a config file, and a Gemfile. You will want to add a folder called `collections`, and inside of that another folder called `_wiki`.
 
@@ -49,7 +51,24 @@ Or install it yourself as:
 $ gem install jekyll-theme-paperwiki
 ```
 
+To serve your site locally, navigate into the site's directory and run:
 
+```
+$ bundle exec jekyll serve
+```
+
+Navigate to your localhost and voila! Start adding articles in your wiki collections folder.
+
+All of your wiki pages should be written in markdown, and you must begin each `.md` file like so:
+
+```
+---
+---
+```
+
+Between these two lines is where you would include *front matter*, such as specifying the layout or the permalink to the page. Jekyll needs to know that the front matter is there in order to output the page. However, you can leave the front matter blank - wiki pages have layouts and permalinks set by default in the theme's config file, and you only need to specify them if you want to override the defaults. You also do not need to specify a title for the page, as it is automatically taken from the filename.
+
+​
 
 ## Config
 

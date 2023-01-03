@@ -8,37 +8,14 @@
 
    <section class="launchpad-search">
 
-      {% if site.multi_projects %}
+      <form action="/search" method="GET">
 
-         <form action="/search" method="GET">
+         <label for="input__text">What do you want to know?</label><br>
+         <input id="input__text" name="q" class="launchpad-searchbar" required type="search" placeholder="Search">
 
-            <label for="input__text">What do you want to know?</label><br>
+         <input type="submit" class="launchpad-search_submit" value="Go">
 
-            <input id="input__text" name="q" class="launchpad-searchbar" required type="search" placeholder="Search">
-
-            <select id="select__project" name="p" class="launchpad-search_select">
-               <option value="all" class="launchpad-select_default">All projects</option>
-               {% for item in site.data.projects %}
-                  <option value="{{ item.name | slugify }}">{{ item.name }}</option>
-               {% endfor %}
-            </select>
-
-            <input type="submit" class="launchpad-search_submit" value="Go">
-
-         </form>
-
-      {% else %}
-
-         <form action="/search" method="GET">
-
-            <label for="input__text">What do you want to know?</label><br>
-            <input id="input__text" name="q" class="launchpad-searchbar" required type="search" placeholder="Search">
-
-            <input type="submit" class="launchpad-search_submit" value="Go">
-
-         </form>
-
-      {% endif %}
+      </form>
 
    </section>
 
@@ -71,7 +48,7 @@
             Navigate the wiki
          </a>
 
-         <a href="/random" class="launchpad-card">
+         <a href="/wiki:random" class="launchpad-card">
             <i class="ri-question-line project-icon"></i>
             <header>Random</header>
             Visit a random article
