@@ -97,6 +97,9 @@ All of your wiki pages should be written in markdown, and you must begin each `.
 
 Between these two lines is where you include *front matter*, such as specifying the layout or the permalink to the page. However, you can leave the front matter blank - wiki pages have layouts and permalinks set by default in the theme's config file, and you only need to specify them if you want to override the defaults. You also do not need to specify a title for the page, as it is automatically taken from the filename. All you absolutely need is the two triple-dashed lines, as Jekyll needs it to know that the front matter is there in order to output the page.
 
+Caveats:
+- if the site won't build due to an error with the random page, make sure you have more than one wiki article for it to draw from
+
 ​
 
 ## Config

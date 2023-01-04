@@ -1,14 +1,12 @@
-# Build settings
-include: ['_pages'] # forces custom pages to be organized into their own directory
+
+random_redirect:
+   pages: true
 
 collections_dir: collections
 collections:
    wiki:
       output: true
       permalink: /:collection/:name
-
-random_redirect:
-   pages: true
 
 # Front matter defaults, so you don't need to set layouts on every new page.
 # As long as pages are in the correct folder, they'll automatically have the
