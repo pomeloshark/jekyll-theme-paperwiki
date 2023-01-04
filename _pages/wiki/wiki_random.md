@@ -1,0 +1,41 @@
+---
+   # Jekyll page that redirects to a random page, post or document
+   # https://github.com/jekylltools/jekyll-random-redirect
+   # v1.6
+   permalink: /wiki:random
+---
+
+{%- assign docs = site.posts -%}
+
+{%- if site.random_redirect.pages == true -%}
+  {%- assign pages = site.wiki | where_exp:"page","page.url != '/random/'" -%}
+  {%- assign docs = docs | concat: pages -%}
+{%- endif -%}
+
+{%- if site.random_redirect.documents == true -%}
+  {%- assign docs = docs | concat: site.documents | uniq -%}
+{%- endif -%}
+
+   <script type="text/javascript">
+      var urls=[];
+
+      {% for doc in docs -%}
+         urls.push("{{ doc.url | absolute_url }}");
+      {% endfor -%}
+
+      var url = urls[Math.floor(Math.random()*urls.length)];
+      var link = document.createElement('link');
+      link.setAttribute('rel', 'canonical');
+      link.setAttribute('href', url);
+      document.head.appendChild(link);
+
+      if (typeof IE_fix != "undefined") {
+         document.write("Redirecting...");
+         var referLink = document.createElement("a");
+         referLink.href = url;
+         document.body.appendChild(referLink);
+         referLink.click();
+      } else {
+         window.location.replace(url);
+      }
+   </script>

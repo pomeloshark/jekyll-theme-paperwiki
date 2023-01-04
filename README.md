@@ -1,6 +1,8 @@
 # jekyll-theme-paperwiki
 
-The intent of this theme is to get all the code out of the way and to allow you to write Markdown articles.
+The intent of this theme is to get all the code out of the way and to allow you to write Markdown articles; the best way to do that is to install the theme as a gem. However, if you want to tinker with the code, just download this repository.
+
+This theme is not mobile friendly, as I personally do absolutely no worldbuilding on mobile and thus my development skills are lacking. There is also no dark mode or other alternate colour scheme, but please feel free to fork this project and add whatever functionality it's missing.
 
 
 
@@ -25,12 +27,31 @@ This theme comes with all of these prepackaged, so most of what you have to do i
 $ jekyll new MYSITENAME
 ```
 
-This will give you a very bare bones Jekyll site, with an index page, a folder for blog posts, a config file, and a Gemfile. You will want to add a folder called `collections`, and inside of that another folder called `_wiki`.
+This will give you a very bare bones Jekyll site, with an index page, a folder for blog posts, a config file, and a Gemfile. You'll have to do a little setup to make it usable with this theme. Here's what the directory should look like:
+
+```
+.
+├── _pages/
+│   ├── wiki/ # In here is where your organizational pages for your wiki will go.
+├── _posts/ # If you want to write blog posts, they go in here.
+├── _site/
+├── collections/
+│   ├── _wiki/ # In here is where all your articles will go, in markdown or html files.
+├── _config.yml
+├── 404.html
+├── about.md
+├── Gemfile
+├── index.md
+```
+
+(Don't worry about the .gitignore or the Gemfile.lock.)
+
+(You can also move your `_posts` folder into your `collections` folder if you want; I find it makes things a little neater.)
 
 To use this theme, open your Jekyll site's `Gemfile`, delete the line that says `gem "minima"` and replace it with this line:
 
 ```ruby
-gem "jekyll-theme-paperwiki"
+gem "jekyll-theme-paperwiki", "~> 0.1.2"
 ```
 
 And add this line to your Jekyll site's `_config.yml`:
@@ -57,7 +78,15 @@ To serve your site locally, navigate into the site's directory and run:
 $ bundle exec jekyll serve
 ```
 
-Navigate to your localhost and voila! Start adding articles in your wiki collections folder.
+Navigate to your localhost and...you will see an empty page. This is because the layout in the default `index.md` is not set properly. Open this file and change the layout like so:
+
+```yaml
+layout: launchpad
+```
+
+This will show you the default wiki homepage. The three links - explore, contents, and random page - link to pages that are included with the theme, and consist of pregenerated content based on the wiki articles you've written. Now you can start adding articles in your `_wiki` folder.
+
+### Using the wiki
 
 All of your wiki pages should be written in markdown, and you must begin each `.md` file like so:
 
@@ -66,7 +95,7 @@ All of your wiki pages should be written in markdown, and you must begin each `.
 ---
 ```
 
-Between these two lines is where you would include *front matter*, such as specifying the layout or the permalink to the page. Jekyll needs to know that the front matter is there in order to output the page. However, you can leave the front matter blank - wiki pages have layouts and permalinks set by default in the theme's config file, and you only need to specify them if you want to override the defaults. You also do not need to specify a title for the page, as it is automatically taken from the filename.
+Between these two lines is where you include *front matter*, such as specifying the layout or the permalink to the page. However, you can leave the front matter blank - wiki pages have layouts and permalinks set by default in the theme's config file, and you only need to specify them if you want to override the defaults. You also do not need to specify a title for the page, as it is automatically taken from the filename. All you absolutely need is the two triple-dashed lines, as Jekyll needs it to know that the front matter is there in order to output the page.
 
 ​
 
@@ -92,7 +121,7 @@ However, if you would like to have additional collections akin to the Wikimedia 
       permalink: /:collection/:name
 ```
 
-Make sure to add the corresponding folders within `collections`, including the preceding underscore.
+Make sure to add the corresponding folders within `collections`, including the preceding underscore: `_literature`, `_dictionary`, etc.
 
 Add into your `_config.yml`:
 
@@ -100,7 +129,18 @@ Add into your `_config.yml`:
 multi_projects: true
 ```
 
-This will add links to each different collection on your homepage, and allow you to limit the scope of your searches to a single collection or expand it to cover all of them at once.
+You will also need to add a data file listing your projects: create a folder titled `_data` and inside it a file titled `projects.yml`. Within it you need to list the following, formatted in the same way:
+
+``` yaml
+- name: Wiki
+  link: /wiki
+  icon: ri-global-line
+  desc: A brief description here
+```
+
+For the icon, find one you like from RemixIcon and copy the code.
+
+This will add links to each different collection on your homepage, and allow you to limit the scope of your searches to a single collection or expand it to cover all of them at once. You do not need to do anything to
 
 
 
