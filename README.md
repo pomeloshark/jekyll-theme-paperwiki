@@ -1,8 +1,12 @@
 # jekyll-theme-paperwiki
 
-The intent of this theme is to get all the code out of the way and to allow you to write Markdown articles; the best way to do that is to install the theme as a gem. However, if you want to tinker with the code, just download this repository.
+For storing your worldbuilding notes! The intent of this theme is to get all the code out of the way and to allow you to write Markdown articles; the best way to do that is to install the theme as a gem. However, if you want to tinker with the code, just download this repository.
 
-This theme is not mobile friendly, as I personally do absolutely no worldbuilding on mobile and thus my development skills are lacking. There is also no dark mode or other alternate colour scheme, but please feel free to fork this project and add whatever functionality it's missing.
+For the easiest starting point, I have uploaded a sample site that you can download with everything preconfigured, so if you're unfamiliar with Jekyll you can bypass all the setup and get right to it. See that repo for instructions.
+
+I've tried to adhere to accessible and easy to read design principles while retaining the look and layout of a classic wiki that we're all familiar with - I've aped some elements of Wikipedia's organizational system and layout while trying to make it as clean and user friendly as possible.
+
+This theme is not mobile friendly, as I personally do absolutely no work on mobile and thus my development skills are lacking. There is also no dark mode or other alternate colour scheme, but please feel free to fork this project and add whatever functionality it's missing.
 
 
 
@@ -15,7 +19,7 @@ In case you're unfamiliar with it, a basic Jekyll site includes the following:
 + The `_site` folder contains everything that Jekyll outputs when it builds the site. Don't edit anything in this folder, as it will be rewritten the next time you serve the site.
 + The `assets` folder contains things like fonts, images, and Javascript files. It also contains a `.scss` file importing all of your SCSS so that Jekyll can convert it to regular CSS.
 
-This theme comes with all of these prepackaged, so most of what you have to do is edit the `_config.yaml` file. The theme has some default config set already, but you can override these in your own config file if you wish. You can also add any of the above folders with includes, layouts, or SCSS to override the theme's own files. For example, you will want to add your own `assets` folder to store your own images, including one titled `favicon.png` in order to override the placeholder one i've included.
+This theme comes with all of these prepackaged, so most of what you have to do is edit the `_config.yaml` file. The theme has some default config set already, but you can override these in your own config file if you wish. You can also add any of the above folders to your own project with includes, layouts, or SCSS to override the theme's files. For example, you will want to add your own `assets` folder to store your own images, including one titled `favicon.png` in order to override the placeholder one i've included.
 
 
 
@@ -46,12 +50,10 @@ This will give you a very bare bones Jekyll site, with an index page, a folder f
 
 (Don't worry about the .gitignore or the Gemfile.lock.)
 
-(You can also move your `_posts` folder into your `collections` folder if you want; I find it makes things a little neater.)
-
 To use this theme, open your Jekyll site's `Gemfile`, delete the line that says `gem "minima"` and replace it with this line:
 
 ```ruby
-gem "jekyll-theme-paperwiki", "~> 0.1.2"
+gem "jekyll-theme-paperwiki", "~> 0.1.4"
 ```
 
 And add this line to your Jekyll site's `_config.yml`:
@@ -98,9 +100,10 @@ All of your wiki pages should be written in markdown, and you must begin each `.
 Between these two lines is where you include *front matter*, such as specifying the layout or the permalink to the page. However, you can leave the front matter blank - wiki pages have layouts and permalinks set by default in the theme's config file, and you only need to specify them if you want to override the defaults. You also do not need to specify a title for the page, as it is automatically taken from the filename. All you absolutely need is the two triple-dashed lines, as Jekyll needs it to know that the front matter is there in order to output the page.
 
 Caveats:
-- if the site won't build due to an error with the random page, make sure you have more than one wiki article for it to draw from
+- If the site won't build due to an error with the random page, make sure you have more than one wiki article for it to draw from
+- You may need to specify a permalink and a title if you want to use certain characters that are not allowed in filenames -- say, some IPA characters. Otherwise just title your articles "Article title.md", with spaces, not underscores or hyphens, and the default settings will take care of the rest.
 
-​
+
 
 ## Config
 
@@ -119,7 +122,8 @@ collections:
 However, if you would like to have additional collections akin to the Wikimedia Foundation's other projects - such as Wikisource, Wikispecies, or Wiktionary - then you can specify them in the same format as above, also under the `collections` key:
 
 ```yaml
-   collection_name:
+collections:
+   COLLECTION_NAME:
       output: true
       permalink: /:collection/:name
 ```
@@ -141,9 +145,9 @@ You will also need to add a data file listing your projects: create a folder tit
   desc: A brief description here
 ```
 
-For the icon, find one you like from RemixIcon and copy the code.
+For the icon, find one you like from [RemixIcon](https://remixicon.com/) and copy the code.
 
-This will add links to each different collection on your homepage, and allow you to limit the scope of your searches to a single collection or expand it to cover all of them at once. You do not need to do anything to
+This will add links to each different collection on your homepage, and allow you to limit the scope of your searches to a single collection or expand it to cover all of them at once. The search logic is already taken care of in the theme itself; it just needs the names of your collections.
 
 
 

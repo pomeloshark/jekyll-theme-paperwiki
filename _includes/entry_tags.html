@@ -1,0 +1,36 @@
+<div class="entry-subhead_pair">
+
+   <span class="entry-subhead_key">Portals:</span>
+   <span>
+      <a href="/{{ page.collection }}/portal:{{ page.portal }}" class="entry-subhead_value">
+         {{ page.portal }}
+      </a>
+   </span>
+
+</div>
+
+<div class="entry-subhead_pair">
+
+   <span class="entry-subhead_key">Categories:</span>
+   <span>
+      {% for item in page.categories %}
+         <a href="/{{ page.collection }}/category:{{ item | slugify }}" class="entry-subhead_value">
+            {{ item }}
+         </a>
+      {% endfor %}
+   </span>
+
+</div>
+
+<div class="entry-subhead_pair">
+
+   <span class="entry-subhead_key">Tags:</span>
+   <span>
+      {% for item in page.tags %}
+         <a href="/{{ page.category }}/tag:{{ item }}" class="entry-subhead_value">
+            {{ item }}
+         </a>
+      {% endfor %}
+   </span>
+
+</div>

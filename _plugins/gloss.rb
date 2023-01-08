@@ -3,14 +3,14 @@ module Jekyll
 
       def gloss(input) # will be available as the "gloss" filter
          @text = input
-#         puts "<tr>"
+         puts "<table><tbody><tr>"
 
-#         lexemes = @text.split(" ")
-#         lexemes.each do |word|
-#            puts "<td class=\"gloss_item\">#{word}</td>"
-#         end
+         lexemes = @text.split(" ")
+         lexemes.each do |word|
+            puts "<td class=\"gloss_item\">#{word}</td>"
+         end
 
-#         puts "</tr>"
+         puts "</tr></tbody><table>"
 
 #         morphemic_analysis
 #         morphemic_gloss

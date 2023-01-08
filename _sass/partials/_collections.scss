@@ -6,7 +6,8 @@
    grid-column: span 2 / auto;
    padding: 4.5em 2em;
 
-   background-color: $color-paperdark;
+   background-color: $color-collections_sidebar;
+   border-right: 1px solid $color-shortbread;
 
    font-size: $fontsize-small;
 
@@ -21,10 +22,6 @@
 
 .collections-content {
    grid-column: span 10 / auto;
-
-//   display: grid;
-//   grid-template-columns: repeat(12, 1fr);
-//   grid-gap: 2em;
 
    padding: 1.56em 2em 1.56em*2;
 
@@ -47,8 +44,8 @@
    padding: 1.5rem;
    margin-bottom: 1rem;
 
-   background-color: $color-paperdark;
-   border: 1px solid #faf7f6;
+   background-color: $color-collections_header;
+   border: 1px solid $color-collections_header_border;
    border-radius: 1.5rem;
 }
 
@@ -62,7 +59,7 @@
    width: 100%;
    padding: 12px 16px;
 
-   border: 1px solid transparent;
+   border: 1px solid $color-searchbar_border;
    border-radius: 1rem;
 
    font-size: $fontsize-body;
@@ -73,14 +70,14 @@
 }
 
 .collections-searchbar:hover {
-   border: 1px solid $color-launchpadsearch;
-   box-shadow: 0 0 6px $color-globalsearchbar;
+   border: 1px solid $color-searchbar_border_hover;
+   box-shadow: 0 0 6px $color-searchbar_shadow_hover;
 }
 
 .collections-searchbar:focus {
    outline: none;
-   border-color: $color-globalsearchbar;
-   box-shadow: 0 0 6px $color-globalsearchbar;
+   border-color: $color-searchbar_border_focus;
+   box-shadow: 0 0 6px $color-searchbar_shadow_focus;
    transition: 0.25s;
 }
 

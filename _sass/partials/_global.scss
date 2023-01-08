@@ -67,7 +67,7 @@
 
 .global-searchbar {
    padding: 0.2rem 1rem;
-   border: 1px solid transparent;
+   border: 1px solid $color-searchbar_border;
    border-radius: 8px;
    font-size: $fontsize-small;
    transition: 0.25s;
@@ -81,14 +81,14 @@
 }
 
 .global-searchbar:hover {
-   border: 1px solid $color-launchpadsearch;
-   box-shadow: 0 0 6px $color-globalsearchbar;
+   border: 1px solid $color-searchbar_border_hover;
+   box-shadow: 0 0 6px $color-searchbar_shadow_hover;
 }
 
 .global-searchbar:focus {
    outline: none;
-   border-color: $color-globalsearchbar;
-   box-shadow: 0 0 6px $color-globalsearchbar;
+   border-color: $color-searchbar_border_focus;
+   box-shadow: 0 0 6px $color-searchbar_shadow_focus;
    transition: 0.25s;
 }
 
@@ -106,18 +106,29 @@
 }
 
 .global-nav-link {
+   position: relative;
    display: inline-block;
-   padding-top: 0.3rem;
-
+   padding-top: 0.15rem;
    margin-right: 1.75rem;
-
-   border-bottom: 2px solid #f6bf5d;
 
    font-size: $fontsize-small;
    text-decoration: none;
    text-transform: uppercase;
-   &:hover {
-      opacity: 0.75;
+   &::after {
+      content: ' ';
+		position: absolute;
+		top: 100%;
+		left: 25%;
+
+		width: 50%;
+		height: 1px;
+		border-bottom: 2px solid $color-global_nav_underline;
+
+		transition: 0.4s;
+   }
+   &:hover::after {
+      width: 100%;
+      left: 0;
    }
 }
 

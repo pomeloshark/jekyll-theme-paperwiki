@@ -3,5 +3,17 @@
 \*------------------------------------*/
 
 #search-results dd {
-   margin-bottom: 1.75em;
+}
+
+.search_result {}
+
+.search_result-details {
+   margin-bottom: 0;
+   margin-left: 1.75rem;
+   font-size: $fontsize-small;
+   text-transform: uppercase;
+}
+
+.search_result-preview {
+   margin-bottom: 1.75rem;
 }
