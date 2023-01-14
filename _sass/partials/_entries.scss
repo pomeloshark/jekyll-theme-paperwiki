@@ -8,8 +8,8 @@
 .entry {
    padding: 1.56em 2em;
 
-   border-left: 1px solid $color-articleborder;
-   border-right: 1px solid $color-articleborder;
+   border-left: 1px solid $color-article_border;
+   border-right: 1px solid $color-article_border;
 
    ul {
       margin: 0 2rem 1.75rem;
@@ -126,7 +126,7 @@
       background-color: $color-linen;
    }
    tr td:last-child {
-      background-color: $color-paperdark;
+      background-color: $color-paper_dark;
    }
    .entry-quickstats_double {
       text-align: center !important;
@@ -210,3 +210,15 @@ a.footnote::after {
 }
 
 .tooltip {}
+
+
+
+// Sidenotes
+.aside {
+   display: inline; 	      /* prevents parent paragraph from breaking */
+   float: right; 	         /* positions the note to the right of the content */
+   position: relative; 	   /* forces note to be relative its the normal position */
+   width: 20vw; 	         /* limits the width of the marginal note */
+   margin-right: -24vw; 	/* sets the distance away from the body text */
+   font-size: $fontsize-small;
+}

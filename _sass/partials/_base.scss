@@ -11,7 +11,7 @@
    margin: 0;
    padding: 0;
 
-   color: $color-bodytext;
+   color: $color-body_text;
    line-height: $lineheight-body;
 }
 
@@ -23,7 +23,7 @@ body {
 
    margin: 0 auto;
 
-   background-color: $color-bodybg;
+   background-color: $color-body_background;
    font-family: $fontfamily-body;
    font-size: $fontsize-body;
 }
@@ -36,7 +36,7 @@ main {
    display: grid;
    grid-template-columns: repeat(12, 1fr);
 
-   background-color: $color-contentbg;
+   background-color: $color-content_background;
 }
 
 h1,
@@ -67,19 +67,19 @@ a,
 a:link,
 a:active {
    color: $color-link;
-   transition: .2s;
+   transition: $transition;
 }
 
 a:hover {
-   color: $color-linkhover;
+   color: $color-link_hover;
 }
 
 a:active {
-   color: $color-linkactive;
+   color: $color-link_active;
 }
 
 p {
-   margin-bottom: 1.75em;
+   margin-bottom: 1.75em; // Equal to one line-height.
 }
 
 hr {
@@ -99,8 +99,8 @@ blockquote {
    margin-bottom: 1.75rem;
    padding: 1.75em;
 
-   background-color: $color-paperdark;
-   border-left: 0.5em solid $color-shortbread;
+   background-color: $color-blockquote_background;
+   border-left: 0.5em solid $color-blockquote_border;
 
    figcaption {
       text-align: right;
@@ -126,6 +126,10 @@ figcaption {
    text-align: center;
 }
 
+abbr {
+   cursor: help;
+}
+
 code,
 pre,
 kbd,
@@ -133,13 +137,12 @@ samp {
    font-family: $fontfamily-code;
 }
 
-code,
-kbd {
+code {
    padding: 0.4em 0.5em 0.2em;
 
-   background-color: $color-codebg;
-   color: $color-codetext;
-   border-radius: 4px;
+   background-color: $color-code_background;
+   color: $color-code_text;
+   border-radius: $border_radius-inline;
 }
 
 kbd {
@@ -150,19 +153,20 @@ kbd {
    padding: 0.2rem 0.5rem;
    line-height: 1;
 
-   background-color: $color-paperlight;
-   border: 1px solid $color-linen;
-   box-shadow: 0 2px 0 1px $color-linen;
+   background-color: $color-kbd_background;
+   border: 1px solid $color-kbd_border;
+   border-radius: $border_radius-inline;
+   box-shadow: 0 2px 0 1px $color-kbd_box_shadow;
 
    cursor: default;
 
    font-family: $fontfamily-body;
    text-align: center;
-   color: $color-bodytext;
+   color: $color-body_text;
 
-   transition: .1s;
+   transition: $transition;
    &:hover {
-      box-shadow: 0 1px 0 0.5px $color-linen;
+      box-shadow: 0 1px 0 0.5px $color-kbd_hover;
       top: 1px;
    }
 }
@@ -170,13 +174,29 @@ kbd {
 pre {
    padding: 1rem;
 
-   background-color: $color-codebg;
-   color: $color-codetext;
+   background-color: $color-code_background;
+   color: $color-code_text;
    border-radius: 6px;
 }
 
 input[type="search"] {
-   background-color: $color-searchbg;
+   background-color: $color-searchbar_background;
+   border: 1px solid $color-searchbar_border;
+   appearance: none;
+   outline: none;
+
+   transition: $transition;
+
+   &:hover {
+      border: 1px solid $color-searchbar_border_hover;
+      box-shadow: 0 0 6px $color-searchbar_shadow_hover;
+      transition: $transition;
+   }
+   &:focus {
+      border-color: $color-searchbar_border_focus;
+      box-shadow: 0 0 6px $color-searchbar_shadow_focus;
+      transition: $transition;
+   }
 }
 
 .tooltip {

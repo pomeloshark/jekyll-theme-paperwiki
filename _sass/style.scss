@@ -1,6 +1,7 @@
 /* The variables directory contains any SCSS that doesn't create any actual CSS output. */
 @import "variables/colors";
 @import "variables/fonts";
+@import "variables/misc";
 
 /* Partials are all the components of a webpage broken down into manageable chunks. Organized by page type (i.e. templates for wiki pages, grammars, etc). */
 @import "partials/base";

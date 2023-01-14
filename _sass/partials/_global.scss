@@ -17,20 +17,20 @@
    align-items: center;
    justify-content: space-between;
 
-   background-color: $color-globalbg;
-   border-bottom: 1px solid $color-globalborder;
+   background-color: $color-global_background;
+   border-bottom: 1px solid $color-global_border;
 
    a,
    a:link,
    a:hover,
    a:visited {
-      color: $color-bodytext;
+      color: $color-body_text;
    }
 }
 
 .global-footer {
-   background-color: $color-globalbg;
-   border-top: 1px solid $color-globalborder;
+   background-color: $color-global_background;
+   border-top: 1px solid $color-global_border;
    padding: 1.75em;
 
    font-size: $fontsize-small;
@@ -67,36 +67,13 @@
 
 .global-searchbar {
    padding: 0.2rem 1rem;
-   border: 1px solid $color-searchbar_border;
    border-radius: 8px;
    font-size: $fontsize-small;
-   transition: 0.25s;
-   appearance: none;
-   outline: none;
    line-height: 2rem;
 }
 
 .global-searchbar::placeholder {
    text-transform: uppercase;
-}
-
-.global-searchbar:hover {
-   border: 1px solid $color-searchbar_border_hover;
-   box-shadow: 0 0 6px $color-searchbar_shadow_hover;
-}
-
-.global-searchbar:focus {
-   outline: none;
-   border-color: $color-searchbar_border_focus;
-   box-shadow: 0 0 6px $color-searchbar_shadow_focus;
-   transition: 0.25s;
-}
-
-.global-search_submit {
-   background: none;
-   border: 0;
-
-   font-size: $fontsize-small;
 }
 
 .global-nav {
@@ -133,5 +110,5 @@
 }
 
 .global-nav-link:visited {
-   color: $color-bodytext;
+   color: $color-body_text;
 }

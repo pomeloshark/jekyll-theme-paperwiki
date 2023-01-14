@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "jekyll-theme-paperwiki"
-  spec.version       = "0.1.5"
+  spec.version       = "0.1.7"
   spec.authors       = ["pomeloshark"]
 
   spec.summary       = "A theme meant for use as a personal wiki."

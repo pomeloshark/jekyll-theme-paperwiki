@@ -8,7 +8,7 @@ include: ['_pages'] # forces custom pages to be organized into their own directo
 random_redirect:
    pages: true
 
-multi_projects: true
+multi_projects: false
 entry_tags_top: true
 
 

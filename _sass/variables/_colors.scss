@@ -3,12 +3,13 @@
 \*------------------------------------*/
 
 // neutrals
-$color-paperlight: #fdfcfc; // off white
-$color-paperdark: #fbf9f8;
+$color-paper_light: #fdfcfc; // off white
+$color-paper_dark: #fbf9f8;
 $color-linen: #f6f2ef; // shortbread
 $color-shortbread: #f9f6f4;//#f8f4f2;
+$color-shortbread_dark: #f3efec;
 $color-ink: #4b4a46; // dark umber
-$color-inkwarm: #504b38;
+$color-ink_warm: #504b38;
 $color-ink_faded: #828077;
 
 // brights
@@ -20,8 +21,8 @@ $color-peach: #f7dcd3;
 $color-mango: #f6bf5d;
 
 // links
-$color-bluelight: #4083ae;
-$color-bluedark: #356d90;
+$color-blue_light: #4083ae;
+$color-blue_dark: #356d90;
 $color-purple: #61609d;
 
 /*------------------------------------*\
@@ -29,52 +30,73 @@ $color-purple: #61609d;
 \*------------------------------------*/
 
 // Colours that apply to the body of all pages.
-$color-bodybg: $color-linen;
-$color-contentbg: $color-paperlight;
+$color-body_background: $color-linen;
+$color-content_background: $color-paper_light;
 
 // Global text and link colours.
-$color-bodytext: $color-ink;
+$color-body_text: $color-ink;
 $color-h3: $color-ink_faded;
 
-$color-link: $color-bluelight;
-$color-linkhover: $color-bluedark;
-$color-linkactive: $color-purple;
-$color-linkvisited: $color-purple;
-
-// Colours that apply to the global header and footer.
-$color-globalbg: $color-paperdark;
-$color-globalborder: $color-shortbread;
-$color-global_nav_underline: $color-mango;
-
-$color-globalsearchbar: $color-peach;
-
-// Colours that apply to the index page or launchpad.
-$color-launchpadsearch: $color-linen;
-$color-launchpadborder: $color-linen;
-$color-launchpadsearchbar: $color-melon;
-$color-projectcard: $color-kiwi;
-$color-projectborder: $color-linen;
-$color-projecthover: $color-limeade;
+$color-link: $color-blue_light;
+$color-link_hover: $color-blue_dark;
+$color-link_active: $color-purple;
+$color-link_visited: $color-purple;
 
 // General searchbar colours.
-$color-searchbar_border: $color-shortbread;
+$color-searchbar_background: $color-paper_light;
+$color-searchbar_border: $color-shortbread_dark;
 $color-searchbar_border_hover: $color-linen;
 $color-searchbar_border_focus: $color-peach;
 $color-searchbar_shadow_hover: $color-peach;
 $color-searchbar_shadow_focus: $color-peach;
 
-// Colours that apply only to collections pages.
-$color-collections_sidebar: $color-paperdark;
-$color-collections_header: $color-paperdark;
-$color-collections_header_border: $color-shortbread;//#faf7f6;
-
-// Colours that apply only to entry pages.
-$color-articleborder: $color-linen;
-$color-entry_secondary: $color-paperdark;
-
-$color-searchbg: $color-paperlight;
-$color-codebg: $color-pistachio;
-$color-codetext: $color-inkwarm;
+$color-code_background: $color-pistachio;
+$color-code_text: $color-ink_warm;
 $color-hr: $color-linen;
 
-$color-blockquoteborder: $color-linen;
+$color-kbd_background: $color-paper_light;
+$color-kbd_border: $color-linen;
+$color-kbd_box_shadow: $color-linen;
+$color-kbd_hover: $color-linen;
+
+$color-blockquote_background: $color-paper_dark;
+$color-blockquote_border: $color-shortbread;
+
+/*------------------------------------*\
+  # COLOUR SCHEME values
+  # page- or section-specific
+\*------------------------------------*/
+
+// Colours that apply to the global header and footer.
+$color-global_background: $color-paper_dark;
+$color-global_border: $color-shortbread;
+$color-global_nav_underline: $color-mango;
+
+// Colours that apply to the index page or launchpad.
+$color-launchpad_search: $color-linen;
+$color-launchpad_search_border: $color-shortbread_dark;
+$color-launchpad_search_submit: $color-melon;
+$color-launchpad_search_submit_hover: $color-melon;
+$color-launchpad_search_submit_focus: $color-melon;
+
+$color-project_card_icon: $color-kiwi;
+$color-project_card_border: $color-linen;
+$color-project_card_hover_shadow: $color-linen;
+$color-project_card_icon_hover: $color-limeade;
+
+$color-wiki_card_background: $color-limeade;
+$color-wiki_card_border: $color-limeade;
+$color-wiki_card_hover_shadow: $color-limeade;
+
+// Colours that apply only to collections pages.
+$color-collections_sidebar: $color-paper_dark;
+$color-collections_sidebar_border: $color-shortbread;
+$color-collections_header: $color-paper_dark;
+$color-collections_header_border: $color-shortbread;
+
+$color-portal_card_border: $color-linen;
+$color-portal_card_icon_hover: $color-kiwi;
+
+// Colours that apply only to entry pages.
+$color-article_border: $color-linen;
+$color-entry_secondary: $color-paper_dark;

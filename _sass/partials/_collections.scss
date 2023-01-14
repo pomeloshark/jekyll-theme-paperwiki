@@ -7,7 +7,7 @@
    padding: 4.5em 2em;
 
    background-color: $color-collections_sidebar;
-   border-right: 1px solid $color-shortbread;
+   border-right: 1px solid $color-collections_sidebar_border;
 
    font-size: $fontsize-small;
 
@@ -59,27 +59,11 @@
    width: 100%;
    padding: 12px 16px;
 
-   border: 1px solid $color-searchbar_border;
    border-radius: 1rem;
 
    font-size: $fontsize-body;
-
-   transition: 0.25s;
-   appearance: none;
-   outline: none;
 }
 
-.collections-searchbar:hover {
-   border: 1px solid $color-searchbar_border_hover;
-   box-shadow: 0 0 6px $color-searchbar_shadow_hover;
-}
-
-.collections-searchbar:focus {
-   outline: none;
-   border-color: $color-searchbar_border_focus;
-   box-shadow: 0 0 6px $color-searchbar_shadow_focus;
-   transition: 0.25s;
-}
 
 
 
@@ -122,10 +106,10 @@
    padding: 28px 28px;
 
    border-radius: 1.5rem;
-   border: 1px solid $color-projectborder;
+   border: 1px solid $color-portal_card_border;
 
    text-decoration: none;
-   color: $color-bodytext;
+   color: $color-body_text;
 
    header {
       display: flex;
@@ -138,7 +122,7 @@
       margin-right: 0.4em;
       padding: 0;
 
-      color: $color-bodytext;
+      color: $color-body_text;
       font-size: 1em;
 
       transition: 0.2s;
@@ -146,22 +130,22 @@
 }
 
 .collections-portal_card:link {
-   color: $color-bodytext;
+   color: $color-body_text;
 }
 
 .collections-portal_card:hover {
    border: 1px solid transparent;
-   box-shadow: 0 0 6px $color-projectborder;
+   box-shadow: 0 0 6px $color-portal_card_border;
    .portal-icon {
-      color: $color-projectcard;
+      color: $color-portal_card_icon_hover;
 
       transition: 0.2s;
    }
-   color: $color-bodytext;
+   color: $color-body_text;
 }
 
 .collections-portal_card:visited {
-   color: $color-bodytext;
+   color: $color-body_text;
 }
 
 
@@ -190,7 +174,7 @@
    padding: 14px 28px;
 
    border-radius: 1.5rem;
-   border: 1px solid $color-projectborder;
+   border: 1px solid $color-portal_card_border;
 }
 
 
@@ -230,4 +214,18 @@
    font-size: $fontsize-small;
 //   text-transform: uppercase;
    margin-right: 0.65rem;
+}
+
+
+
+.contents-tag_list {
+   -webkit-columns: 4 10em;
+      -moz-columns: 4 10em;
+           columns: 4 10em;
+   -webkit-column-gap: 4em;
+      -moz-column-gap: 4em;
+           column-gap: 4em;
+   -webkit-column-rule: 1px dotted #ddd;
+      -moz-column-rule: 1px dotted #ddd;
+           column-rule: 1px solid #f6f2ef;
 }
