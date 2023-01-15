@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "jekyll-theme-paperwiki"
-  spec.version       = "0.1.8"
+  spec.version       = "0.1.9"
   spec.authors       = ["pomeloshark"]
 
   spec.summary       = "A theme meant for use as a personal wiki."
@@ -11,5 +11,5 @@ Gem::Specification.new do |spec|
 
   spec.files         = `git ls-files -z`.split("\x0").select { |f| f.match(%r!^(assets|_layouts|_includes|_sass|_data|_plugins|LICENSE|README|_config\.yml)!i) }
 
-  spec.add_runtime_dependency "jekyll", "~> 4.2"
+  spec.add_runtime_dependency "jekyll", "~> 4.3"
 end
