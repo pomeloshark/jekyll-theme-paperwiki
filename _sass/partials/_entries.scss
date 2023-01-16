@@ -10,14 +10,6 @@
 
    border-left: 1px solid $color-article_border;
    border-right: 1px solid $color-article_border;
-
-   ul {
-      margin: 0 2rem 1.75rem;
-      ul {
-         margin-bottom: 0;
-         margin-right: 0;
-      }
-   }
 }
 
 .entry-wiki {
@@ -52,19 +44,21 @@
 
 .entry-index ul {
    list-style: none;
-   padding-left: 1rem;
    a {
       text-decoration: none;
    }
 }
 
 .entry-index_return {
-   margin-bottom: 1.5rem;
+   margin-bottom: 1.5em;
+   margin-left: 1em;
 }
 
 .entry-index ol {
    list-style: none;
    padding-left: 1rem;
+   margin-left: 0;
+   margin-right: 0;
    /* This is an arbitrary name as the value. */
    counter-reset: counter-index;
 }
@@ -89,7 +83,7 @@
 }
 
 .entry-other_projects {
-   padding: 1rem;
+   padding: 1em;
    margin: 1em;
    border-radius: 1em;
    background-color: $color-entry_secondary;
@@ -116,10 +110,12 @@
 .stats-table {
    border-collapse: separate;
    border-spacing: 3px;
-   border: none;
+   border: 0;
    width: 100%;
+   margin-bottom: 0;
    td {
       padding: 0.5em;
+      border: 0;
    }
    tr td:first-child {
       text-align: right;

@@ -39,6 +39,8 @@ main {
    background-color: $color-content_background;
 }
 
+
+
 h1,
 h2,
 h3 {
@@ -82,21 +84,120 @@ p {
    margin-bottom: 1.75em; // Equal to one line-height.
 }
 
-hr {
-   margin: 2*1.75rem 6em 2*1.68rem;
+sup,
+sub {
+   font-size: $fontsize-small;
+   line-height: 0;
+}
 
-   border-style: solid;
-   border-color: $color-hr;
+abbr {
+   cursor: help;
 }
 
 img {
    border: 0;
 }
 
+figcaption {
+   font-size: $fontsize-small;
+   text-align: center;
+}
+
+dl,
+ol,
+ul {
+   margin-bottom: 1.75em;
+}
+
+ol li,
+ul li {
+//   padding-left: 1em;
+}
+
+ul ul {
+//   padding-left: -2em;
+   margin-left: 2em;
+   margin-bottom: 0;
+}
+
+ol,
+ul {
+   margin-left: 3em;
+   margin-right: 3em;
+}
+
+dl {
+   margin-left: 2em;
+   margin-right: 3em;
+}
+
+dt {
+   font-weight: bold;
+}
+
+dd {
+   margin-left: 1em;
+}
+
+
+
+table {
+   margin: auto;
+   margin-bottom: 1.75em;
+   border-collapse: collapse;
+   border-bottom: 0;
+}
+
+tr:nth-child(even) {
+   background-color: $color-paper_dark;
+}
+
+th:first-child,
+td:first-child {
+   border-left: 0;
+}
+
+th:last-child,
+td:last-child {
+   border-right: 0;
+}
+
+th,
+td {
+   border: 1px solid $color-shortbread_dark;
+   padding: 0.5em;
+}
+
+th {
+   border-top: 0;
+   background-color: $color-shortbread_dark;
+   text-align: center;
+}
+td {
+   border-bottom: 0;
+}
+
+caption {
+   caption-side: bottom;
+   font-size: $fontsize-small;
+   padding-top: 1em;
+}
+
+
+
+
+
+hr {
+   margin: 2*1.75em 6em 2*1.68em;
+
+   border-style: solid;
+   border-color: $color-hr;
+}
+
 blockquote {
    margin-left: 3em;
    margin-right: 3em;
-   margin-bottom: 1.75rem;
+   margin-bottom: 1.75em;
    padding: 1.75em;
 
    background-color: $color-blockquote_background;
@@ -113,21 +214,6 @@ blockquote {
 
 ul ul {
    list-style-type: circle;
-}
-
-sup,
-sub {
-   font-size: $fontsize-small;
-   line-height: 0;
-}
-
-figcaption {
-   font-size: $fontsize-small;
-   text-align: center;
-}
-
-abbr {
-   cursor: help;
 }
 
 code,
@@ -149,8 +235,8 @@ kbd {
    position: relative;
    top: -1px;
    display: inline-block;
-   min-width: 0.75rem;
-   padding: 0.2rem 0.5rem;
+   min-width: 0.75em;
+   padding: 0.2em 0.5em;
    line-height: 1;
 
    background-color: $color-kbd_background;
@@ -172,12 +258,19 @@ kbd {
 }
 
 pre {
-   padding: 1rem;
+   padding: 1em;
+   margin-bottom: 1.75em;
+   white-space: pre-wrap;
 
    background-color: $color-code_background;
    color: $color-code_text;
    border-radius: 6px;
+   code {
+      padding: 0;
+   }
 }
+
+
 
 input[type="search"] {
    background-color: $color-searchbar_background;
@@ -197,47 +290,4 @@ input[type="search"] {
       box-shadow: 0 0 6px $color-searchbar_shadow_focus;
       transition: $transition;
    }
-}
-
-.tooltip {
-   position: relative;
-}
-
-.tooltip:before {
-   content: attr(data-tooltip);
-   position: absolute;
-   width: 100px;
-   background-color: #062B45;
-   color: #fff;
-   text-align: center;
-   padding: 10px;
-   line-height: 1.2;
-   border-radius: 6px;
-   z-index: 1;
-   opacity: 0;
-   transition: opacity .6s;
-   bottom: 125%;
-   left: 50%;
-   margin-left: -60px;
-   font-size: 0.75em;
-   visibility: hidden;
-}
-
-.tooltip:after {
-   content: "";
-   position: absolute;
-   bottom: 75%;
-   left: 50%;
-   margin-left: -5px;
-   border-width: 5px;
-   border-style: solid;
-   opacity: 0;
-   transition: opacity .6s;
-   border-color: #062B45 transparent transparent transparent;
-   visibility: hidden;
-}
-
-.tooltip:hover:before, .tooltip:hover:after {
-   opacity: 1;
-   visibility: visible;
 }
