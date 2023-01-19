@@ -43,25 +43,10 @@
 
 .launchpad-search_submit {
    padding: 12px 20px;
-   appearance: none;
-   outline: none;
 
-   background: $color-launchpad_search_submit;
-   border: 0;
    border-radius: 1rem;
 
    font-size: $fontsize-body;
-
-   transition: $transition;
-
-   &:hover {
-      box-shadow: 0 0 7px $color-launchpad_search_submit_hover;
-      transition: $transition;
-   }
-   &:focus {
-      box-shadow: 0 0 7px $color-launchpad_search_submit_focus;
-      transition: $transition;
-   }
 }
 
 .launchpad-projects {
@@ -83,7 +68,7 @@
 
    padding: 36px 28px 28px;
 
-   border-radius: 1.5rem;
+   border-radius: 1.5em;
    border: 1px solid $color-project_card_border;
 
    text-decoration: none;
@@ -101,7 +86,7 @@
    .project-icon {
       padding: 1rem;
 
-      border-radius: 3rem;
+      border-radius: 3em;
       background-color: $color-project_card_icon;
 
       color: #ffffff;
@@ -135,6 +120,16 @@
    color: $color-body_text;
 }
 
+.launchpad-card:active,
+.launchpad-card:focus {
+   outline: 1px solid $color-project_card_focus;
+   outline-offset: 0;
+   border: 1px solid transparent;
+   border-radius: 1.5em;
+   box-shadow: 0 0 7px $color-project_card_focus;
+   transition: $transition;
+}
+
 
 
 /*------------------------------------*\
@@ -154,10 +149,15 @@
    transition: $transition;
 
    .project-icon {
-      background-color: $color-paper_light;
+      background-color: $color-wiki_icon_background;
 
       color: $color-project_card_icon;
 
       transition: $transition;
    }
+}
+
+.launchpad-card_wiki:active,
+.launchpad-card_wiki:focus {
+   outline: 1px solid $color-wiki_card_focus;
 }

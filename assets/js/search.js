@@ -44,7 +44,7 @@ resultsString = "";
 resultPages.forEach(function (r) {
    resultsString += "<dt class='search_result'>";
    resultsString += "<a href='" + r.url + "'>" + r.title + "</a>";
-   resultsString += "<span class='search_result-details'>" + r.portal + " ⋅ " + r.categories + "</span></dt>"
+   resultsString += "<span class='search_result-details'>" + "<a href='/" + r.collection + "'>" r.collection + "</a>: " + r.portal + " ⋅ " + r.categories + "</span></dt>"
    resultsString += "<dd class='search_result-preview'>" + r.content.substring(0, 200) + "..." + "</dd>";
 });
 document.querySelector("#search-results").innerHTML = resultsString;

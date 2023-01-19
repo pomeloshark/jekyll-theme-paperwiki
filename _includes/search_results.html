@@ -1,6 +1,7 @@
 "{{ page.url | slugify }}": {
    "title": "{{ page.title | xml_escape }}",
    "content": {{ page.content | markdownify | strip_newlines | strip_html | jsonify }},
+   "collection": "{{ page.collection | xml_escape }}",
    "portal": "{{ page.portal | xml_escape }}",
    "categories": "{{ page.categories | array_to_sentence_string: "" | xml_escape }}",
    "url": "{{ site.url | append: page.url | xml_escape }}",

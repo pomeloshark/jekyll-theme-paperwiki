@@ -2,11 +2,13 @@
 
 For storing your worldbuilding notes! The intent of this theme is to get all the code out of the way and to allow you to write Markdown articles; the best way to do that is to install the theme as a gem. However, if you want to tinker with the code, just download this repository.
 
-For the easiest starting point, I have uploaded a sample site that you can download with everything preconfigured, so if you're unfamiliar with Jekyll you can bypass all the setup and get right to it. See that repo for instructions.
+For the easiest starting point, I have uploaded a [sample site](https://github.com/pomeloshark/paperwiki-example) that you can download with everything preconfigured, so if you're unfamiliar with Jekyll you can bypass all the setup and get right to it. See that repo for instructions.
 
 I've tried to adhere to accessible and easy to read design principles while retaining the look and layout of a classic wiki that we're all familiar with - I've aped some elements of Wikipedia's organizational system and layout while trying to make it as clean and user friendly as possible.
 
-This theme is not mobile friendly, as I personally do absolutely no work on mobile and thus my development skills are lacking. There is also no dark mode or other alternate colour scheme, but please feel free to fork this project and add whatever functionality it's missing.
+This theme is not mobile friendly, as I personally do absolutely no work on mobile and thus my development skills are lacking. I stuck in a couple CSS breakpoints, so it'll be mostly legible on a medium-sized tablet, but don't expect great results on a phone. There is also no dark mode or other alternate colour scheme, but please feel free to fork this project and add whatever functionality you're looking for.
+
+This theme is not really intended for blogging, but you could add in the functionality easily enough by creating a `_posts` collection and setting a default post layout in the config file, as there is a dedicated `post` layout, as well as a `blog.md` which will list all of your blog posts on one page. If you have no need for it you can delete this file.
 
 
 
@@ -53,7 +55,7 @@ This will give you a very bare bones Jekyll site, with an index page, a folder f
 To use this theme, open your Jekyll site's `Gemfile`, delete the line that says `gem "minima"` and replace it with this line:
 
 ```ruby
-gem "jekyll-theme-paperwiki", "~> 0.1.4"
+gem "jekyll-theme-paperwiki", "~> [version]"
 ```
 
 And add this line to your Jekyll site's `_config.yml`:
@@ -117,7 +119,7 @@ collections:
       permalink: /:collection/:name
 ```
 
-`/:collection/:name` means the url to each wiki entry will be `wiki/article_title` without the article file extension.
+`/:collection/:name` means the url to each wiki entry will be `wiki/article-title` without the article file extension.
 
 However, if you would like to have additional collections akin to the Wikimedia Foundation's other projects - such as Wikisource, Wikispecies, or Wiktionary - then you can specify them in the same format as above, also under the `collections` key:
 
@@ -151,13 +153,6 @@ This will add links to each different collection on your homepage, and allow you
 
 
 
-## Development
-
-When your theme is released, only the files in `_layouts`, `_includes`, `_sass` and `assets` tracked with Git will be bundled.
-To add a custom directory to your theme-gem, please edit the regexp in `jekyll-theme-paperwiki.gemspec` accordingly.
-
-
-
 ## License
 
 The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
@@ -168,4 +163,4 @@ The theme is available as open source under the terms of the [MIT License](https
 
 This theme uses the fonts [Inter](https://rsms.me/inter/), [Libertinus Serif](https://github.com/alerque/libertinus), and [Liberation Mono](https://fontlibrary.org/en/font/liberation-mono), all of which are released under the SIL Open Font License; and the icon font [RemixIcon](https://remixicon.com/), which is available under the Apache License 2.0. The [example favicon](https://www.flaticon.com/free-icon/toucan_3002355) is by Freepik at Flaticon.
 
-The search function uses [Lunr.js](https://lunrjs.com/).
+The search function uses [Lunr.js](https://lunrjs.com/). Random page functionality is from [Jekyll Random Redirect](https://github.com/jekylltools/jekyll-random-redirect).

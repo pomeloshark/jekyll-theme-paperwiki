@@ -150,6 +150,16 @@
    color: $color-body_text;
 }
 
+.collections-portal_card:active,
+.collections-portal_card:focus {
+   outline: 1px solid $color-portal_card_focus;
+   outline-offset: 0;
+   border: 1px solid transparent;
+   border-radius: 1.5em;
+   box-shadow: 0 0 7px $color-portal_card_focus;
+   transition: $transition;
+}
+
 
 
 .collections-wrapper {

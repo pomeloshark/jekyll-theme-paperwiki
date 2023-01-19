@@ -12,7 +12,8 @@
    border-right: 1px solid $color-article_border;
 }
 
-.entry-wiki {
+.entry_wiki,
+.entry_work {
    grid-column: span 7 / auto;
 
    h1 {
@@ -21,8 +22,7 @@
    }
 }
 
-.entry-work,
-.entry-grammar {
+.entry_grammar {
    grid-column: span 10 / auto;
 }
 
@@ -32,7 +32,7 @@
 .entry-index {
    position: -webkit-sticky; /* Safari */
    position: sticky;
-   top: 0;
+   top: 5.1458rem;
    align-self: start;
 
    grid-column: span 2 / auto;
@@ -217,4 +217,15 @@ a.footnote::after {
    width: 20vw; 	         /* limits the width of the marginal note */
    margin-right: -24vw; 	/* sets the distance away from the body text */
    font-size: $fontsize-small;
+}
+
+
+
+.entry_work-verse {
+   p {
+      margin-bottom: 0;
+   }
+   p:last-child {
+      margin-bottom: 1.75em;
+   }
 }

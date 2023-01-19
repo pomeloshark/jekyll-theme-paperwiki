@@ -1,4 +1,5 @@
 /* The variables directory contains any SCSS that doesn't create any actual CSS output. */
+@import "variables/_media-queries";
 @import "variables/colors";
 @import "variables/fonts";
 @import "variables/misc";

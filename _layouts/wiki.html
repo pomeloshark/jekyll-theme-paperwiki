@@ -2,10 +2,10 @@
    layout: entry
 ---
 
-<article class="entry entry-wiki">
+<article class="entry entry_wiki">
 
    <h1>
-      {{ page.title }}
+      {{ page.name | remove: ".md" }}
    </h1>
 
    {% if site.entry_tags_top %}

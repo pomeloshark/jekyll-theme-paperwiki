@@ -2,7 +2,16 @@
   # SEARCH PAGE STYLING
 \*------------------------------------*/
 
+#search-results {
+   margin-left: 0;
+}
+
+#search-results dt {
+   font-weight: normal;
+}
+
 #search-results dd {
+   margin-left: 0;
 }
 
 .search_result {}

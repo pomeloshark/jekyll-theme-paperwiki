@@ -3,10 +3,18 @@
   # styling universal to all pages
 \*------------------------------------*/
 
-* {
+html {
    /* Correct box-sizing in IE. */
    box-sizing: border-box;
+}
 
+*,
+*::before,
+*::after {
+   box-sizing: inherit;
+}
+
+* {
    /* Hard reset on spacing, for the insane. */
    margin: 0;
    padding: 0;
@@ -16,8 +24,6 @@
 }
 
 body {
-   width: 85%;
-
    display: grid;
    grid-template-columns: repeat(12, 1fr);
 
@@ -25,7 +31,22 @@ body {
 
    background-color: $color-body_background;
    font-family: $fontfamily-body;
-   font-size: $fontsize-body;
+   @include for-phone-only {
+      width: 100%;
+      font-size: 85%;
+   }
+   @include for-tablet-portrait-up {
+      width: 100%;
+      font-size: 85%;
+   }
+   @include for-tablet-landscape-up {
+      width: 90%;
+      font-size: 90%;
+   }
+   @include for-desktop-up {
+      width: 85%;
+      font-size: $fontsize-body;
+   }
 }
 
 main {
@@ -74,10 +95,16 @@ a:active {
 
 a:hover {
    color: $color-link_hover;
+   transition: $transition;
 }
 
-a:active {
-   color: $color-link_active;
+a.active,
+a:focus {
+   border: 0;
+   border-radius: 0.05em;
+   outline: 3px solid $color-link_focus;
+   outline-offset: 0.2em;
+   transition: $transition;
 }
 
 p {
@@ -94,30 +121,20 @@ abbr {
    cursor: help;
 }
 
-img {
-   border: 0;
-}
-
-figcaption {
-   font-size: $fontsize-small;
-   text-align: center;
-}
-
 dl,
 ol,
 ul {
    margin-bottom: 1.75em;
 }
 
-ol li,
-ul li {
-//   padding-left: 1em;
+ul ul,
+ol ol {
+   margin-left: 2em;
+   margin-bottom: 0;
 }
 
 ul ul {
-//   padding-left: -2em;
-   margin-left: 2em;
-   margin-bottom: 0;
+   list-style-type: circle;
 }
 
 ol,
@@ -137,6 +154,37 @@ dt {
 
 dd {
    margin-left: 1em;
+}
+
+
+
+img {
+   border: 0;
+}
+
+figure {}
+
+figcaption {
+   font-size: $fontsize-small;
+   text-align: center;
+}
+
+blockquote {
+   margin-left: 3em;
+   margin-right: 3em;
+   margin-bottom: 1.75em;
+   padding: 1.75em;
+
+   background-color: $color-blockquote_background;
+   border-left: 0.5em solid $color-blockquote_border;
+
+   figcaption {
+      text-align: right;
+   }
+
+   figcaption cite {
+      display: inline;
+   }
 }
 
 
@@ -185,35 +233,11 @@ caption {
 
 
 
-
-
 hr {
    margin: 2*1.75em 6em 2*1.68em;
 
    border-style: solid;
    border-color: $color-hr;
-}
-
-blockquote {
-   margin-left: 3em;
-   margin-right: 3em;
-   margin-bottom: 1.75em;
-   padding: 1.75em;
-
-   background-color: $color-blockquote_background;
-   border-left: 0.5em solid $color-blockquote_border;
-
-   figcaption {
-      text-align: right;
-   }
-
-   figcaption cite {
-      display: inline;
-   }
-}
-
-ul ul {
-   list-style-type: circle;
 }
 
 code,
@@ -275,19 +299,29 @@ pre {
 input[type="search"] {
    background-color: $color-searchbar_background;
    border: 1px solid $color-searchbar_border;
-   appearance: none;
-   outline: none;
-
    transition: $transition;
 
    &:hover {
       border: 1px solid $color-searchbar_border_hover;
       box-shadow: 0 0 6px $color-searchbar_shadow_hover;
-      transition: $transition;
    }
    &:focus {
-      border-color: $color-searchbar_border_focus;
+      border: 1px solid $color-searchbar_border_focus;
+      outline: 1px solid $color-searchbar_border_focus;
       box-shadow: 0 0 6px $color-searchbar_shadow_focus;
-      transition: $transition;
+   }
+}
+
+button {
+   background-color: $color-button_background;
+   border: 1px solid transparent;
+   transition: $transition;
+
+   &:hover {
+      box-shadow: 0 0 7px $color-button_shadow_hover;
+   }
+   &:focus {
+      box-shadow: 0 0 7px $color-button_shadow_focus;
+      outline: 1px solid $color-button_outline-focus;
    }
 }
