@@ -1,5 +1,7 @@
 # jekyll-theme-paperwiki
 
+![alt text](screenshot.png)
+
 For storing your worldbuilding notes! The intent of this theme is to get all the code out of the way and to allow you to write Markdown articles; the best way to do that is to install the theme as a gem. However, if you want to tinker with the code, just download this repository.
 
 For the easiest starting point, I have uploaded a [sample site](https://github.com/pomeloshark/paperwiki-example) that you can download with everything preconfigured, so if you're unfamiliar with Jekyll you can bypass all the setup and get right to it. See that repo for instructions.
