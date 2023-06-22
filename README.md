@@ -1,6 +1,6 @@
 # jekyll-theme-paperwiki
 
-![alt text](screenshot.png)
+![](/screenshot.png)
 
 For storing your worldbuilding notes! The intent of this theme is to get all the code out of the way and to allow you to write Markdown articles; the best way to do that is to install the theme as a gem. However, if you want to tinker with the code, just download this repository.
 
