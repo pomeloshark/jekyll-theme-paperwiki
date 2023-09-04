@@ -29,7 +29,7 @@ This theme comes with all of these prepackaged, so most of what you have to do i
 
 ## Installation
 
-[Install Jekyll](https://jekyllrb.com/docs/). Create a new site by running the following in your terminal:
+[Install Jekyll](https://jekyllrb.com/docs/). If you're using the example site linked above, you can skip ahead to the [using the wiki](#using-the-wiki) section. Otherwise, create a new site by running the following in your terminal:
 
 ```
 $ jekyll new MYSITENAME
@@ -92,9 +92,11 @@ layout: launchpad
 
 This will show you the default wiki homepage. The three links - explore, contents, and random page - link to pages that are included with the theme, and consist of pregenerated content based on the wiki articles you've written. Now you can start adding articles in your `_wiki` folder.
 
+
+
 ### Using the wiki
 
-All of your wiki pages should be written in markdown, and you must begin each `.md` file like so:
+All of your wiki pages should be written in Markdown, and you must begin each `.md` file like so:
 
 ```
 ---
@@ -107,51 +109,7 @@ Caveats:
 - If the site won't build due to an error with the random page, make sure you have more than one wiki article for it to draw from
 - You may need to specify a permalink and a title if you want to use certain characters that are not allowed in filenames -- say, some IPA characters. Otherwise just title your articles "Article title.md", with spaces, not underscores or hyphens, and the default settings will take care of the rest.
 
-
-
-## Config
-
-By default, PaperWiki is set up to just be a collection of articles, with a handful of navigational pages, similar to Wikipedia. The articles are organized into the `collections` folder, in a subfolder titled `_wiki`. This is defined in the theme's config file like so:
-
-```yaml
-collections_dir: collections
-collections:
-   wiki:
-      output: true
-      permalink: /:collection/:name
-```
-
-`/:collection/:name` means the url to each wiki entry will be `wiki/article-title` without the article file extension.
-
-However, if you would like to have additional collections akin to the Wikimedia Foundation's other projects - such as Wikisource, Wikispecies, or Wiktionary - then you can specify them in the same format as above, also under the `collections` key:
-
-```yaml
-collections:
-   COLLECTION_NAME:
-      output: true
-      permalink: /:collection/:name
-```
-
-Make sure to add the corresponding folders within `collections`, including the preceding underscore: `_literature`, `_dictionary`, etc.
-
-Add into your `_config.yml`:
-
-```yaml
-multi_projects: true
-```
-
-You will also need to add a data file listing your projects: create a folder titled `_data` and inside it a file titled `projects.yml`. Within it you need to list the following, formatted in the same way:
-
-``` yaml
-- name: Wiki
-  link: /wiki
-  icon: ri-global-line
-  desc: A brief description here
-```
-
-For the icon, find one you like from [RemixIcon](https://remixicon.com/) and copy the code.
-
-This will add links to each different collection on your homepage, and allow you to limit the scope of your searches to a single collection or expand it to cover all of them at once. The search logic is already taken care of in the theme itself; it just needs the names of your collections.
+If you're unfamiliar with Markdown, see [here](https://www.markdownguide.org/).
 
 
 
