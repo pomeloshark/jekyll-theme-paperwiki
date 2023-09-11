@@ -1,13 +1,16 @@
-// Yoinked in its entirety from https://davidwalsh.name/adding-search-to-your-site-with-javascript
+// Yoinked in its entirety from https://davidwalsh.name/adding-search-to-your-site-with-javascript and https://trackjs.com/blog/site-search-with-javascript-part-2/
 
+// var lunrFolding = require("lunr-folding")(lunr);
+
+// Build the search index
 var searchIndex = lunr(function() {
-   // define searchable fields for each page
+   // Define searchable fields for each page
    this.ref("id");
-   this.field("title", { boost: 10 });
-   this.field("content");
+   this.field("title", { boost: 100 }); // Boost the importance of the title field, prioritizing title matches
+   this.field("content", { boost: 10 });
    this.field("portal");
    this.field("categories");
-   for (var key in window.pages) {
+   for (var key in window.pages) { // Loop through all pages to add their data to the search index
       this.add({
          "id": key,
          "title": pages[key].title,
@@ -30,21 +33,44 @@ function getQueryVariable(variable) {
 }
 
 var searchTerm = getQueryVariable("q");
-// creation of searchIndex from earlier example
-var results = searchIndex.search(searchTerm);
+// Create index of search term matches
+var results = searchIndex.search(searchTerm + "*"); // Wildcard by default
 var resultPages = results.map(function (match) {
    return pages[match.ref];
 });
 
 
 
+// Text highlighting
+function formatContent(content, searchTerm) {
+    var termIdx = content.toLowerCase().indexOf(searchTerm.toLowerCase());
+    if (termIdx >= 0) {
+        var startIdx = Math.max(0, termIdx - 140);
+        var endIdx = Math.min(content.length, termIdx + searchTerm.length + 140);
+        var trimmedContent = (startIdx === 0) ? "" : "&hellip;";
+        trimmedContent += content.substring(startIdx, endIdx);
+        trimmedContent += (endIdx >= content.length) ? "" : "&hellip;"
 
-// resultPages from previous example
+        var highlightedContent = trimmedContent.replace(new RegExp(searchTerm, "ig"), function matcher(match) {
+            return "<mark class='search_result-highlight'>" + match + "</mark>";
+        });
+
+        return highlightedContent;
+    }
+    else {
+        var emptyTrimmedString = content.substr(0, 280);
+        emptyTrimmedString += (content.length < 280) ? "" : "&hellip;";
+        return emptyTrimmedString;
+    }
+}
+
+
+
 resultsString = "";
-resultPages.forEach(function (r) {
+resultPages.forEach(function (r) { // Format the output on the search results page
    resultsString += "<dt class='search_result'>";
-   resultsString += "<a href='" + r.url + "'>" + r.title + "</a>";
+   resultsString += "<a class='search_result' href='" + r.url + "'>" + r.title + "</a>";
    resultsString += "<span class='search_result-details'>" + r.portal + " ⋅ " + r.categories + "</span></dt>"
-   resultsString += "<dd class='search_result-preview'>" + r.content.substring(0, 200) + "..." + "</dd>";
+   resultsString += "<dd class='search_result-preview'>" + formatContent(r.content, searchTerm) + "" + "</dd>";
 });
 document.querySelector("#search-results").innerHTML = resultsString;

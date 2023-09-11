@@ -14,7 +14,10 @@
    margin-left: 0;
 }
 
-.search_result {}
+.search_result {
+   text-decoration: none;
+   font-weight: bold;
+}
 
 .search_result-details {
    margin-bottom: 0;
@@ -25,4 +28,11 @@
 
 .search_result-preview {
    margin-bottom: 1.75rem;
+}
+
+.search_result-highlight {
+   padding: 0.2em 0.3em;
+
+   background-color: $color-peach;
+   border-radius: $border_radius-inline;
 }
