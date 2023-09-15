@@ -5,14 +5,23 @@
 
 .interlinear_gloss {
    border-collapse: collapse;
+   border: 0;
    margin-left: 3%;
    margin-top: 0;
    margin-bottom: 1.75rem;
+   tr {
+      border: 0;
+   }
+   tr:nth-child(even) {
+      background-color: transparent;
+   }
    td {
-      padding: 0 0 0 1em;
+      padding: 0.5em;
+      border: 0;
    }
    td:first-child {
-      border-left: 4px solid $color-pistachio;
+      border-left: 0.5em solid $color-pistachio;
+      padding-left: 1em;
    }
 }
 

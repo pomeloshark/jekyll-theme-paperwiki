@@ -5,10 +5,8 @@
    layout: page
 ---
 
-{%- assign docs = site.documents -%}
+{% assign project = page.project %}
 
-{%- if site.random_redirect.posts == true -%}
-  {%- assign docs = docs | concat: site.posts -%}
-{%- endif -%}
+{%- assign docs = site.documents | where_exp: "page","page.collection == project" -%}
 
 {% include random_redirect.html %}

@@ -1,20 +1,26 @@
 // Yoinked in its entirety from https://davidwalsh.name/adding-search-to-your-site-with-javascript and https://trackjs.com/blog/site-search-with-javascript-part-2/
 
-// var lunrFolding = require("lunr-folding")(lunr);
+//var lunr = require("lunr")
+//require("lunr.unicodeNormalizer")(lunr)
 
 // Build the search index
 var searchIndex = lunr(function() {
+//   this.use("lunr.unicodeNormalizer")
    // Define searchable fields for each page
    this.ref("id");
    this.field("title", { boost: 100 }); // Boost the importance of the title field, prioritizing title matches
-   this.field("content", { boost: 10 });
-   this.field("portal");
-   this.field("categories");
+   this.field("content", { boost: 50 });
+   this.field("portal", { boost: 10 });
+   this.field("categories", { boost: 10 });
+   this.field("tags", { boost: 10 });
    for (var key in window.pages) { // Loop through all pages to add their data to the search index
       this.add({
          "id": key,
          "title": pages[key].title,
-         "content": pages[key].content
+         "content": pages[key].content,
+         "portal": pages[key].portal,
+         "categories": pages[key].categories,
+         "tags": pages[key].tags
       });
    }
 });
