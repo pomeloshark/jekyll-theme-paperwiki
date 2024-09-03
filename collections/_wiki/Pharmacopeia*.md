@@ -1,4 +1,0 @@
----
----
-
-+ acetylsalicylic acid
