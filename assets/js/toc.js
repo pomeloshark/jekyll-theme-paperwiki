@@ -1,19 +1,19 @@
-/*
-   Demo for this article:
-   http://blustemy.io/creating-a-table-of-contents-in-javascript/
-*/
+/***
+ * Demo for this article:
+ * http://blustemy.io/creating-a-table-of-contents-in-javascript/
+ */
 
 class TableOfContents {
    /*
-   The parameters from and to must be Element objects in the DOM.
-   */
+      The parameters from and to must be Element objects in the DOM.
+    */
    constructor({ from, to }) {
       this.fromElement = from;
       this.toElement = to;
       // Get all the ordered headings.
       this.headingElements = this.fromElement.querySelectorAll("h2, h3, h4, h5, h6");
       this.tocElement = document.createElement("div");
-    }
+   }
 
    /*
       Get the most important heading level.
@@ -32,14 +32,14 @@ class TableOfContents {
 
    /*
       Generate a unique id string for the heading from its text content.
-   */
+    */
    static generateId(headingElement) {
       return headingElement.textContent.replace(/\s+/g, "_");
    }
 
    /*
       Convert <h1> to 1 … <h6> to 6.
-   */
+    */
    static getHeadingLevel(headingElement) {
       switch (headingElement.tagName.toLowerCase()) {
          case "h1": return 1;

@@ -10,6 +10,11 @@
 
    border-left: 1px solid $color-article_border;
    border-right: 1px solid $color-article_border;
+
+   ul,
+   li {
+      margin-right: 0;
+   }
 }
 
 .entry_wiki,

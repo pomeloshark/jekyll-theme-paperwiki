@@ -1,11 +1,10 @@
-// Yoinked in its entirety from https://davidwalsh.name/adding-search-to-your-site-with-javascript and https://trackjs.com/blog/site-search-with-javascript-part-2/
-
-//var lunr = require("lunr")
-//require("lunr.unicodeNormalizer")(lunr)
+/***
+ * Yoinked in its entirety from https://davidwalsh.name/adding-search-to-your-site-with-javascript
+ * and https://trackjs.com/blog/site-search-with-javascript-part-2/
+ */
 
 // Build the search index
 var searchIndex = lunr(function() {
-//   this.use("lunr.unicodeNormalizer")
    // Define searchable fields for each page
    this.ref("id");
    this.field("title", { boost: 100 }); // Boost the importance of the title field, prioritizing title matches
@@ -49,25 +48,25 @@ var resultPages = results.map(function (match) {
 
 // Text highlighting
 function formatContent(content, searchTerm) {
-    var termIdx = content.toLowerCase().indexOf(searchTerm.toLowerCase());
-    if (termIdx >= 0) {
-        var startIdx = Math.max(0, termIdx - 140);
-        var endIdx = Math.min(content.length, termIdx + searchTerm.length + 140);
-        var trimmedContent = (startIdx === 0) ? "" : "&hellip;";
-        trimmedContent += content.substring(startIdx, endIdx);
-        trimmedContent += (endIdx >= content.length) ? "" : "&hellip;"
+   var termIdx = content.toLowerCase().indexOf(searchTerm.toLowerCase());
+   if (termIdx >= 0) {
+      var startIdx = Math.max(0, termIdx - 140);
+      var endIdx = Math.min(content.length, termIdx + searchTerm.length + 140);
+      var trimmedContent = (startIdx === 0) ? "" : "&hellip;";
+      trimmedContent += content.substring(startIdx, endIdx);
+      trimmedContent += (endIdx >= content.length) ? "" : "&hellip;"
 
-        var highlightedContent = trimmedContent.replace(new RegExp(searchTerm, "ig"), function matcher(match) {
-            return "<mark class='search_result-highlight'>" + match + "</mark>";
-        });
+      var highlightedContent = trimmedContent.replace(new RegExp(searchTerm, "ig"), function matcher(match) {
+         return "<mark class='search_result-highlight'>" + match + "</mark>";
+      });
 
-        return highlightedContent;
-    }
-    else {
-        var emptyTrimmedString = content.substr(0, 280);
-        emptyTrimmedString += (content.length < 280) ? "" : "&hellip;";
-        return emptyTrimmedString;
-    }
+      return highlightedContent;
+   }
+   else {
+      var emptyTrimmedString = content.substr(0, 280);
+      emptyTrimmedString += (content.length < 280) ? "" : "&hellip;";
+      return emptyTrimmedString;
+   }
 }
 
 

@@ -1,4 +1,4 @@
-/**
+/***
  * lunr - http://lunrjs.com - A bit like Solr, but much smaller and not as bright - 2.3.9
  * Copyright (C) 2020 Oliver Nightingale
  * @license MIT
@@ -38,20 +38,20 @@
  * @namespace {function} lunr
  */
 var lunr = function (config) {
-  var builder = new lunr.Builder
+   var builder = new lunr.Builder
 
-  builder.pipeline.add(
-    lunr.trimmer,
-    lunr.stopWordFilter,
-    lunr.stemmer
-  )
+   builder.pipeline.add(
+      lunr.trimmer,
+      lunr.stopWordFilter,
+      lunr.stemmer
+   )
 
-  builder.searchPipeline.add(
-    lunr.stemmer
-  )
+   builder.searchPipeline.add(
+      lunr.stemmer
+   )
 
-  config.call(builder, builder)
-  return builder.build()
+   config.call(builder, builder)
+   return builder.build()
 }
 
 lunr.version = "2.3.9"
@@ -74,13 +74,13 @@ lunr.utils = {}
  * @function
  */
 lunr.utils.warn = (function (global) {
-  /* eslint-disable no-console */
-  return function (message) {
-    if (global.console && console.warn) {
-      console.warn(message)
-    }
-  }
-  /* eslint-enable no-console */
+   /* eslint-disable no-console */
+   return function (message) {
+      if (global.console && console.warn) {
+         console.warn(message)
+      }
+   }
+   /* eslint-enable no-console */
 })(this)
 
 /**
@@ -95,11 +95,11 @@ lunr.utils.warn = (function (global) {
  * @memberOf lunr.utils
  */
 lunr.utils.asString = function (obj) {
-  if (obj === void 0 || obj === null) {
-    return ""
-  } else {
-    return obj.toString()
-  }
+   if (obj === void 0 || obj === null) {
+      return ""
+   } else {
+      return obj.toString()
+   }
 }
 
 /**
@@ -119,61 +119,61 @@ lunr.utils.asString = function (obj) {
  * @memberOf Utils
  */
 lunr.utils.clone = function (obj) {
-  if (obj === null || obj === undefined) {
-    return obj
-  }
+   if (obj === null || obj === undefined) {
+      return obj
+   }
 
-  var clone = Object.create(null),
+   var clone = Object.create(null),
       keys = Object.keys(obj)
 
-  for (var i = 0; i < keys.length; i++) {
-    var key = keys[i],
-        val = obj[key]
+   for (var i = 0; i < keys.length; i++) {
+      var key = keys[i],
+         val = obj[key]
 
-    if (Array.isArray(val)) {
+   if (Array.isArray(val)) {
       clone[key] = val.slice()
       continue
-    }
+   }
 
-    if (typeof val === 'string' ||
-        typeof val === 'number' ||
-        typeof val === 'boolean') {
+   if (typeof val === 'string' ||
+       typeof val === 'number' ||
+       typeof val === 'boolean') {
       clone[key] = val
       continue
-    }
+   }
 
-    throw new TypeError("clone is not deep and does not support nested objects")
-  }
+      throw new TypeError("clone is not deep and does not support nested objects")
+   }
 
-  return clone
+   return clone
 }
 lunr.FieldRef = function (docRef, fieldName, stringValue) {
-  this.docRef = docRef
-  this.fieldName = fieldName
-  this._stringValue = stringValue
+   this.docRef = docRef
+   this.fieldName = fieldName
+   this._stringValue = stringValue
 }
 
 lunr.FieldRef.joiner = "/"
 
 lunr.FieldRef.fromString = function (s) {
-  var n = s.indexOf(lunr.FieldRef.joiner)
+   var n = s.indexOf(lunr.FieldRef.joiner)
 
-  if (n === -1) {
-    throw "malformed field ref string"
-  }
+   if (n === -1) {
+      throw "malformed field ref string"
+   }
 
-  var fieldRef = s.slice(0, n),
+   var fieldRef = s.slice(0, n),
       docRef = s.slice(n + 1)
 
-  return new lunr.FieldRef (docRef, fieldRef, s)
+      return new lunr.FieldRef (docRef, fieldRef, s)
 }
 
 lunr.FieldRef.prototype.toString = function () {
-  if (this._stringValue == undefined) {
-    this._stringValue = this.fieldName + lunr.FieldRef.joiner + this.docRef
-  }
+   if (this._stringValue == undefined) {
+      this._stringValue = this.fieldName + lunr.FieldRef.joiner + this.docRef
+   }
 
-  return this._stringValue
+   return this._stringValue
 }
 /*!
  * lunr.Set
@@ -186,17 +186,17 @@ lunr.FieldRef.prototype.toString = function () {
  * @constructor
  */
 lunr.Set = function (elements) {
-  this.elements = Object.create(null)
+   this.elements = Object.create(null)
 
-  if (elements) {
-    this.length = elements.length
+   if (elements) {
+      this.length = elements.length
 
-    for (var i = 0; i < this.length; i++) {
-      this.elements[elements[i]] = true
-    }
-  } else {
-    this.length = 0
-  }
+      for (var i = 0; i < this.length; i++) {
+         this.elements[elements[i]] = true
+      }
+   } else {
+      this.length = 0
+   }
 }
 
 /**
@@ -207,17 +207,17 @@ lunr.Set = function (elements) {
  * @type {lunr.Set}
  */
 lunr.Set.complete = {
-  intersect: function (other) {
-    return other
-  },
+   intersect: function (other) {
+      return other
+   },
 
-  union: function () {
-    return this
-  },
+   union: function () {
+      return this
+   },
 
-  contains: function () {
-    return true
-  }
+   contains: function () {
+      return true
+   }
 }
 
 /**
@@ -228,17 +228,17 @@ lunr.Set.complete = {
  * @type {lunr.Set}
  */
 lunr.Set.empty = {
-  intersect: function () {
-    return this
-  },
+   intersect: function () {
+      return this
+   },
 
-  union: function (other) {
-    return other
-  },
+   union: function (other) {
+      return other
+   },
 
-  contains: function () {
-    return false
-  }
+   contains: function () {
+      return false
+   }
 }
 
 /**
@@ -248,7 +248,7 @@ lunr.Set.empty = {
  * @returns {boolean} - True if this set contains the specified object.
  */
 lunr.Set.prototype.contains = function (object) {
-  return !!this.elements[object]
+   return !!this.elements[object]
 }
 
 /**
@@ -260,34 +260,34 @@ lunr.Set.prototype.contains = function (object) {
  */
 
 lunr.Set.prototype.intersect = function (other) {
-  var a, b, elements, intersection = []
+   var a, b, elements, intersection = []
 
-  if (other === lunr.Set.complete) {
-    return this
-  }
+   if (other === lunr.Set.complete) {
+      return this
+   }
 
-  if (other === lunr.Set.empty) {
-    return other
-  }
+   if (other === lunr.Set.empty) {
+      return other
+   }
 
-  if (this.length < other.length) {
-    a = this
-    b = other
-  } else {
-    a = other
-    b = this
-  }
+   if (this.length < other.length) {
+      a = this
+      b = other
+   } else {
+      a = other
+      b = this
+   }
 
-  elements = Object.keys(a.elements)
+   elements = Object.keys(a.elements)
 
-  for (var i = 0; i < elements.length; i++) {
-    var element = elements[i]
-    if (element in b.elements) {
-      intersection.push(element)
-    }
-  }
+   for (var i = 0; i < elements.length; i++) {
+      var element = elements[i]
+      if (element in b.elements) {
+         intersection.push(element)
+      }
+   }
 
-  return new lunr.Set (intersection)
+   return new lunr.Set (intersection)
 }
 
 /**
@@ -298,15 +298,15 @@ lunr.Set.prototype.intersect = function (other) {
  */
 
 lunr.Set.prototype.union = function (other) {
-  if (other === lunr.Set.complete) {
-    return lunr.Set.complete
-  }
+   if (other === lunr.Set.complete) {
+      return lunr.Set.complete
+   }
 
-  if (other === lunr.Set.empty) {
-    return this
-  }
+   if (other === lunr.Set.empty) {
+      return this
+   }
 
-  return new lunr.Set(Object.keys(this.elements).concat(Object.keys(other.elements)))
+   return new lunr.Set(Object.keys(this.elements).concat(Object.keys(other.elements)))
 }
 /**
  * A function to calculate the inverse document frequency for
@@ -317,16 +317,16 @@ lunr.Set.prototype.union = function (other) {
  * @param {number} documentCount - The total number of documents.
  */
 lunr.idf = function (posting, documentCount) {
-  var documentsWithTerm = 0
+   var documentsWithTerm = 0
 
-  for (var fieldName in posting) {
-    if (fieldName == '_index') continue // Ignore the term index, its not a field
-    documentsWithTerm += Object.keys(posting[fieldName]).length
-  }
+   for (var fieldName in posting) {
+      if (fieldName == '_index') continue // Ignore the term index, its not a field
+      documentsWithTerm += Object.keys(posting[fieldName]).length
+   }
 
-  var x = (documentCount - documentsWithTerm + 0.5) / (documentsWithTerm + 0.5)
+   var x = (documentCount - documentsWithTerm + 0.5) / (documentsWithTerm + 0.5)
 
-  return Math.log(1 + Math.abs(x))
+   return Math.log(1 + Math.abs(x))
 }
 
 /**
@@ -338,8 +338,8 @@ lunr.idf = function (posting, documentCount) {
  * @param {object} [metadata={}] - Metadata associated with this token.
  */
 lunr.Token = function (str, metadata) {
-  this.str = str || ""
-  this.metadata = metadata || {}
+   this.str = str || ""
+   this.metadata = metadata || {}
 }
 
 /**
@@ -348,7 +348,7 @@ lunr.Token = function (str, metadata) {
  * @returns {string}
  */
 lunr.Token.prototype.toString = function () {
-  return this.str
+   return this.str
 }
 
 /**
@@ -372,8 +372,8 @@ lunr.Token.prototype.toString = function () {
  * @returns {lunr.Token}
  */
 lunr.Token.prototype.update = function (fn) {
-  this.str = fn(this.str, this.metadata)
-  return this
+   this.str = fn(this.str, this.metadata)
+   return this
 }
 
 /**
@@ -384,8 +384,8 @@ lunr.Token.prototype.update = function (fn) {
  * @returns {lunr.Token}
  */
 lunr.Token.prototype.clone = function (fn) {
-  fn = fn || function (s) { return s }
-  return new lunr.Token (fn(this.str, this.metadata), this.metadata)
+   fn = fn || function (s) { return s }
+   return new lunr.Token (fn(this.str, this.metadata), this.metadata)
 }
 /*!
  * lunr.tokenizer
@@ -411,44 +411,44 @@ lunr.Token.prototype.clone = function (fn) {
  * @see {@link lunr.Pipeline}
  */
 lunr.tokenizer = function (obj, metadata) {
-  if (obj == null || obj == undefined) {
-    return []
-  }
+   if (obj == null || obj == undefined) {
+      return []
+   }
 
-  if (Array.isArray(obj)) {
-    return obj.map(function (t) {
-      return new lunr.Token(
-        lunr.utils.asString(t).toLowerCase(),
-        lunr.utils.clone(metadata)
-      )
-    })
-  }
+   if (Array.isArray(obj)) {
+      return obj.map(function (t) {
+         return new lunr.Token(
+            lunr.utils.asString(t).toLowerCase(),
+            lunr.utils.clone(metadata)
+         )
+      })
+   }
 
-  var str = obj.toString().toLowerCase(),
+   var str = obj.toString().toLowerCase(),
       len = str.length,
       tokens = []
 
-  for (var sliceEnd = 0, sliceStart = 0; sliceEnd <= len; sliceEnd++) {
-    var char = str.charAt(sliceEnd),
-        sliceLength = sliceEnd - sliceStart
+   for (var sliceEnd = 0, sliceStart = 0; sliceEnd <= len; sliceEnd++) {
+      var char = str.charAt(sliceEnd),
+      sliceLength = sliceEnd - sliceStart
 
-    if ((char.match(lunr.tokenizer.separator) || sliceEnd == len)) {
+      if ((char.match(lunr.tokenizer.separator) || sliceEnd == len)) {
 
-      if (sliceLength > 0) {
-        var tokenMetadata = lunr.utils.clone(metadata) || {}
-        tokenMetadata["position"] = [sliceStart, sliceLength]
-        tokenMetadata["index"] = tokens.length
+         if (sliceLength > 0) {
+            var tokenMetadata = lunr.utils.clone(metadata) || {}
+            tokenMetadata["position"] = [sliceStart, sliceLength]
+            tokenMetadata["index"] = tokens.length
 
-        tokens.push(
-          new lunr.Token (
-            str.slice(sliceStart, sliceEnd),
-            tokenMetadata
-          )
-        )
-      }
+            tokens.push(
+               new lunr.Token (
+                  str.slice(sliceStart, sliceEnd),
+                  tokenMetadata
+               )
+            )
+         }
 
-      sliceStart = sliceEnd + 1
-    }
+         sliceStart = sliceEnd + 1
+       }
 
   }
 
@@ -498,7 +498,7 @@ lunr.tokenizer.separator = /[\s\-]+/
  * @constructor
  */
 lunr.Pipeline = function () {
-  this._stack = []
+   this._stack = []
 }
 
 lunr.Pipeline.registeredFunctions = Object.create(null)
@@ -537,12 +537,12 @@ lunr.Pipeline.registeredFunctions = Object.create(null)
  * @param {String} label - The label to register this function with
  */
 lunr.Pipeline.registerFunction = function (fn, label) {
-  if (label in this.registeredFunctions) {
-    lunr.utils.warn('Overwriting existing registered function: ' + label)
-  }
+   if (label in this.registeredFunctions) {
+      lunr.utils.warn('Overwriting existing registered function: ' + label)
+   }
 
-  fn.label = label
-  lunr.Pipeline.registeredFunctions[fn.label] = fn
+   fn.label = label
+   lunr.Pipeline.registeredFunctions[fn.label] = fn
 }
 
 /**
@@ -552,11 +552,11 @@ lunr.Pipeline.registerFunction = function (fn, label) {
  * @private
  */
 lunr.Pipeline.warnIfFunctionNotRegistered = function (fn) {
-  var isRegistered = fn.label && (fn.label in this.registeredFunctions)
+   var isRegistered = fn.label && (fn.label in this.registeredFunctions)
 
-  if (!isRegistered) {
-    lunr.utils.warn('Function is not registered with pipeline. This may cause problems when serialising the index.\n', fn)
-  }
+   if (!isRegistered) {
+      lunr.utils.warn('Function is not registered with pipeline. This may cause problems when serialising the index.\n', fn)
+   }
 }
 
 /**
@@ -570,17 +570,17 @@ lunr.Pipeline.warnIfFunctionNotRegistered = function (fn) {
  * @returns {lunr.Pipeline}
  */
 lunr.Pipeline.load = function (serialised) {
-  var pipeline = new lunr.Pipeline
+   var pipeline = new lunr.Pipeline
 
-  serialised.forEach(function (fnName) {
-    var fn = lunr.Pipeline.registeredFunctions[fnName]
+   serialised.forEach(function (fnName) {
+      var fn = lunr.Pipeline.registeredFunctions[fnName]
 
-    if (fn) {
-      pipeline.add(fn)
-    } else {
-      throw new Error('Cannot load unregistered function: ' + fnName)
-    }
-  })
+      if (fn) {
+         pipeline.add(fn)
+      } else {
+         throw new Error('Cannot load unregistered function: ' + fnName)
+      }
+   })
 
   return pipeline
 }
@@ -593,12 +593,12 @@ lunr.Pipeline.load = function (serialised) {
  * @param {lunr.PipelineFunction[]} functions - Any number of functions to add to the pipeline.
  */
 lunr.Pipeline.prototype.add = function () {
-  var fns = Array.prototype.slice.call(arguments)
+   var fns = Array.prototype.slice.call(arguments)
 
-  fns.forEach(function (fn) {
-    lunr.Pipeline.warnIfFunctionNotRegistered(fn)
-    this._stack.push(fn)
-  }, this)
+   fns.forEach(function (fn) {
+      lunr.Pipeline.warnIfFunctionNotRegistered(fn)
+      this._stack.push(fn)
+   }, this)
 }
 
 /**
@@ -611,15 +611,15 @@ lunr.Pipeline.prototype.add = function () {
  * @param {lunr.PipelineFunction} newFn - The new function to add to the pipeline.
  */
 lunr.Pipeline.prototype.after = function (existingFn, newFn) {
-  lunr.Pipeline.warnIfFunctionNotRegistered(newFn)
+   lunr.Pipeline.warnIfFunctionNotRegistered(newFn)
 
-  var pos = this._stack.indexOf(existingFn)
-  if (pos == -1) {
-    throw new Error('Cannot find existingFn')
-  }
+   var pos = this._stack.indexOf(existingFn)
+   if (pos == -1) {
+      throw new Error('Cannot find existingFn')
+   }
 
-  pos = pos + 1
-  this._stack.splice(pos, 0, newFn)
+   pos = pos + 1
+   this._stack.splice(pos, 0, newFn)
 }
 
 /**
@@ -632,14 +632,14 @@ lunr.Pipeline.prototype.after = function (existingFn, newFn) {
  * @param {lunr.PipelineFunction} newFn - The new function to add to the pipeline.
  */
 lunr.Pipeline.prototype.before = function (existingFn, newFn) {
-  lunr.Pipeline.warnIfFunctionNotRegistered(newFn)
+   lunr.Pipeline.warnIfFunctionNotRegistered(newFn)
 
-  var pos = this._stack.indexOf(existingFn)
-  if (pos == -1) {
-    throw new Error('Cannot find existingFn')
-  }
+   var pos = this._stack.indexOf(existingFn)
+   if (pos == -1) {
+      throw new Error('Cannot find existingFn')
+   }
 
-  this._stack.splice(pos, 0, newFn)
+   this._stack.splice(pos, 0, newFn)
 }
 
 /**
@@ -648,12 +648,12 @@ lunr.Pipeline.prototype.before = function (existingFn, newFn) {
  * @param {lunr.PipelineFunction} fn The function to remove from the pipeline.
  */
 lunr.Pipeline.prototype.remove = function (fn) {
-  var pos = this._stack.indexOf(fn)
-  if (pos == -1) {
-    return
-  }
+   var pos = this._stack.indexOf(fn)
+   if (pos == -1) {
+      return
+   }
 
-  this._stack.splice(pos, 1)
+   this._stack.splice(pos, 1)
 }
 
 /**
@@ -664,30 +664,30 @@ lunr.Pipeline.prototype.remove = function (fn) {
  * @returns {Array}
  */
 lunr.Pipeline.prototype.run = function (tokens) {
-  var stackLength = this._stack.length
+   var stackLength = this._stack.length
 
-  for (var i = 0; i < stackLength; i++) {
-    var fn = this._stack[i]
-    var memo = []
+   for (var i = 0; i < stackLength; i++) {
+      var fn = this._stack[i]
+      var memo = []
 
-    for (var j = 0; j < tokens.length; j++) {
-      var result = fn(tokens[j], j, tokens)
+      for (var j = 0; j < tokens.length; j++) {
+         var result = fn(tokens[j], j, tokens)
 
-      if (result === null || result === void 0 || result === '') continue
+         if (result === null || result === void 0 || result === '') continue
 
-      if (Array.isArray(result)) {
-        for (var k = 0; k < result.length; k++) {
-          memo.push(result[k])
-        }
-      } else {
-        memo.push(result)
+         if (Array.isArray(result)) {
+            for (var k = 0; k < result.length; k++) {
+               memo.push(result[k])
+            }
+         } else {
+            memo.push(result)
+         }
       }
-    }
 
-    tokens = memo
-  }
+      tokens = memo
+   }
 
-  return tokens
+   return tokens
 }
 
 /**
@@ -701,11 +701,11 @@ lunr.Pipeline.prototype.run = function (tokens) {
  * @returns {string[]}
  */
 lunr.Pipeline.prototype.runString = function (str, metadata) {
-  var token = new lunr.Token (str, metadata)
+   var token = new lunr.Token (str, metadata)
 
-  return this.run([token]).map(function (t) {
-    return t.toString()
-  })
+   return this.run([token]).map(function (t) {
+      return t.toString()
+   })
 }
 
 /**
@@ -713,7 +713,7 @@ lunr.Pipeline.prototype.runString = function (str, metadata) {
  *
  */
 lunr.Pipeline.prototype.reset = function () {
-  this._stack = []
+   this._stack = []
 }
 
 /**
@@ -724,11 +724,11 @@ lunr.Pipeline.prototype.reset = function () {
  * @returns {Array}
  */
 lunr.Pipeline.prototype.toJSON = function () {
-  return this._stack.map(function (fn) {
-    lunr.Pipeline.warnIfFunctionNotRegistered(fn)
+   return this._stack.map(function (fn) {
+      lunr.Pipeline.warnIfFunctionNotRegistered(fn)
 
-    return fn.label
-  })
+      return fn.label
+   })
 }
 /*!
  * lunr.Vector
@@ -752,8 +752,8 @@ lunr.Pipeline.prototype.toJSON = function () {
  * @param {Number[]} [elements] - The flat list of element index and element value pairs.
  */
 lunr.Vector = function (elements) {
-  this._magnitude = 0
-  this.elements = elements || []
+   this._magnitude = 0
+   this.elements = elements || []
 }
 
 
@@ -768,46 +768,46 @@ lunr.Vector = function (elements) {
  * @returns {Number}
  */
 lunr.Vector.prototype.positionForIndex = function (index) {
-  // For an empty vector the tuple can be inserted at the beginning
-  if (this.elements.length == 0) {
-    return 0
-  }
+   // For an empty vector the tuple can be inserted at the beginning
+   if (this.elements.length == 0) {
+      return 0
+   }
 
-  var start = 0,
+   var start = 0,
       end = this.elements.length / 2,
       sliceLength = end - start,
       pivotPoint = Math.floor(sliceLength / 2),
       pivotIndex = this.elements[pivotPoint * 2]
 
-  while (sliceLength > 1) {
-    if (pivotIndex < index) {
-      start = pivotPoint
-    }
+   while (sliceLength > 1) {
+      if (pivotIndex < index) {
+         start = pivotPoint
+      }
 
-    if (pivotIndex > index) {
-      end = pivotPoint
-    }
+      if (pivotIndex > index) {
+         end = pivotPoint
+      }
 
-    if (pivotIndex == index) {
-      break
-    }
+      if (pivotIndex == index) {
+         break
+      }
 
-    sliceLength = end - start
-    pivotPoint = start + Math.floor(sliceLength / 2)
-    pivotIndex = this.elements[pivotPoint * 2]
-  }
+      sliceLength = end - start
+      pivotPoint = start + Math.floor(sliceLength / 2)
+      pivotIndex = this.elements[pivotPoint * 2]
+   }
 
-  if (pivotIndex == index) {
-    return pivotPoint * 2
-  }
+   if (pivotIndex == index) {
+      return pivotPoint * 2
+   }
 
-  if (pivotIndex > index) {
-    return pivotPoint * 2
-  }
+   if (pivotIndex > index) {
+      return pivotPoint * 2
+   }
 
-  if (pivotIndex < index) {
-    return (pivotPoint + 1) * 2
-  }
+   if (pivotIndex < index) {
+      return (pivotPoint + 1) * 2
+   }
 }
 
 /**
@@ -820,9 +820,9 @@ lunr.Vector.prototype.positionForIndex = function (index) {
  * @param {Number} val - The value to be inserted into the vector.
  */
 lunr.Vector.prototype.insert = function (insertIdx, val) {
-  this.upsert(insertIdx, val, function () {
-    throw "duplicate index"
-  })
+   this.upsert(insertIdx, val, function () {
+      throw "duplicate index"
+   })
 }
 
 /**
@@ -834,14 +834,14 @@ lunr.Vector.prototype.insert = function (insertIdx, val) {
  * requested value are passed as arguments
  */
 lunr.Vector.prototype.upsert = function (insertIdx, val, fn) {
-  this._magnitude = 0
-  var position = this.positionForIndex(insertIdx)
+   this._magnitude = 0
+   var position = this.positionForIndex(insertIdx)
 
-  if (this.elements[position] == insertIdx) {
-    this.elements[position + 1] = fn(this.elements[position + 1], val)
-  } else {
-    this.elements.splice(position, 0, insertIdx, val)
-  }
+   if (this.elements[position] == insertIdx) {
+      this.elements[position + 1] = fn(this.elements[position + 1], val)
+   } else {
+      this.elements.splice(position, 0, insertIdx, val)
+   }
 }
 
 /**
@@ -850,17 +850,17 @@ lunr.Vector.prototype.upsert = function (insertIdx, val, fn) {
  * @returns {Number}
  */
 lunr.Vector.prototype.magnitude = function () {
-  if (this._magnitude) return this._magnitude
+   if (this._magnitude) return this._magnitude
 
-  var sumOfSquares = 0,
+   var sumOfSquares = 0,
       elementsLength = this.elements.length
 
-  for (var i = 1; i < elementsLength; i += 2) {
-    var val = this.elements[i]
-    sumOfSquares += val * val
-  }
+   for (var i = 1; i < elementsLength; i += 2) {
+      var val = this.elements[i]
+      sumOfSquares += val * val
+   }
 
-  return this._magnitude = Math.sqrt(sumOfSquares)
+   return this._magnitude = Math.sqrt(sumOfSquares)
 }
 
 /**
@@ -870,26 +870,26 @@ lunr.Vector.prototype.magnitude = function () {
  * @returns {Number}
  */
 lunr.Vector.prototype.dot = function (otherVector) {
-  var dotProduct = 0,
+   var dotProduct = 0,
       a = this.elements, b = otherVector.elements,
       aLen = a.length, bLen = b.length,
       aVal = 0, bVal = 0,
       i = 0, j = 0
 
-  while (i < aLen && j < bLen) {
-    aVal = a[i], bVal = b[j]
-    if (aVal < bVal) {
-      i += 2
-    } else if (aVal > bVal) {
-      j += 2
-    } else if (aVal == bVal) {
-      dotProduct += a[i + 1] * b[j + 1]
-      i += 2
-      j += 2
-    }
-  }
+   while (i < aLen && j < bLen) {
+      aVal = a[i], bVal = b[j]
+      if (aVal < bVal) {
+         i += 2
+      } else if (aVal > bVal) {
+         j += 2
+      } else if (aVal == bVal) {
+         dotProduct += a[i + 1] * b[j + 1]
+         i += 2
+         j += 2
+      }
+   }
 
-  return dotProduct
+   return dotProduct
 }
 
 /**
@@ -900,7 +900,7 @@ lunr.Vector.prototype.dot = function (otherVector) {
  * @returns {Number}
  */
 lunr.Vector.prototype.similarity = function (otherVector) {
-  return this.dot(otherVector) / this.magnitude() || 0
+   return this.dot(otherVector) / this.magnitude() || 0
 }
 
 /**
@@ -909,13 +909,13 @@ lunr.Vector.prototype.similarity = function (otherVector) {
  * @returns {Number[]}
  */
 lunr.Vector.prototype.toArray = function () {
-  var output = new Array (this.elements.length / 2)
+   var output = new Array (this.elements.length / 2)
 
-  for (var i = 1, j = 0; i < this.elements.length; i += 2, j++) {
-    output[j] = this.elements[i]
-  }
+   for (var i = 1, j = 0; i < this.elements.length; i += 2, j++) {
+      output[j] = this.elements[i]
+   }
 
-  return output
+   return output
 }
 
 /**
@@ -924,7 +924,7 @@ lunr.Vector.prototype.toArray = function () {
  * @returns {Number[]}
  */
 lunr.Vector.prototype.toJSON = function () {
-  return this.elements
+   return this.elements
 }
 /* eslint-disable */
 /*!
@@ -945,7 +945,7 @@ lunr.Vector.prototype.toJSON = function () {
  * @function
  */
 lunr.stemmer = (function(){
-  var step2list = {
+   var step2list = {
       "ational" : "ate",
       "tional" : "tion",
       "enci" : "ence",
@@ -967,9 +967,9 @@ lunr.stemmer = (function(){
       "iviti" : "ive",
       "biliti" : "ble",
       "logi" : "log"
-    },
+   },
 
-    step3list = {
+   step3list = {
       "icate" : "ic",
       "ative" : "",
       "alize" : "al",
@@ -977,175 +977,174 @@ lunr.stemmer = (function(){
       "ical" : "ic",
       "ful" : "",
       "ness" : ""
-    },
+   },
 
-    c = "[^aeiou]",          // consonant
-    v = "[aeiouy]",          // vowel
-    C = c + "[^aeiouy]*",    // consonant sequence
-    V = v + "[aeiou]*",      // vowel sequence
+   c = "[^aeiou]",          // consonant
+   v = "[aeiouy]",          // vowel
+   C = c + "[^aeiouy]*",    // consonant sequence
+   V = v + "[aeiou]*",      // vowel sequence
 
-    mgr0 = "^(" + C + ")?" + V + C,               // [C]VC... is m>0
-    meq1 = "^(" + C + ")?" + V + C + "(" + V + ")?$",  // [C]VC[V] is m=1
-    mgr1 = "^(" + C + ")?" + V + C + V + C,       // [C]VCVC... is m>1
-    s_v = "^(" + C + ")?" + v;                   // vowel in stem
+   mgr0 = "^(" + C + ")?" + V + C,               // [C]VC... is m>0
+   meq1 = "^(" + C + ")?" + V + C + "(" + V + ")?$",  // [C]VC[V] is m=1
+   mgr1 = "^(" + C + ")?" + V + C + V + C,       // [C]VCVC... is m>1
+   s_v = "^(" + C + ")?" + v;                   // vowel in stem
 
-  var re_mgr0 = new RegExp(mgr0);
-  var re_mgr1 = new RegExp(mgr1);
-  var re_meq1 = new RegExp(meq1);
-  var re_s_v = new RegExp(s_v);
+   var re_mgr0 = new RegExp(mgr0);
+   var re_mgr1 = new RegExp(mgr1);
+   var re_meq1 = new RegExp(meq1);
+   var re_s_v = new RegExp(s_v);
 
-  var re_1a = /^(.+?)(ss|i)es$/;
-  var re2_1a = /^(.+?)([^s])s$/;
-  var re_1b = /^(.+?)eed$/;
-  var re2_1b = /^(.+?)(ed|ing)$/;
-  var re_1b_2 = /.$/;
-  var re2_1b_2 = /(at|bl|iz)$/;
-  var re3_1b_2 = new RegExp("([^aeiouylsz])\\1$");
-  var re4_1b_2 = new RegExp("^" + C + v + "[^aeiouwxy]$");
+   var re_1a = /^(.+?)(ss|i)es$/;
+   var re2_1a = /^(.+?)([^s])s$/;
+   var re_1b = /^(.+?)eed$/;
+   var re2_1b = /^(.+?)(ed|ing)$/;
+   var re_1b_2 = /.$/;
+   var re2_1b_2 = /(at|bl|iz)$/;
+   var re3_1b_2 = new RegExp("([^aeiouylsz])\\1$");
+   var re4_1b_2 = new RegExp("^" + C + v + "[^aeiouwxy]$");
 
-  var re_1c = /^(.+?[^aeiou])y$/;
-  var re_2 = /^(.+?)(ational|tional|enci|anci|izer|bli|alli|entli|eli|ousli|ization|ation|ator|alism|iveness|fulness|ousness|aliti|iviti|biliti|logi)$/;
+   var re_1c = /^(.+?[^aeiou])y$/;
+   var re_2 = /^(.+?)(ational|tional|enci|anci|izer|bli|alli|entli|eli|ousli|ization|ation|ator|alism|iveness|fulness|ousness|aliti|iviti|biliti|logi)$/;
 
-  var re_3 = /^(.+?)(icate|ative|alize|iciti|ical|ful|ness)$/;
+   var re_3 = /^(.+?)(icate|ative|alize|iciti|ical|ful|ness)$/;
 
-  var re_4 = /^(.+?)(al|ance|ence|er|ic|able|ible|ant|ement|ment|ent|ou|ism|ate|iti|ous|ive|ize)$/;
-  var re2_4 = /^(.+?)(s|t)(ion)$/;
+   var re_4 = /^(.+?)(al|ance|ence|er|ic|able|ible|ant|ement|ment|ent|ou|ism|ate|iti|ous|ive|ize)$/;
+   var re2_4 = /^(.+?)(s|t)(ion)$/;
 
-  var re_5 = /^(.+?)e$/;
-  var re_5_1 = /ll$/;
-  var re3_5 = new RegExp("^" + C + v + "[^aeiouwxy]$");
+   var re_5 = /^(.+?)e$/;
+   var re_5_1 = /ll$/;
+   var re3_5 = new RegExp("^" + C + v + "[^aeiouwxy]$");
 
-  var porterStemmer = function porterStemmer(w) {
-    var stem,
-      suffix,
-      firstch,
-      re,
-      re2,
-      re3,
-      re4;
+   var porterStemmer = function porterStemmer(w) {
+      var stem,
+          suffix,
+          firstch,
+          re,
+          re2,
+          re3,
+          re4;
 
-    if (w.length < 3) { return w; }
+          if (w.length < 3) { return w; }
 
-    firstch = w.substr(0,1);
-    if (firstch == "y") {
-      w = firstch.toUpperCase() + w.substr(1);
-    }
-
-    // Step 1a
-    re = re_1a
-    re2 = re2_1a;
-
-    if (re.test(w)) { w = w.replace(re,"$1$2"); }
-    else if (re2.test(w)) { w = w.replace(re2,"$1$2"); }
-
-    // Step 1b
-    re = re_1b;
-    re2 = re2_1b;
-    if (re.test(w)) {
-      var fp = re.exec(w);
-      re = re_mgr0;
-      if (re.test(fp[1])) {
-        re = re_1b_2;
-        w = w.replace(re,"");
+      firstch = w.substr(0,1);
+      if (firstch == "y") {
+         w = firstch.toUpperCase() + w.substr(1);
       }
-    } else if (re2.test(w)) {
-      var fp = re2.exec(w);
-      stem = fp[1];
-      re2 = re_s_v;
-      if (re2.test(stem)) {
-        w = stem;
-        re2 = re2_1b_2;
-        re3 = re3_1b_2;
-        re4 = re4_1b_2;
-        if (re2.test(w)) { w = w + "e"; }
-        else if (re3.test(w)) { re = re_1b_2; w = w.replace(re,""); }
-        else if (re4.test(w)) { w = w + "e"; }
-      }
-    }
 
-    // Step 1c - replace suffix y or Y by i if preceded by a non-vowel which is not the first letter of the word (so cry -> cri, by -> by, say -> say)
-    re = re_1c;
-    if (re.test(w)) {
-      var fp = re.exec(w);
-      stem = fp[1];
-      w = stem + "i";
-    }
+      // Step 1a
+      re = re_1a
+      re2 = re2_1a;
 
-    // Step 2
-    re = re_2;
-    if (re.test(w)) {
-      var fp = re.exec(w);
-      stem = fp[1];
-      suffix = fp[2];
-      re = re_mgr0;
-      if (re.test(stem)) {
-        w = stem + step2list[suffix];
-      }
-    }
+      if (re.test(w)) { w = w.replace(re,"$1$2"); }
+      else if (re2.test(w)) { w = w.replace(re2,"$1$2"); }
 
-    // Step 3
-    re = re_3;
-    if (re.test(w)) {
-      var fp = re.exec(w);
-      stem = fp[1];
-      suffix = fp[2];
-      re = re_mgr0;
-      if (re.test(stem)) {
-        w = stem + step3list[suffix];
+      // Step 1b
+      re = re_1b;
+      re2 = re2_1b;
+      if (re.test(w)) {
+         var fp = re.exec(w);
+         re = re_mgr0;
+         if (re.test(fp[1])) {
+            re = re_1b_2;
+            w = w.replace(re,"");
+         }
+      } else if (re2.test(w)) {
+         var fp = re2.exec(w);
+         stem = fp[1];
+         re2 = re_s_v;
+         if (re2.test(stem)) {
+            w = stem;
+            re2 = re2_1b_2;
+            re3 = re3_1b_2;
+            re4 = re4_1b_2;
+            if (re2.test(w)) { w = w + "e"; }
+            else if (re3.test(w)) { re = re_1b_2; w = w.replace(re,""); }
+            else if (re4.test(w)) { w = w + "e"; }
+         }
       }
-    }
 
-    // Step 4
-    re = re_4;
-    re2 = re2_4;
-    if (re.test(w)) {
-      var fp = re.exec(w);
-      stem = fp[1];
-      re = re_mgr1;
-      if (re.test(stem)) {
-        w = stem;
+      // Step 1c - replace suffix y or Y by i if preceded by a non-vowel which is not the first letter of the word (so cry -> cri, by -> by, say -> say)
+      re = re_1c;
+      if (re.test(w)) {
+         var fp = re.exec(w);
+         stem = fp[1];
+         w = stem + "i";
       }
-    } else if (re2.test(w)) {
-      var fp = re2.exec(w);
-      stem = fp[1] + fp[2];
+
+      // Step 2
+      re = re_2;
+      if (re.test(w)) {
+         var fp = re.exec(w);
+         stem = fp[1];
+         suffix = fp[2];
+         re = re_mgr0;
+         if (re.test(stem)) {
+            w = stem + step2list[suffix];
+         }
+      }
+
+      // Step 3
+      re = re_3;
+      if (re.test(w)) {
+         var fp = re.exec(w);
+         stem = fp[1];
+         suffix = fp[2];
+         re = re_mgr0;
+         if (re.test(stem)) {
+            w = stem + step3list[suffix];
+         }
+      }
+
+      // Step 4
+      re = re_4;
+      re2 = re2_4;
+      if (re.test(w)) {
+         var fp = re.exec(w);
+         stem = fp[1];
+         re = re_mgr1;
+         if (re.test(stem)) {
+            w = stem;
+         }
+      } else if (re2.test(w)) {
+         var fp = re2.exec(w);
+         stem = fp[1] + fp[2];
+         re2 = re_mgr1;
+         if (re2.test(stem)) {
+            w = stem;
+         }
+      }
+
+      // Step 5
+      re = re_5;
+      if (re.test(w)) {
+         var fp = re.exec(w);
+         stem = fp[1];
+         re = re_mgr1;
+         re2 = re_meq1;
+         re3 = re3_5;
+         if (re.test(stem) || (re2.test(stem) && !(re3.test(stem)))) {
+            w = stem;
+         }
+      }
+
+      re = re_5_1;
       re2 = re_mgr1;
-      if (re2.test(stem)) {
-        w = stem;
+      if (re.test(w) && re2.test(w)) {
+         re = re_1b_2;
+         w = w.replace(re,"");
       }
-    }
 
-    // Step 5
-    re = re_5;
-    if (re.test(w)) {
-      var fp = re.exec(w);
-      stem = fp[1];
-      re = re_mgr1;
-      re2 = re_meq1;
-      re3 = re3_5;
-      if (re.test(stem) || (re2.test(stem) && !(re3.test(stem)))) {
-        w = stem;
+      // and turn initial Y back to y
+      if (firstch == "y") {
+         w = firstch.toLowerCase() + w.substr(1);
       }
-    }
 
-    re = re_5_1;
-    re2 = re_mgr1;
-    if (re.test(w) && re2.test(w)) {
-      re = re_1b_2;
-      w = w.replace(re,"");
-    }
+      return w;
+   };
 
-    // and turn initial Y back to y
-
-    if (firstch == "y") {
-      w = firstch.toLowerCase() + w.substr(1);
-    }
-
-    return w;
-  };
-
-  return function (token) {
-    return token.update(porterStemmer);
-  }
+   return function (token) {
+      return token.update(porterStemmer);
+   }
 })();
 
 lunr.Pipeline.registerFunction(lunr.stemmer, 'stemmer')
@@ -1168,14 +1167,14 @@ lunr.Pipeline.registerFunction(lunr.stemmer, 'stemmer')
  * @see lunr.stopWordFilter
  */
 lunr.generateStopWordFilter = function (stopWords) {
-  var words = stopWords.reduce(function (memo, stopWord) {
-    memo[stopWord] = stopWord
-    return memo
-  }, {})
+   var words = stopWords.reduce(function (memo, stopWord) {
+      memo[stopWord] = stopWord
+      return memo
+   }, {})
 
-  return function (token) {
-    if (token && words[token.toString()] !== token.toString()) return token
-  }
+   return function (token) {
+      if (token && words[token.toString()] !== token.toString()) return token
+   }
 }
 
 /**
@@ -1192,125 +1191,125 @@ lunr.generateStopWordFilter = function (stopWords) {
  * @see {@link lunr.Pipeline}
  */
 lunr.stopWordFilter = lunr.generateStopWordFilter([
-  'a',
-  'able',
-  'about',
-  'across',
-  'after',
-  'all',
-  'almost',
-  'also',
-  'am',
-  'among',
-  'an',
-  'and',
-  'any',
-  'are',
-  'as',
-  'at',
-  'be',
-  'because',
-  'been',
-  'but',
-  'by',
-  'can',
-  'cannot',
-  'could',
-  'dear',
-  'did',
-  'do',
-  'does',
-  'either',
-  'else',
-  'ever',
-  'every',
-  'for',
-  'from',
-  'get',
-  'got',
-  'had',
-  'has',
-  'have',
-  'he',
-  'her',
-  'hers',
-  'him',
-  'his',
-  'how',
-  'however',
-  'i',
-  'if',
-  'in',
-  'into',
-  'is',
-  'it',
-  'its',
-  'just',
-  'least',
-  'let',
-  'like',
-  'likely',
-  'may',
-  'me',
-  'might',
-  'most',
-  'must',
-  'my',
-  'neither',
-  'no',
-  'nor',
-  'not',
-  'of',
-  'off',
-  'often',
-  'on',
-  'only',
-  'or',
-  'other',
-  'our',
-  'own',
-  'rather',
-  'said',
-  'say',
-  'says',
-  'she',
-  'should',
-  'since',
-  'so',
-  'some',
-  'than',
-  'that',
-  'the',
-  'their',
-  'them',
-  'then',
-  'there',
-  'these',
-  'they',
-  'this',
-  'tis',
-  'to',
-  'too',
-  'twas',
-  'us',
-  'wants',
-  'was',
-  'we',
-  'were',
-  'what',
-  'when',
-  'where',
-  'which',
-  'while',
-  'who',
-  'whom',
-  'why',
-  'will',
-  'with',
-  'would',
-  'yet',
-  'you',
-  'your'
+   'a',
+   'able',
+   'about',
+   'across',
+   'after',
+   'all',
+   'almost',
+   'also',
+   'am',
+   'among',
+   'an',
+   'and',
+   'any',
+   'are',
+   'as',
+   'at',
+   'be',
+   'because',
+   'been',
+   'but',
+   'by',
+   'can',
+   'cannot',
+   'could',
+   'dear',
+   'did',
+   'do',
+   'does',
+   'either',
+   'else',
+   'ever',
+   'every',
+   'for',
+   'from',
+   'get',
+   'got',
+   'had',
+   'has',
+   'have',
+   'he',
+   'her',
+   'hers',
+   'him',
+   'his',
+   'how',
+   'however',
+   'i',
+   'if',
+   'in',
+   'into',
+   'is',
+   'it',
+   'its',
+   'just',
+   'least',
+   'let',
+   'like',
+   'likely',
+   'may',
+   'me',
+   'might',
+   'most',
+   'must',
+   'my',
+   'neither',
+   'no',
+   'nor',
+   'not',
+   'of',
+   'off',
+   'often',
+   'on',
+   'only',
+   'or',
+   'other',
+   'our',
+   'own',
+   'rather',
+   'said',
+   'say',
+   'says',
+   'she',
+   'should',
+   'since',
+   'so',
+   'some',
+   'than',
+   'that',
+   'the',
+   'their',
+   'them',
+   'then',
+   'there',
+   'these',
+   'they',
+   'this',
+   'tis',
+   'to',
+   'too',
+   'twas',
+   'us',
+   'wants',
+   'was',
+   'we',
+   'were',
+   'what',
+   'when',
+   'where',
+   'which',
+   'while',
+   'who',
+   'whom',
+   'why',
+   'will',
+   'with',
+   'would',
+   'yet',
+   'you',
+   'your'
 ])
 
 lunr.Pipeline.registerFunction(lunr.stopWordFilter, 'stopWordFilter')
@@ -1335,9 +1334,9 @@ lunr.Pipeline.registerFunction(lunr.stopWordFilter, 'stopWordFilter')
  * @see lunr.Pipeline
  */
 lunr.trimmer = function (token) {
-  return token.update(function (s) {
-    return s.replace(/^\W+/, '').replace(/\W+$/, '')
-  })
+   return token.update(function (s) {
+      return s.replace(/^\W+/, '').replace(/\W+$/, '')
+   })
 }
 
 lunr.Pipeline.registerFunction(lunr.trimmer, 'trimmer')
@@ -1368,10 +1367,10 @@ lunr.Pipeline.registerFunction(lunr.trimmer, 'trimmer')
  * @constructor
  */
 lunr.TokenSet = function () {
-  this.final = false
-  this.edges = {}
-  this.id = lunr.TokenSet._nextId
-  lunr.TokenSet._nextId += 1
+   this.final = false
+   this.edges = {}
+   this.id = lunr.TokenSet._nextId
+   lunr.TokenSet._nextId += 1
 }
 
 /**
@@ -1392,14 +1391,14 @@ lunr.TokenSet._nextId = 1
  * @throws Will throw an error if the input array is not sorted.
  */
 lunr.TokenSet.fromArray = function (arr) {
-  var builder = new lunr.TokenSet.Builder
+   var builder = new lunr.TokenSet.Builder
 
-  for (var i = 0, len = arr.length; i < len; i++) {
-    builder.insert(arr[i])
-  }
+   for (var i = 0, len = arr.length; i < len; i++) {
+      builder.insert(arr[i])
+   }
 
-  builder.finish()
-  return builder.root
+   builder.finish()
+   return builder.root
 }
 
 /**
@@ -1412,11 +1411,11 @@ lunr.TokenSet.fromArray = function (arr) {
  * @returns {lunr.TokenSet}
  */
 lunr.TokenSet.fromClause = function (clause) {
-  if ('editDistance' in clause) {
-    return lunr.TokenSet.fromFuzzyString(clause.term, clause.editDistance)
-  } else {
-    return lunr.TokenSet.fromString(clause.term)
-  }
+   if ('editDistance' in clause) {
+      return lunr.TokenSet.fromFuzzyString(clause.term, clause.editDistance)
+   } else {
+      return lunr.TokenSet.fromString(clause.term)
+   }
 }
 
 /**
@@ -1435,129 +1434,129 @@ lunr.TokenSet.fromClause = function (clause) {
  * @returns {lunr.Vector}
  */
 lunr.TokenSet.fromFuzzyString = function (str, editDistance) {
-  var root = new lunr.TokenSet
+   var root = new lunr.TokenSet
 
-  var stack = [{
-    node: root,
-    editsRemaining: editDistance,
-    str: str
-  }]
+   var stack = [{
+      node: root,
+      editsRemaining: editDistance,
+      str: str
+   }]
 
-  while (stack.length) {
-    var frame = stack.pop()
+   while (stack.length) {
+      var frame = stack.pop()
 
-    // no edit
-    if (frame.str.length > 0) {
-      var char = frame.str.charAt(0),
-          noEditNode
+      // no edit
+      if (frame.str.length > 0) {
+         var char = frame.str.charAt(0),
+            noEditNode
 
-      if (char in frame.node.edges) {
-        noEditNode = frame.node.edges[char]
-      } else {
-        noEditNode = new lunr.TokenSet
-        frame.node.edges[char] = noEditNode
+         if (char in frame.node.edges) {
+            noEditNode = frame.node.edges[char]
+         } else {
+            noEditNode = new lunr.TokenSet
+            frame.node.edges[char] = noEditNode
+         }
+
+         if (frame.str.length == 1) {
+            noEditNode.final = true
+         }
+
+         stack.push({
+            node: noEditNode,
+            editsRemaining: frame.editsRemaining,
+            str: frame.str.slice(1)
+         })
       }
 
-      if (frame.str.length == 1) {
-        noEditNode.final = true
+      if (frame.editsRemaining == 0) {
+         continue
       }
 
-      stack.push({
-        node: noEditNode,
-        editsRemaining: frame.editsRemaining,
-        str: frame.str.slice(1)
-      })
-    }
-
-    if (frame.editsRemaining == 0) {
-      continue
-    }
-
-    // insertion
-    if ("*" in frame.node.edges) {
-      var insertionNode = frame.node.edges["*"]
-    } else {
-      var insertionNode = new lunr.TokenSet
-      frame.node.edges["*"] = insertionNode
-    }
-
-    if (frame.str.length == 0) {
-      insertionNode.final = true
-    }
-
-    stack.push({
-      node: insertionNode,
-      editsRemaining: frame.editsRemaining - 1,
-      str: frame.str
-    })
-
-    // deletion
-    // can only do a deletion if we have enough edits remaining
-    // and if there are characters left to delete in the string
-    if (frame.str.length > 1) {
-      stack.push({
-        node: frame.node,
-        editsRemaining: frame.editsRemaining - 1,
-        str: frame.str.slice(1)
-      })
-    }
-
-    // deletion
-    // just removing the last character from the str
-    if (frame.str.length == 1) {
-      frame.node.final = true
-    }
-
-    // substitution
-    // can only do a substitution if we have enough edits remaining
-    // and if there are characters left to substitute
-    if (frame.str.length >= 1) {
+      // insertion
       if ("*" in frame.node.edges) {
-        var substitutionNode = frame.node.edges["*"]
+         var insertionNode = frame.node.edges["*"]
       } else {
-        var substitutionNode = new lunr.TokenSet
-        frame.node.edges["*"] = substitutionNode
+         var insertionNode = new lunr.TokenSet
+         frame.node.edges["*"] = insertionNode
       }
 
-      if (frame.str.length == 1) {
-        substitutionNode.final = true
+      if (frame.str.length == 0) {
+         insertionNode.final = true
       }
 
       stack.push({
-        node: substitutionNode,
-        editsRemaining: frame.editsRemaining - 1,
-        str: frame.str.slice(1)
+         node: insertionNode,
+         editsRemaining: frame.editsRemaining - 1,
+         str: frame.str
       })
-    }
 
-    // transposition
-    // can only do a transposition if there are edits remaining
-    // and there are enough characters to transpose
-    if (frame.str.length > 1) {
-      var charA = frame.str.charAt(0),
-          charB = frame.str.charAt(1),
-          transposeNode
-
-      if (charB in frame.node.edges) {
-        transposeNode = frame.node.edges[charB]
-      } else {
-        transposeNode = new lunr.TokenSet
-        frame.node.edges[charB] = transposeNode
+      // deletion
+      // can only do a deletion if we have enough edits remaining
+      // and if there are characters left to delete in the string
+      if (frame.str.length > 1) {
+         stack.push({
+            node: frame.node,
+            editsRemaining: frame.editsRemaining - 1,
+            str: frame.str.slice(1)
+         })
       }
 
+      // deletion
+      // just removing the last character from the str
       if (frame.str.length == 1) {
-        transposeNode.final = true
+         frame.node.final = true
       }
 
-      stack.push({
-        node: transposeNode,
-        editsRemaining: frame.editsRemaining - 1,
-        str: charA + frame.str.slice(2)
-      })
-    }
-  }
+      // substitution
+      // can only do a substitution if we have enough edits remaining
+      // and if there are characters left to substitute
+      if (frame.str.length >= 1) {
+         if ("*" in frame.node.edges) {
+            var substitutionNode = frame.node.edges["*"]
+         } else {
+            var substitutionNode = new lunr.TokenSet
+            frame.node.edges["*"] = substitutionNode
+         }
 
-  return root
+         if (frame.str.length == 1) {
+            substitutionNode.final = true
+         }
+
+         stack.push({
+            node: substitutionNode,
+            editsRemaining: frame.editsRemaining - 1,
+            str: frame.str.slice(1)
+         })
+      }
+
+      // transposition
+      // can only do a transposition if there are edits remaining
+      // and there are enough characters to transpose
+      if (frame.str.length > 1) {
+         var charA = frame.str.charAt(0),
+             charB = frame.str.charAt(1),
+             transposeNode
+
+         if (charB in frame.node.edges) {
+            transposeNode = frame.node.edges[charB]
+         } else {
+           transposeNode = new lunr.TokenSet
+           frame.node.edges[charB] = transposeNode
+         }
+
+         if (frame.str.length == 1) {
+            transposeNode.final = true
+         }
+
+         stack.push({
+            node: transposeNode,
+            editsRemaining: frame.editsRemaining - 1,
+            str: charA + frame.str.slice(2)
+         })
+      }
+   }
+
+   return root
 }
 
 /**
@@ -1571,7 +1570,7 @@ lunr.TokenSet.fromFuzzyString = function (str, editDistance) {
  * @returns {lunr.TokenSet}
  */
 lunr.TokenSet.fromString = function (str) {
-  var node = new lunr.TokenSet,
+   var node = new lunr.TokenSet,
       root = node
 
   /*
@@ -1582,24 +1581,24 @@ lunr.TokenSet.fromString = function (str) {
    * referencing edge is introduced to continually match
    * any number of any characters.
    */
-  for (var i = 0, len = str.length; i < len; i++) {
-    var char = str[i],
-        final = (i == len - 1)
+   for (var i = 0, len = str.length; i < len; i++) {
+      var char = str[i],
+         final = (i == len - 1)
 
-    if (char == "*") {
-      node.edges[char] = node
-      node.final = final
+      if (char == "*") {
+         node.edges[char] = node
+         node.final = final
 
-    } else {
-      var next = new lunr.TokenSet
-      next.final = final
+      } else {
+         var next = new lunr.TokenSet
+         next.final = final
 
-      node.edges[char] = next
-      node = next
-    }
-  }
+         node.edges[char] = next
+         node = next
+      }
+   }
 
-  return root
+   return root
 }
 
 /**
@@ -1613,38 +1612,38 @@ lunr.TokenSet.fromString = function (str) {
  * @returns {string[]}
  */
 lunr.TokenSet.prototype.toArray = function () {
-  var words = []
+   var words = []
 
-  var stack = [{
-    prefix: "",
-    node: this
-  }]
+   var stack = [{
+      prefix: "",
+      node: this
+   }]
 
-  while (stack.length) {
-    var frame = stack.pop(),
-        edges = Object.keys(frame.node.edges),
-        len = edges.length
+   while (stack.length) {
+      var frame = stack.pop(),
+         edges = Object.keys(frame.node.edges),
+         len = edges.length
 
-    if (frame.node.final) {
-      /* In Safari, at this point the prefix is sometimes corrupted, see:
-       * https://github.com/olivernn/lunr.js/issues/279 Calling any
-       * String.prototype method forces Safari to "cast" this string to what
-       * it's supposed to be, fixing the bug. */
-      frame.prefix.charAt(0)
-      words.push(frame.prefix)
-    }
+      if (frame.node.final) {
+         /* In Safari, at this point the prefix is sometimes corrupted, see:
+          * https://github.com/olivernn/lunr.js/issues/279 Calling any
+          * String.prototype method forces Safari to "cast" this string to what
+          * it's supposed to be, fixing the bug. */
+         frame.prefix.charAt(0)
+         words.push(frame.prefix)
+      }
 
-    for (var i = 0; i < len; i++) {
-      var edge = edges[i]
+      for (var i = 0; i < len; i++) {
+         var edge = edges[i]
 
-      stack.push({
-        prefix: frame.prefix.concat(edge),
-        node: frame.node.edges[edge]
-      })
-    }
-  }
+         stack.push({
+           prefix: frame.prefix.concat(edge),
+           node: frame.node.edges[edge]
+         })
+      }
+   }
 
-  return words
+   return words
 }
 
 /**
@@ -1666,22 +1665,22 @@ lunr.TokenSet.prototype.toString = function () {
   // benchmarks the performance is comparable, but allowing
   // V8 to optimize may mean easy performance wins in the future.
 
-  if (this._str) {
-    return this._str
-  }
+   if (this._str) {
+      return this._str
+   }
 
-  var str = this.final ? '1' : '0',
+   var str = this.final ? '1' : '0',
       labels = Object.keys(this.edges).sort(),
       len = labels.length
 
-  for (var i = 0; i < len; i++) {
-    var label = labels[i],
-        node = this.edges[label]
+   for (var i = 0; i < len; i++) {
+      var label = labels[i],
+          node = this.edges[label]
 
-    str = str + label + node.id
-  }
+      str = str + label + node.id
+   }
 
-  return str
+   return str
 }
 
 /**
@@ -1695,135 +1694,135 @@ lunr.TokenSet.prototype.toString = function () {
  * @returns {lunr.TokenSet}
  */
 lunr.TokenSet.prototype.intersect = function (b) {
-  var output = new lunr.TokenSet,
+   var output = new lunr.TokenSet,
       frame = undefined
 
-  var stack = [{
-    qNode: b,
-    output: output,
-    node: this
-  }]
+   var stack = [{
+      qNode: b,
+      output: output,
+      node: this
+   }]
 
-  while (stack.length) {
-    frame = stack.pop()
+   while (stack.length) {
+      frame = stack.pop()
 
-    // NOTE: As with the #toString method, we are using
-    // Object.keys and a for loop instead of a for-in loop
-    // as both of these objects enter 'hash' mode, causing
-    // the function to be de-optimised in V8
-    var qEdges = Object.keys(frame.qNode.edges),
-        qLen = qEdges.length,
-        nEdges = Object.keys(frame.node.edges),
-        nLen = nEdges.length
+      // NOTE: As with the #toString method, we are using
+      // Object.keys and a for loop instead of a for-in loop
+      // as both of these objects enter 'hash' mode, causing
+      // the function to be de-optimised in V8
+      var qEdges = Object.keys(frame.qNode.edges),
+         qLen = qEdges.length,
+         nEdges = Object.keys(frame.node.edges),
+         nLen = nEdges.length
 
-    for (var q = 0; q < qLen; q++) {
-      var qEdge = qEdges[q]
+      for (var q = 0; q < qLen; q++) {
+         var qEdge = qEdges[q]
 
-      for (var n = 0; n < nLen; n++) {
-        var nEdge = nEdges[n]
+         for (var n = 0; n < nLen; n++) {
+            var nEdge = nEdges[n]
 
-        if (nEdge == qEdge || qEdge == '*') {
-          var node = frame.node.edges[nEdge],
-              qNode = frame.qNode.edges[qEdge],
-              final = node.final && qNode.final,
-              next = undefined
+            if (nEdge == qEdge || qEdge == '*') {
+               var node = frame.node.edges[nEdge],
+                   qNode = frame.qNode.edges[qEdge],
+                   final = node.final && qNode.final,
+                   next = undefined
 
-          if (nEdge in frame.output.edges) {
-            // an edge already exists for this character
-            // no need to create a new node, just set the finality
-            // bit unless this node is already final
-            next = frame.output.edges[nEdge]
-            next.final = next.final || final
+               if (nEdge in frame.output.edges) {
+                  // an edge already exists for this character
+                  // no need to create a new node, just set the finality
+                  // bit unless this node is already final
+                  next = frame.output.edges[nEdge]
+                  next.final = next.final || final
 
-          } else {
-            // no edge exists yet, must create one
-            // set the finality bit and insert it
-            // into the output
-            next = new lunr.TokenSet
-            next.final = final
-            frame.output.edges[nEdge] = next
-          }
+               } else {
+                  // no edge exists yet, must create one
+                  // set the finality bit and insert it
+                  // into the output
+                  next = new lunr.TokenSet
+                  next.final = final
+                  frame.output.edges[nEdge] = next
+               }
 
-          stack.push({
-            qNode: qNode,
-            output: next,
-            node: node
-          })
-        }
+               stack.push({
+                  qNode: qNode,
+                  output: next,
+                  node: node
+               })
+            }
+         }
       }
-    }
-  }
+   }
 
-  return output
+   return output
 }
 lunr.TokenSet.Builder = function () {
-  this.previousWord = ""
-  this.root = new lunr.TokenSet
-  this.uncheckedNodes = []
-  this.minimizedNodes = {}
+   this.previousWord = ""
+   this.root = new lunr.TokenSet
+   this.uncheckedNodes = []
+   this.minimizedNodes = {}
 }
 
 lunr.TokenSet.Builder.prototype.insert = function (word) {
-  var node,
+   var node,
       commonPrefix = 0
 
-  if (word < this.previousWord) {
-    throw new Error ("Out of order word insertion")
-  }
+   if (word < this.previousWord) {
+      throw new Error ("Out of order word insertion")
+   }
 
-  for (var i = 0; i < word.length && i < this.previousWord.length; i++) {
-    if (word[i] != this.previousWord[i]) break
-    commonPrefix++
-  }
+   for (var i = 0; i < word.length && i < this.previousWord.length; i++) {
+      if (word[i] != this.previousWord[i]) break
+      commonPrefix++
+   }
 
-  this.minimize(commonPrefix)
+   this.minimize(commonPrefix)
 
-  if (this.uncheckedNodes.length == 0) {
-    node = this.root
-  } else {
-    node = this.uncheckedNodes[this.uncheckedNodes.length - 1].child
-  }
+   if (this.uncheckedNodes.length == 0) {
+      node = this.root
+   } else {
+      node = this.uncheckedNodes[this.uncheckedNodes.length - 1].child
+   }
 
-  for (var i = commonPrefix; i < word.length; i++) {
-    var nextNode = new lunr.TokenSet,
-        char = word[i]
+   for (var i = commonPrefix; i < word.length; i++) {
+      var nextNode = new lunr.TokenSet,
+         char = word[i]
 
-    node.edges[char] = nextNode
+      node.edges[char] = nextNode
 
-    this.uncheckedNodes.push({
-      parent: node,
-      char: char,
-      child: nextNode
-    })
+      this.uncheckedNodes.push({
+         parent: node,
+         char: char,
+         child: nextNode
+      })
 
-    node = nextNode
-  }
+      node = nextNode
+   }
 
-  node.final = true
-  this.previousWord = word
+   node.final = true
+   this.previousWord = word
 }
 
 lunr.TokenSet.Builder.prototype.finish = function () {
-  this.minimize(0)
+   this.minimize(0)
 }
 
 lunr.TokenSet.Builder.prototype.minimize = function (downTo) {
-  for (var i = this.uncheckedNodes.length - 1; i >= downTo; i--) {
-    var node = this.uncheckedNodes[i],
-        childKey = node.child.toString()
+   for (var i = this.uncheckedNodes.length - 1; i >= downTo; i--) {
+      var node = this.uncheckedNodes[i],
+         childKey = node.child.toString()
 
-    if (childKey in this.minimizedNodes) {
-      node.parent.edges[node.char] = this.minimizedNodes[childKey]
-    } else {
-      // Cache the key for this node since
-      // we know it can't change anymore
-      node.child._str = childKey
+      if (childKey in this.minimizedNodes) {
+         node.parent.edges[node.char] = this.minimizedNodes[childKey]
+      } else {
+         // Cache the key for this node since
+         // we know it can't change anymore
+         node.child._str = childKey
 
-      this.minimizedNodes[childKey] = node.child
-    }
+         this.minimizedNodes[childKey] = node.child
+      }
 
-    this.uncheckedNodes.pop()
-  }
+      this.uncheckedNodes.pop()
+   }
 }
 /*!
  * lunr.Index
@@ -1847,11 +1846,11 @@ lunr.TokenSet.Builder.prototype.minimize = function (downTo) {
  * @param {lunr.Pipeline} attrs.pipeline - The pipeline to use for search terms.
  */
 lunr.Index = function (attrs) {
-  this.invertedIndex = attrs.invertedIndex
-  this.fieldVectors = attrs.fieldVectors
-  this.tokenSet = attrs.tokenSet
-  this.fields = attrs.fields
-  this.pipeline = attrs.pipeline
+   this.invertedIndex = attrs.invertedIndex
+   this.fieldVectors = attrs.fieldVectors
+   this.tokenSet = attrs.tokenSet
+   this.fields = attrs.fields
+   this.pipeline = attrs.pipeline
 }
 
 /**
@@ -1926,10 +1925,10 @@ lunr.Index = function (attrs) {
  * @returns {lunr.Index~Result[]}
  */
 lunr.Index.prototype.search = function (queryString) {
-  return this.query(function (query) {
-    var parser = new lunr.QueryParser(queryString, query)
-    parser.parse()
-  })
+   return this.query(function (query) {
+      var parser = new lunr.QueryParser(queryString, query)
+      parser.parse()
+   })
 }
 
 /**
@@ -1965,280 +1964,280 @@ lunr.Index.prototype.query = function (fn) {
   // * get document vectors
   // * score documents
 
-  var query = new lunr.Query(this.fields),
-      matchingFields = Object.create(null),
-      queryVectors = Object.create(null),
-      termFieldCache = Object.create(null),
-      requiredMatches = Object.create(null),
-      prohibitedMatches = Object.create(null)
+   var query = new lunr.Query(this.fields),
+       matchingFields = Object.create(null),
+       queryVectors = Object.create(null),
+       termFieldCache = Object.create(null),
+       requiredMatches = Object.create(null),
+       prohibitedMatches = Object.create(null)
 
   /*
    * To support field level boosts a query vector is created per
    * field. An empty vector is eagerly created to support negated
    * queries.
    */
-  for (var i = 0; i < this.fields.length; i++) {
-    queryVectors[this.fields[i]] = new lunr.Vector
-  }
+   for (var i = 0; i < this.fields.length; i++) {
+      queryVectors[this.fields[i]] = new lunr.Vector
+   }
 
-  fn.call(query, query)
+   fn.call(query, query)
 
-  for (var i = 0; i < query.clauses.length; i++) {
-    /*
-     * Unless the pipeline has been disabled for this term, which is
-     * the case for terms with wildcards, we need to pass the clause
-     * term through the search pipeline. A pipeline returns an array
-     * of processed terms. Pipeline functions may expand the passed
-     * term, which means we may end up performing multiple index lookups
-     * for a single query term.
-     */
-    var clause = query.clauses[i],
-        terms = null,
-        clauseMatches = lunr.Set.empty
-
-    if (clause.usePipeline) {
-      terms = this.pipeline.runString(clause.term, {
-        fields: clause.fields
-      })
-    } else {
-      terms = [clause.term]
-    }
-
-    for (var m = 0; m < terms.length; m++) {
-      var term = terms[m]
-
+   for (var i = 0; i < query.clauses.length; i++) {
       /*
-       * Each term returned from the pipeline needs to use the same query
-       * clause object, e.g. the same boost and or edit distance. The
-       * simplest way to do this is to re-use the clause object but mutate
-       * its term property.
+       * Unless the pipeline has been disabled for this term, which is
+       * the case for terms with wildcards, we need to pass the clause
+       * term through the search pipeline. A pipeline returns an array
+       * of processed terms. Pipeline functions may expand the passed
+       * term, which means we may end up performing multiple index lookups
+       * for a single query term.
        */
-      clause.term = term
+      var clause = query.clauses[i],
+         terms = null,
+         clauseMatches = lunr.Set.empty
 
-      /*
-       * From the term in the clause we create a token set which will then
-       * be used to intersect the indexes token set to get a list of terms
-       * to lookup in the inverted index
-       */
-      var termTokenSet = lunr.TokenSet.fromClause(clause),
-          expandedTerms = this.tokenSet.intersect(termTokenSet).toArray()
-
-      /*
-       * If a term marked as required does not exist in the tokenSet it is
-       * impossible for the search to return any matches. We set all the field
-       * scoped required matches set to empty and stop examining any further
-       * clauses.
-       */
-      if (expandedTerms.length === 0 && clause.presence === lunr.Query.presence.REQUIRED) {
-        for (var k = 0; k < clause.fields.length; k++) {
-          var field = clause.fields[k]
-          requiredMatches[field] = lunr.Set.empty
-        }
-
-        break
+      if (clause.usePipeline) {
+         terms = this.pipeline.runString(clause.term, {
+            fields: clause.fields
+         })
+      } else {
+         terms = [clause.term]
       }
 
-      for (var j = 0; j < expandedTerms.length; j++) {
-        /*
-         * For each term get the posting and termIndex, this is required for
-         * building the query vector.
-         */
-        var expandedTerm = expandedTerms[j],
-            posting = this.invertedIndex[expandedTerm],
-            termIndex = posting._index
+      for (var m = 0; m < terms.length; m++) {
+         var term = terms[m]
 
-        for (var k = 0; k < clause.fields.length; k++) {
-          /*
-           * For each field that this query term is scoped by (by default
-           * all fields are in scope) we need to get all the document refs
-           * that have this term in that field.
-           *
-           * The posting is the entry in the invertedIndex for the matching
-           * term from above.
-           */
-          var field = clause.fields[k],
-              fieldPosting = posting[field],
-              matchingDocumentRefs = Object.keys(fieldPosting),
-              termField = expandedTerm + "/" + field,
-              matchingDocumentsSet = new lunr.Set(matchingDocumentRefs)
+         /*
+          * Each term returned from the pipeline needs to use the same query
+          * clause object, e.g. the same boost and or edit distance. The
+          * simplest way to do this is to re-use the clause object but mutate
+          * its term property.
+          */
+         clause.term = term
 
-          /*
-           * if the presence of this term is required ensure that the matching
-           * documents are added to the set of required matches for this clause.
-           *
-           */
-          if (clause.presence == lunr.Query.presence.REQUIRED) {
-            clauseMatches = clauseMatches.union(matchingDocumentsSet)
+         /*
+          * From the term in the clause we create a token set which will then
+          * be used to intersect the indexes token set to get a list of terms
+          * to lookup in the inverted index
+          */
+         var termTokenSet = lunr.TokenSet.fromClause(clause),
+             expandedTerms = this.tokenSet.intersect(termTokenSet).toArray()
 
-            if (requiredMatches[field] === undefined) {
-              requiredMatches[field] = lunr.Set.complete
-            }
-          }
-
-          /*
-           * if the presence of this term is prohibited ensure that the matching
-           * documents are added to the set of prohibited matches for this field,
-           * creating that set if it does not yet exist.
-           */
-          if (clause.presence == lunr.Query.presence.PROHIBITED) {
-            if (prohibitedMatches[field] === undefined) {
-              prohibitedMatches[field] = lunr.Set.empty
+         /*
+          * If a term marked as required does not exist in the tokenSet it is
+          * impossible for the search to return any matches. We set all the field
+          * scoped required matches set to empty and stop examining any further
+          * clauses.
+          */
+         if (expandedTerms.length === 0 && clause.presence === lunr.Query.presence.REQUIRED) {
+            for (var k = 0; k < clause.fields.length; k++) {
+               var field = clause.fields[k]
+               requiredMatches[field] = lunr.Set.empty
             }
 
-            prohibitedMatches[field] = prohibitedMatches[field].union(matchingDocumentsSet)
+            break
+         }
 
+         for (var j = 0; j < expandedTerms.length; j++) {
             /*
-             * Prohibited matches should not be part of the query vector used for
-             * similarity scoring and no metadata should be extracted so we continue
-             * to the next field
+             * For each term get the posting and termIndex, this is required for
+             * building the query vector.
              */
-            continue
-          }
+            var expandedTerm = expandedTerms[j],
+               posting = this.invertedIndex[expandedTerm],
+               termIndex = posting._index
 
-          /*
-           * The query field vector is populated using the termIndex found for
-           * the term and a unit value with the appropriate boost applied.
-           * Using upsert because there could already be an entry in the vector
-           * for the term we are working with. In that case we just add the scores
-           * together.
-           */
-          queryVectors[field].upsert(termIndex, clause.boost, function (a, b) { return a + b })
+            for (var k = 0; k < clause.fields.length; k++) {
+               /*
+                * For each field that this query term is scoped by (by default
+                * all fields are in scope) we need to get all the document refs
+                * that have this term in that field.
+                *
+                * The posting is the entry in the invertedIndex for the matching
+                * term from above.
+                */
+               var field = clause.fields[k],
+                   fieldPosting = posting[field],
+                   matchingDocumentRefs = Object.keys(fieldPosting),
+                   termField = expandedTerm + "/" + field,
+                   matchingDocumentsSet = new lunr.Set(matchingDocumentRefs)
 
-          /**
-           * If we've already seen this term, field combo then we've already collected
-           * the matching documents and metadata, no need to go through all that again
-           */
-          if (termFieldCache[termField]) {
-            continue
-          }
+               /*
+                * if the presence of this term is required ensure that the matching
+                * documents are added to the set of required matches for this clause.
+                *
+                */
+               if (clause.presence == lunr.Query.presence.REQUIRED) {
+                  clauseMatches = clauseMatches.union(matchingDocumentsSet)
 
-          for (var l = 0; l < matchingDocumentRefs.length; l++) {
-            /*
-             * All metadata for this term/field/document triple
-             * are then extracted and collected into an instance
-             * of lunr.MatchData ready to be returned in the query
-             * results
-             */
-            var matchingDocumentRef = matchingDocumentRefs[l],
-                matchingFieldRef = new lunr.FieldRef (matchingDocumentRef, field),
-                metadata = fieldPosting[matchingDocumentRef],
-                fieldMatch
+                  if (requiredMatches[field] === undefined) {
+                     requiredMatches[field] = lunr.Set.complete
+                  }
+               }
 
-            if ((fieldMatch = matchingFields[matchingFieldRef]) === undefined) {
-              matchingFields[matchingFieldRef] = new lunr.MatchData (expandedTerm, field, metadata)
-            } else {
-              fieldMatch.add(expandedTerm, field, metadata)
+               /*
+                * if the presence of this term is prohibited ensure that the matching
+                * documents are added to the set of prohibited matches for this field,
+                * creating that set if it does not yet exist.
+                */
+               if (clause.presence == lunr.Query.presence.PROHIBITED) {
+                  if (prohibitedMatches[field] === undefined) {
+                     prohibitedMatches[field] = lunr.Set.empty
+                  }
+
+                  prohibitedMatches[field] = prohibitedMatches[field].union(matchingDocumentsSet)
+
+                  /*
+                   * Prohibited matches should not be part of the query vector used for
+                   * similarity scoring and no metadata should be extracted so we continue
+                   * to the next field
+                   */
+                  continue
+               }
+
+               /*
+               * The query field vector is populated using the termIndex found for
+               * the term and a unit value with the appropriate boost applied.
+               * Using upsert because there could already be an entry in the vector
+               * for the term we are working with. In that case we just add the scores
+               * together.
+               */
+               queryVectors[field].upsert(termIndex, clause.boost, function (a, b) { return a + b })
+
+               /**
+               * If we've already seen this term, field combo then we've already collected
+               * the matching documents and metadata, no need to go through all that again
+               */
+               if (termFieldCache[termField]) {
+                  continue
+               }
+
+               for (var l = 0; l < matchingDocumentRefs.length; l++) {
+                  /*
+                   * All metadata for this term/field/document triple
+                   * are then extracted and collected into an instance
+                   * of lunr.MatchData ready to be returned in the query
+                   * results
+                   */
+                  var matchingDocumentRef = matchingDocumentRefs[l],
+                      matchingFieldRef = new lunr.FieldRef (matchingDocumentRef, field),
+                      metadata = fieldPosting[matchingDocumentRef],
+                      fieldMatch
+
+                  if ((fieldMatch = matchingFields[matchingFieldRef]) === undefined) {
+                    matchingFields[matchingFieldRef] = new lunr.MatchData (expandedTerm, field, metadata)
+                  } else {
+                    fieldMatch.add(expandedTerm, field, metadata)
+                  }
+
+               }
+
+               termFieldCache[termField] = true
             }
-
-          }
-
-          termFieldCache[termField] = true
-        }
+         }
       }
-    }
 
-    /**
-     * If the presence was required we need to update the requiredMatches field sets.
-     * We do this after all fields for the term have collected their matches because
-     * the clause terms presence is required in _any_ of the fields not _all_ of the
-     * fields.
-     */
-    if (clause.presence === lunr.Query.presence.REQUIRED) {
-      for (var k = 0; k < clause.fields.length; k++) {
-        var field = clause.fields[k]
-        requiredMatches[field] = requiredMatches[field].intersect(clauseMatches)
+      /**
+      * If the presence was required we need to update the requiredMatches field sets.
+      * We do this after all fields for the term have collected their matches because
+      * the clause terms presence is required in _any_ of the fields not _all_ of the
+      * fields.
+      */
+      if (clause.presence === lunr.Query.presence.REQUIRED) {
+         for (var k = 0; k < clause.fields.length; k++) {
+            var field = clause.fields[k]
+            requiredMatches[field] = requiredMatches[field].intersect(clauseMatches)
+         }
       }
-    }
-  }
+   }
 
-  /**
-   * Need to combine the field scoped required and prohibited
-   * matching documents into a global set of required and prohibited
-   * matches
-   */
-  var allRequiredMatches = lunr.Set.complete,
+   /**
+    * Need to combine the field scoped required and prohibited
+    * matching documents into a global set of required and prohibited
+    * matches
+    */
+   var allRequiredMatches = lunr.Set.complete,
       allProhibitedMatches = lunr.Set.empty
 
-  for (var i = 0; i < this.fields.length; i++) {
-    var field = this.fields[i]
+   for (var i = 0; i < this.fields.length; i++) {
+      var field = this.fields[i]
 
-    if (requiredMatches[field]) {
-      allRequiredMatches = allRequiredMatches.intersect(requiredMatches[field])
-    }
-
-    if (prohibitedMatches[field]) {
-      allProhibitedMatches = allProhibitedMatches.union(prohibitedMatches[field])
-    }
-  }
-
-  var matchingFieldRefs = Object.keys(matchingFields),
-      results = [],
-      matches = Object.create(null)
-
-  /*
-   * If the query is negated (contains only prohibited terms)
-   * we need to get _all_ fieldRefs currently existing in the
-   * index. This is only done when we know that the query is
-   * entirely prohibited terms to avoid any cost of getting all
-   * fieldRefs unnecessarily.
-   *
-   * Additionally, blank MatchData must be created to correctly
-   * populate the results.
-   */
-  if (query.isNegated()) {
-    matchingFieldRefs = Object.keys(this.fieldVectors)
-
-    for (var i = 0; i < matchingFieldRefs.length; i++) {
-      var matchingFieldRef = matchingFieldRefs[i]
-      var fieldRef = lunr.FieldRef.fromString(matchingFieldRef)
-      matchingFields[matchingFieldRef] = new lunr.MatchData
-    }
-  }
-
-  for (var i = 0; i < matchingFieldRefs.length; i++) {
-    /*
-     * Currently we have document fields that match the query, but we
-     * need to return documents. The matchData and scores are combined
-     * from multiple fields belonging to the same document.
-     *
-     * Scores are calculated by field, using the query vectors created
-     * above, and combined into a final document score using addition.
-     */
-    var fieldRef = lunr.FieldRef.fromString(matchingFieldRefs[i]),
-        docRef = fieldRef.docRef
-
-    if (!allRequiredMatches.contains(docRef)) {
-      continue
-    }
-
-    if (allProhibitedMatches.contains(docRef)) {
-      continue
-    }
-
-    var fieldVector = this.fieldVectors[fieldRef],
-        score = queryVectors[fieldRef.fieldName].similarity(fieldVector),
-        docMatch
-
-    if ((docMatch = matches[docRef]) !== undefined) {
-      docMatch.score += score
-      docMatch.matchData.combine(matchingFields[fieldRef])
-    } else {
-      var match = {
-        ref: docRef,
-        score: score,
-        matchData: matchingFields[fieldRef]
+      if (requiredMatches[field]) {
+         allRequiredMatches = allRequiredMatches.intersect(requiredMatches[field])
       }
-      matches[docRef] = match
-      results.push(match)
-    }
-  }
+
+      if (prohibitedMatches[field]) {
+         allProhibitedMatches = allProhibitedMatches.union(prohibitedMatches[field])
+      }
+   }
+
+   var matchingFieldRefs = Object.keys(matchingFields),
+       results = [],
+       matches = Object.create(null)
+
+   /*
+    * If the query is negated (contains only prohibited terms)
+    * we need to get _all_ fieldRefs currently existing in the
+    * index. This is only done when we know that the query is
+    * entirely prohibited terms to avoid any cost of getting all
+    * fieldRefs unnecessarily.
+    *
+    * Additionally, blank MatchData must be created to correctly
+    * populate the results.
+    */
+   if (query.isNegated()) {
+      matchingFieldRefs = Object.keys(this.fieldVectors)
+
+      for (var i = 0; i < matchingFieldRefs.length; i++) {
+         var matchingFieldRef = matchingFieldRefs[i]
+         var fieldRef = lunr.FieldRef.fromString(matchingFieldRef)
+         matchingFields[matchingFieldRef] = new lunr.MatchData
+      }
+   }
+
+   for (var i = 0; i < matchingFieldRefs.length; i++) {
+      /*
+       * Currently we have document fields that match the query, but we
+       * need to return documents. The matchData and scores are combined
+       * from multiple fields belonging to the same document.
+       *
+       * Scores are calculated by field, using the query vectors created
+       * above, and combined into a final document score using addition.
+       */
+      var fieldRef = lunr.FieldRef.fromString(matchingFieldRefs[i]),
+         docRef = fieldRef.docRef
+
+      if (!allRequiredMatches.contains(docRef)) {
+         continue
+      }
+
+      if (allProhibitedMatches.contains(docRef)) {
+         continue
+      }
+
+      var fieldVector = this.fieldVectors[fieldRef],
+          score = queryVectors[fieldRef.fieldName].similarity(fieldVector),
+          docMatch
+
+      if ((docMatch = matches[docRef]) !== undefined) {
+         docMatch.score += score
+         docMatch.matchData.combine(matchingFields[fieldRef])
+      } else {
+         var match = {
+            ref: docRef,
+            score: score,
+            matchData: matchingFields[fieldRef]
+         }
+         matches[docRef] = match
+         results.push(match)
+      }
+   }
 
   /*
    * Sort the results objects by score, highest first.
    */
-  return results.sort(function (a, b) {
-    return b.score - a.score
-  })
+   return results.sort(function (a, b) {
+      return b.score - a.score
+   })
 }
 
 /**
@@ -2250,24 +2249,24 @@ lunr.Index.prototype.query = function (fn) {
  * @returns {Object}
  */
 lunr.Index.prototype.toJSON = function () {
-  var invertedIndex = Object.keys(this.invertedIndex)
-    .sort()
-    .map(function (term) {
-      return [term, this.invertedIndex[term]]
-    }, this)
+   var invertedIndex = Object.keys(this.invertedIndex)
+      .sort()
+      .map(function (term) {
+         return [term, this.invertedIndex[term]]
+      }, this)
 
-  var fieldVectors = Object.keys(this.fieldVectors)
-    .map(function (ref) {
-      return [ref, this.fieldVectors[ref].toJSON()]
-    }, this)
+   var fieldVectors = Object.keys(this.fieldVectors)
+      .map(function (ref) {
+         return [ref, this.fieldVectors[ref].toJSON()]
+      }, this)
 
-  return {
-    version: lunr.version,
-    fields: this.fields,
-    fieldVectors: fieldVectors,
-    invertedIndex: invertedIndex,
-    pipeline: this.pipeline.toJSON()
-  }
+   return {
+      version: lunr.version,
+      fields: this.fields,
+      fieldVectors: fieldVectors,
+      invertedIndex: invertedIndex,
+      pipeline: this.pipeline.toJSON()
+   }
 }
 
 /**
@@ -2277,7 +2276,7 @@ lunr.Index.prototype.toJSON = function () {
  * @returns {lunr.Index}
  */
 lunr.Index.load = function (serializedIndex) {
-  var attrs = {},
+   var attrs = {},
       fieldVectors = {},
       serializedVectors = serializedIndex.fieldVectors,
       invertedIndex = Object.create(null),
@@ -2285,37 +2284,37 @@ lunr.Index.load = function (serializedIndex) {
       tokenSetBuilder = new lunr.TokenSet.Builder,
       pipeline = lunr.Pipeline.load(serializedIndex.pipeline)
 
-  if (serializedIndex.version != lunr.version) {
-    lunr.utils.warn("Version mismatch when loading serialised index. Current version of lunr '" + lunr.version + "' does not match serialized index '" + serializedIndex.version + "'")
-  }
+   if (serializedIndex.version != lunr.version) {
+      lunr.utils.warn("Version mismatch when loading serialised index. Current version of lunr '" + lunr.version + "' does not match serialized index '" + serializedIndex.version + "'")
+   }
 
-  for (var i = 0; i < serializedVectors.length; i++) {
-    var tuple = serializedVectors[i],
-        ref = tuple[0],
-        elements = tuple[1]
+   for (var i = 0; i < serializedVectors.length; i++) {
+      var tuple = serializedVectors[i],
+          ref = tuple[0],
+          elements = tuple[1]
 
-    fieldVectors[ref] = new lunr.Vector(elements)
-  }
+      fieldVectors[ref] = new lunr.Vector(elements)
+   }
 
-  for (var i = 0; i < serializedInvertedIndex.length; i++) {
-    var tuple = serializedInvertedIndex[i],
-        term = tuple[0],
-        posting = tuple[1]
+   for (var i = 0; i < serializedInvertedIndex.length; i++) {
+      var tuple = serializedInvertedIndex[i],
+          term = tuple[0],
+          posting = tuple[1]
 
-    tokenSetBuilder.insert(term)
-    invertedIndex[term] = posting
-  }
+      tokenSetBuilder.insert(term)
+      invertedIndex[term] = posting
+   }
 
-  tokenSetBuilder.finish()
+   tokenSetBuilder.finish()
 
-  attrs.fields = serializedIndex.fields
+   attrs.fields = serializedIndex.fields
 
-  attrs.fieldVectors = fieldVectors
-  attrs.invertedIndex = invertedIndex
-  attrs.tokenSet = tokenSetBuilder.root
-  attrs.pipeline = pipeline
+   attrs.fieldVectors = fieldVectors
+   attrs.invertedIndex = invertedIndex
+   attrs.tokenSet = tokenSetBuilder.root
+   attrs.pipeline = pipeline
 
-  return new lunr.Index(attrs)
+   return new lunr.Index(attrs)
 }
 /*!
  * lunr.Builder
@@ -2347,20 +2346,20 @@ lunr.Index.load = function (serializedIndex) {
  * @property {array} metadataWhitelist - A list of metadata keys that have been whitelisted for entry in the index.
  */
 lunr.Builder = function () {
-  this._ref = "id"
-  this._fields = Object.create(null)
-  this._documents = Object.create(null)
-  this.invertedIndex = Object.create(null)
-  this.fieldTermFrequencies = {}
-  this.fieldLengths = {}
-  this.tokenizer = lunr.tokenizer
-  this.pipeline = new lunr.Pipeline
-  this.searchPipeline = new lunr.Pipeline
-  this.documentCount = 0
-  this._b = 0.75
-  this._k1 = 1.2
-  this.termIndex = 0
-  this.metadataWhitelist = []
+   this._ref = "id"
+   this._fields = Object.create(null)
+   this._documents = Object.create(null)
+   this.invertedIndex = Object.create(null)
+   this.fieldTermFrequencies = {}
+   this.fieldLengths = {}
+   this.tokenizer = lunr.tokenizer
+   this.pipeline = new lunr.Pipeline
+   this.searchPipeline = new lunr.Pipeline
+   this.documentCount = 0
+   this._b = 0.75
+   this._k1 = 1.2
+   this.termIndex = 0
+   this.metadataWhitelist = []
 }
 
 /**
@@ -2376,7 +2375,7 @@ lunr.Builder = function () {
  * @param {string} ref - The name of the reference field in the document.
  */
 lunr.Builder.prototype.ref = function (ref) {
-  this._ref = ref
+   this._ref = ref
 }
 
 /**
@@ -2412,11 +2411,11 @@ lunr.Builder.prototype.ref = function (ref) {
  * @throws {RangeError} fieldName cannot contain unsupported characters '/'
  */
 lunr.Builder.prototype.field = function (fieldName, attributes) {
-  if (/\//.test(fieldName)) {
-    throw new RangeError ("Field '" + fieldName + "' contains illegal character '/'")
-  }
+   if (/\//.test(fieldName)) {
+      throw new RangeError ("Field '" + fieldName + "' contains illegal character '/'")
+   }
 
-  this._fields[fieldName] = attributes || {}
+   this._fields[fieldName] = attributes || {}
 }
 
 /**
@@ -2428,13 +2427,13 @@ lunr.Builder.prototype.field = function (fieldName, attributes) {
  * @param {number} number - The value to set for this tuning parameter.
  */
 lunr.Builder.prototype.b = function (number) {
-  if (number < 0) {
-    this._b = 0
-  } else if (number > 1) {
-    this._b = 1
-  } else {
-    this._b = number
-  }
+   if (number < 0) {
+      this._b = 0
+   } else if (number > 1) {
+      this._b = 1
+   } else {
+      this._b = number
+   }
 }
 
 /**
@@ -2445,7 +2444,7 @@ lunr.Builder.prototype.b = function (number) {
  * @param {number} number - The value to set for this tuning parameter.
  */
 lunr.Builder.prototype.k1 = function (number) {
-  this._k1 = number
+   this._k1 = number
 }
 
 /**
@@ -2466,73 +2465,73 @@ lunr.Builder.prototype.k1 = function (number) {
  * @param {number} [attributes.boost=1] - Boost applied to all terms within this document.
  */
 lunr.Builder.prototype.add = function (doc, attributes) {
-  var docRef = doc[this._ref],
-      fields = Object.keys(this._fields)
+   var docRef = doc[this._ref],
+       fields = Object.keys(this._fields)
 
-  this._documents[docRef] = attributes || {}
-  this.documentCount += 1
+   this._documents[docRef] = attributes || {}
+   this.documentCount += 1
 
-  for (var i = 0; i < fields.length; i++) {
-    var fieldName = fields[i],
-        extractor = this._fields[fieldName].extractor,
-        field = extractor ? extractor(doc) : doc[fieldName],
-        tokens = this.tokenizer(field, {
-          fields: [fieldName]
-        }),
-        terms = this.pipeline.run(tokens),
-        fieldRef = new lunr.FieldRef (docRef, fieldName),
-        fieldTerms = Object.create(null)
+   for (var i = 0; i < fields.length; i++) {
+      var fieldName = fields[i],
+          extractor = this._fields[fieldName].extractor,
+          field = extractor ? extractor(doc) : doc[fieldName],
+          tokens = this.tokenizer(field, {
+             fields: [fieldName]
+          }),
+          terms = this.pipeline.run(tokens),
+          fieldRef = new lunr.FieldRef (docRef, fieldName),
+          fieldTerms = Object.create(null)
 
-    this.fieldTermFrequencies[fieldRef] = fieldTerms
-    this.fieldLengths[fieldRef] = 0
+      this.fieldTermFrequencies[fieldRef] = fieldTerms
+      this.fieldLengths[fieldRef] = 0
 
-    // store the length of this field for this document
-    this.fieldLengths[fieldRef] += terms.length
+      // store the length of this field for this document
+      this.fieldLengths[fieldRef] += terms.length
 
-    // calculate term frequencies for this field
-    for (var j = 0; j < terms.length; j++) {
-      var term = terms[j]
+      // calculate term frequencies for this field
+      for (var j = 0; j < terms.length; j++) {
+         var term = terms[j]
 
-      if (fieldTerms[term] == undefined) {
-        fieldTerms[term] = 0
+         if (fieldTerms[term] == undefined) {
+            fieldTerms[term] = 0
+         }
+
+         fieldTerms[term] += 1
+
+         // add to inverted index
+         // create an initial posting if one doesn't exist
+         if (this.invertedIndex[term] == undefined) {
+            var posting = Object.create(null)
+            posting["_index"] = this.termIndex
+            this.termIndex += 1
+
+            for (var k = 0; k < fields.length; k++) {
+               posting[fields[k]] = Object.create(null)
+            }
+
+            this.invertedIndex[term] = posting
+         }
+
+         // add an entry for this term/fieldName/docRef to the invertedIndex
+         if (this.invertedIndex[term][fieldName][docRef] == undefined) {
+            this.invertedIndex[term][fieldName][docRef] = Object.create(null)
+         }
+
+         // store all whitelisted metadata about this token in the
+         // inverted index
+         for (var l = 0; l < this.metadataWhitelist.length; l++) {
+            var metadataKey = this.metadataWhitelist[l],
+                metadata = term.metadata[metadataKey]
+
+            if (this.invertedIndex[term][fieldName][docRef][metadataKey] == undefined) {
+               this.invertedIndex[term][fieldName][docRef][metadataKey] = []
+            }
+
+            this.invertedIndex[term][fieldName][docRef][metadataKey].push(metadata)
+         }
       }
 
-      fieldTerms[term] += 1
-
-      // add to inverted index
-      // create an initial posting if one doesn't exist
-      if (this.invertedIndex[term] == undefined) {
-        var posting = Object.create(null)
-        posting["_index"] = this.termIndex
-        this.termIndex += 1
-
-        for (var k = 0; k < fields.length; k++) {
-          posting[fields[k]] = Object.create(null)
-        }
-
-        this.invertedIndex[term] = posting
-      }
-
-      // add an entry for this term/fieldName/docRef to the invertedIndex
-      if (this.invertedIndex[term][fieldName][docRef] == undefined) {
-        this.invertedIndex[term][fieldName][docRef] = Object.create(null)
-      }
-
-      // store all whitelisted metadata about this token in the
-      // inverted index
-      for (var l = 0; l < this.metadataWhitelist.length; l++) {
-        var metadataKey = this.metadataWhitelist[l],
-            metadata = term.metadata[metadataKey]
-
-        if (this.invertedIndex[term][fieldName][docRef][metadataKey] == undefined) {
-          this.invertedIndex[term][fieldName][docRef][metadataKey] = []
-        }
-
-        this.invertedIndex[term][fieldName][docRef][metadataKey].push(metadata)
-      }
-    }
-
-  }
+   }
 }
 
 /**
@@ -2542,30 +2541,30 @@ lunr.Builder.prototype.add = function (doc, attributes) {
  */
 lunr.Builder.prototype.calculateAverageFieldLengths = function () {
 
-  var fieldRefs = Object.keys(this.fieldLengths),
-      numberOfFields = fieldRefs.length,
-      accumulator = {},
-      documentsWithField = {}
+   var fieldRefs = Object.keys(this.fieldLengths),
+       numberOfFields = fieldRefs.length,
+       accumulator = {},
+       documentsWithField = {}
 
-  for (var i = 0; i < numberOfFields; i++) {
-    var fieldRef = lunr.FieldRef.fromString(fieldRefs[i]),
-        field = fieldRef.fieldName
+   for (var i = 0; i < numberOfFields; i++) {
+      var fieldRef = lunr.FieldRef.fromString(fieldRefs[i]),
+         field = fieldRef.fieldName
 
-    documentsWithField[field] || (documentsWithField[field] = 0)
-    documentsWithField[field] += 1
+      documentsWithField[field] || (documentsWithField[field] = 0)
+      documentsWithField[field] += 1
 
-    accumulator[field] || (accumulator[field] = 0)
-    accumulator[field] += this.fieldLengths[fieldRef]
-  }
+      accumulator[field] || (accumulator[field] = 0)
+      accumulator[field] += this.fieldLengths[fieldRef]
+   }
 
-  var fields = Object.keys(this._fields)
+   var fields = Object.keys(this._fields)
 
-  for (var i = 0; i < fields.length; i++) {
-    var fieldName = fields[i]
-    accumulator[fieldName] = accumulator[fieldName] / documentsWithField[fieldName]
-  }
+   for (var i = 0; i < fields.length; i++) {
+      var fieldName = fields[i]
+      accumulator[fieldName] = accumulator[fieldName] / documentsWithField[fieldName]
+   }
 
-  this.averageFieldLength = accumulator
+   this.averageFieldLength = accumulator
 }
 
 /**
@@ -2574,55 +2573,55 @@ lunr.Builder.prototype.calculateAverageFieldLengths = function () {
  * @private
  */
 lunr.Builder.prototype.createFieldVectors = function () {
-  var fieldVectors = {},
-      fieldRefs = Object.keys(this.fieldTermFrequencies),
-      fieldRefsLength = fieldRefs.length,
-      termIdfCache = Object.create(null)
+   var fieldVectors = {},
+       fieldRefs = Object.keys(this.fieldTermFrequencies),
+       fieldRefsLength = fieldRefs.length,
+       termIdfCache = Object.create(null)
 
-  for (var i = 0; i < fieldRefsLength; i++) {
-    var fieldRef = lunr.FieldRef.fromString(fieldRefs[i]),
-        fieldName = fieldRef.fieldName,
-        fieldLength = this.fieldLengths[fieldRef],
-        fieldVector = new lunr.Vector,
-        termFrequencies = this.fieldTermFrequencies[fieldRef],
-        terms = Object.keys(termFrequencies),
-        termsLength = terms.length
+   for (var i = 0; i < fieldRefsLength; i++) {
+      var fieldRef = lunr.FieldRef.fromString(fieldRefs[i]),
+          fieldName = fieldRef.fieldName,
+          fieldLength = this.fieldLengths[fieldRef],
+          fieldVector = new lunr.Vector,
+          termFrequencies = this.fieldTermFrequencies[fieldRef],
+          terms = Object.keys(termFrequencies),
+          termsLength = terms.length
 
 
-    var fieldBoost = this._fields[fieldName].boost || 1,
-        docBoost = this._documents[fieldRef.docRef].boost || 1
+      var fieldBoost = this._fields[fieldName].boost || 1,
+          docBoost = this._documents[fieldRef.docRef].boost || 1
 
-    for (var j = 0; j < termsLength; j++) {
-      var term = terms[j],
-          tf = termFrequencies[term],
-          termIndex = this.invertedIndex[term]._index,
-          idf, score, scoreWithPrecision
+      for (var j = 0; j < termsLength; j++) {
+         var term = terms[j],
+             tf = termFrequencies[term],
+             termIndex = this.invertedIndex[term]._index,
+             idf, score, scoreWithPrecision
 
-      if (termIdfCache[term] === undefined) {
-        idf = lunr.idf(this.invertedIndex[term], this.documentCount)
-        termIdfCache[term] = idf
-      } else {
-        idf = termIdfCache[term]
+         if (termIdfCache[term] === undefined) {
+            idf = lunr.idf(this.invertedIndex[term], this.documentCount)
+            termIdfCache[term] = idf
+         } else {
+            idf = termIdfCache[term]
+         }
+
+         score = idf * ((this._k1 + 1) * tf) / (this._k1 * (1 - this._b + this._b * (fieldLength / this.averageFieldLength[fieldName])) + tf)
+         score *= fieldBoost
+         score *= docBoost
+         scoreWithPrecision = Math.round(score * 1000) / 1000
+         // Converts 1.23456789 to 1.234.
+         // Reducing the precision so that the vectors take up less
+         // space when serialised. Doing it now so that they behave
+         // the same before and after serialisation. Also, this is
+         // the fastest approach to reducing a number's precision in
+         // JavaScript.
+
+         fieldVector.insert(termIndex, scoreWithPrecision)
       }
 
-      score = idf * ((this._k1 + 1) * tf) / (this._k1 * (1 - this._b + this._b * (fieldLength / this.averageFieldLength[fieldName])) + tf)
-      score *= fieldBoost
-      score *= docBoost
-      scoreWithPrecision = Math.round(score * 1000) / 1000
-      // Converts 1.23456789 to 1.234.
-      // Reducing the precision so that the vectors take up less
-      // space when serialised. Doing it now so that they behave
-      // the same before and after serialisation. Also, this is
-      // the fastest approach to reducing a number's precision in
-      // JavaScript.
+      fieldVectors[fieldRef] = fieldVector
+   }
 
-      fieldVector.insert(termIndex, scoreWithPrecision)
-    }
-
-    fieldVectors[fieldRef] = fieldVector
-  }
-
-  this.fieldVectors = fieldVectors
+   this.fieldVectors = fieldVectors
 }
 
 /**
@@ -2631,9 +2630,9 @@ lunr.Builder.prototype.createFieldVectors = function () {
  * @private
  */
 lunr.Builder.prototype.createTokenSet = function () {
-  this.tokenSet = lunr.TokenSet.fromArray(
-    Object.keys(this.invertedIndex).sort()
-  )
+   this.tokenSet = lunr.TokenSet.fromArray(
+      Object.keys(this.invertedIndex).sort()
+   )
 }
 
 /**
@@ -2645,17 +2644,17 @@ lunr.Builder.prototype.createTokenSet = function () {
  * @returns {lunr.Index}
  */
 lunr.Builder.prototype.build = function () {
-  this.calculateAverageFieldLengths()
-  this.createFieldVectors()
-  this.createTokenSet()
+   this.calculateAverageFieldLengths()
+   this.createFieldVectors()
+   this.createTokenSet()
 
-  return new lunr.Index({
-    invertedIndex: this.invertedIndex,
-    fieldVectors: this.fieldVectors,
-    tokenSet: this.tokenSet,
-    fields: Object.keys(this._fields),
-    pipeline: this.searchPipeline
-  })
+   return new lunr.Index({
+      invertedIndex: this.invertedIndex,
+      fieldVectors: this.fieldVectors,
+      tokenSet: this.tokenSet,
+      fields: Object.keys(this._fields),
+      pipeline: this.searchPipeline
+   })
 }
 
 /**
@@ -2673,9 +2672,9 @@ lunr.Builder.prototype.build = function () {
  * @param {Function} plugin The plugin to apply.
  */
 lunr.Builder.prototype.use = function (fn) {
-  var args = Array.prototype.slice.call(arguments, 1)
-  args.unshift(this)
-  fn.apply(this, args)
+   var args = Array.prototype.slice.call(arguments, 1)
+   args.unshift(this)
+   fn.apply(this, args)
 }
 /**
  * Contains and collects metadata about a matching document.
@@ -2690,25 +2689,25 @@ lunr.Builder.prototype.use = function (fn) {
  * @see {@link lunr.Index~Result}
  */
 lunr.MatchData = function (term, field, metadata) {
-  var clonedMetadata = Object.create(null),
-      metadataKeys = Object.keys(metadata || {})
+   var clonedMetadata = Object.create(null),
+       metadataKeys = Object.keys(metadata || {})
 
   // Cloning the metadata to prevent the original
   // being mutated during match data combination.
   // Metadata is kept in an array within the inverted
   // index so cloning the data can be done with
   // Array#slice
-  for (var i = 0; i < metadataKeys.length; i++) {
-    var key = metadataKeys[i]
-    clonedMetadata[key] = metadata[key].slice()
-  }
+   for (var i = 0; i < metadataKeys.length; i++) {
+      var key = metadataKeys[i]
+      clonedMetadata[key] = metadata[key].slice()
+   }
 
-  this.metadata = Object.create(null)
+   this.metadata = Object.create(null)
 
-  if (term !== undefined) {
-    this.metadata[term] = Object.create(null)
-    this.metadata[term][field] = clonedMetadata
-  }
+   if (term !== undefined) {
+      this.metadata[term] = Object.create(null)
+      this.metadata[term][field] = clonedMetadata
+   }
 }
 
 /**
@@ -2721,36 +2720,36 @@ lunr.MatchData = function (term, field, metadata) {
  * @see {@link lunr.Index~Result}
  */
 lunr.MatchData.prototype.combine = function (otherMatchData) {
-  var terms = Object.keys(otherMatchData.metadata)
+   var terms = Object.keys(otherMatchData.metadata)
 
-  for (var i = 0; i < terms.length; i++) {
-    var term = terms[i],
-        fields = Object.keys(otherMatchData.metadata[term])
+   for (var i = 0; i < terms.length; i++) {
+      var term = terms[i],
+          fields = Object.keys(otherMatchData.metadata[term])
 
-    if (this.metadata[term] == undefined) {
-      this.metadata[term] = Object.create(null)
-    }
-
-    for (var j = 0; j < fields.length; j++) {
-      var field = fields[j],
-          keys = Object.keys(otherMatchData.metadata[term][field])
-
-      if (this.metadata[term][field] == undefined) {
-        this.metadata[term][field] = Object.create(null)
+      if (this.metadata[term] == undefined) {
+         this.metadata[term] = Object.create(null)
       }
 
-      for (var k = 0; k < keys.length; k++) {
-        var key = keys[k]
+      for (var j = 0; j < fields.length; j++) {
+         var field = fields[j],
+             keys = Object.keys(otherMatchData.metadata[term][field])
 
-        if (this.metadata[term][field][key] == undefined) {
-          this.metadata[term][field][key] = otherMatchData.metadata[term][field][key]
-        } else {
-          this.metadata[term][field][key] = this.metadata[term][field][key].concat(otherMatchData.metadata[term][field][key])
-        }
+         if (this.metadata[term][field] == undefined) {
+            this.metadata[term][field] = Object.create(null)
+         }
 
+         for (var k = 0; k < keys.length; k++) {
+            var key = keys[k]
+
+            if (this.metadata[term][field][key] == undefined) {
+               this.metadata[term][field][key] = otherMatchData.metadata[term][field][key]
+            } else {
+               this.metadata[term][field][key] = this.metadata[term][field][key].concat(otherMatchData.metadata[term][field][key])
+            }
+
+         }
       }
-    }
-  }
+   }
 }
 
 /**
@@ -2761,28 +2760,28 @@ lunr.MatchData.prototype.combine = function (otherMatchData) {
  * @param {object} metadata - The metadata recorded about this term in this field
  */
 lunr.MatchData.prototype.add = function (term, field, metadata) {
-  if (!(term in this.metadata)) {
-    this.metadata[term] = Object.create(null)
-    this.metadata[term][field] = metadata
-    return
-  }
+   if (!(term in this.metadata)) {
+      this.metadata[term] = Object.create(null)
+      this.metadata[term][field] = metadata
+      return
+   }
 
-  if (!(field in this.metadata[term])) {
-    this.metadata[term][field] = metadata
-    return
-  }
+   if (!(field in this.metadata[term])) {
+      this.metadata[term][field] = metadata
+      return
+   }
 
-  var metadataKeys = Object.keys(metadata)
+   var metadataKeys = Object.keys(metadata)
 
-  for (var i = 0; i < metadataKeys.length; i++) {
-    var key = metadataKeys[i]
+   for (var i = 0; i < metadataKeys.length; i++) {
+      var key = metadataKeys[i]
 
-    if (key in this.metadata[term][field]) {
-      this.metadata[term][field][key] = this.metadata[term][field][key].concat(metadata[key])
-    } else {
-      this.metadata[term][field][key] = metadata[key]
-    }
-  }
+      if (key in this.metadata[term][field]) {
+         this.metadata[term][field][key] = this.metadata[term][field][key].concat(metadata[key])
+      } else {
+         this.metadata[term][field][key] = metadata[key]
+      }
+   }
 }
 /**
  * A lunr.Query provides a programmatic way of defining queries to be performed
@@ -2796,8 +2795,8 @@ lunr.MatchData.prototype.add = function (term, field, metadata) {
  * @property {string[]} allFields - An array of all available fields in a lunr.Index.
  */
 lunr.Query = function (allFields) {
-  this.clauses = []
-  this.allFields = allFields
+   this.clauses = []
+   this.allFields = allFields
 }
 
 /**
@@ -2841,22 +2840,22 @@ lunr.Query.wildcard.TRAILING = 2
  * query.term('foo', { presence: lunr.Query.presence.REQUIRED })
  */
 lunr.Query.presence = {
-  /**
-   * Term's presence in a document is optional, this is the default value.
-   */
-  OPTIONAL: 1,
+   /**
+    * Term's presence in a document is optional, this is the default value.
+    */
+   OPTIONAL: 1,
 
-  /**
-   * Term's presence in a document is required, documents that do not contain
-   * this term will not be returned.
-   */
-  REQUIRED: 2,
+   /**
+    * Term's presence in a document is required, documents that do not contain
+    * this term will not be returned.
+    */
+   REQUIRED: 2,
 
-  /**
-   * Term's presence in a document is prohibited, documents that do contain
-   * this term will not be returned.
-   */
-  PROHIBITED: 3
+   /**
+    * Term's presence in a document is prohibited, documents that do contain
+    * this term will not be returned.
+    */
+   PROHIBITED: 3
 }
 
 /**
@@ -2883,37 +2882,37 @@ lunr.Query.presence = {
  * @returns {lunr.Query}
  */
 lunr.Query.prototype.clause = function (clause) {
-  if (!('fields' in clause)) {
-    clause.fields = this.allFields
-  }
+   if (!('fields' in clause)) {
+      clause.fields = this.allFields
+   }
 
-  if (!('boost' in clause)) {
-    clause.boost = 1
-  }
+   if (!('boost' in clause)) {
+      clause.boost = 1
+   }
 
-  if (!('usePipeline' in clause)) {
-    clause.usePipeline = true
-  }
+   if (!('usePipeline' in clause)) {
+      clause.usePipeline = true
+   }
 
-  if (!('wildcard' in clause)) {
-    clause.wildcard = lunr.Query.wildcard.NONE
-  }
+   if (!('wildcard' in clause)) {
+      clause.wildcard = lunr.Query.wildcard.NONE
+   }
 
-  if ((clause.wildcard & lunr.Query.wildcard.LEADING) && (clause.term.charAt(0) != lunr.Query.wildcard)) {
-    clause.term = "*" + clause.term
-  }
+   if ((clause.wildcard & lunr.Query.wildcard.LEADING) && (clause.term.charAt(0) != lunr.Query.wildcard)) {
+      clause.term = "*" + clause.term
+   }
 
-  if ((clause.wildcard & lunr.Query.wildcard.TRAILING) && (clause.term.slice(-1) != lunr.Query.wildcard)) {
-    clause.term = "" + clause.term + "*"
-  }
+   if ((clause.wildcard & lunr.Query.wildcard.TRAILING) && (clause.term.slice(-1) != lunr.Query.wildcard)) {
+      clause.term = "" + clause.term + "*"
+   }
 
-  if (!('presence' in clause)) {
-    clause.presence = lunr.Query.presence.OPTIONAL
-  }
+   if (!('presence' in clause)) {
+      clause.presence = lunr.Query.presence.OPTIONAL
+   }
 
-  this.clauses.push(clause)
+   this.clauses.push(clause)
 
-  return this
+   return this
 }
 
 /**
@@ -2924,13 +2923,13 @@ lunr.Query.prototype.clause = function (clause) {
  * @returns boolean
  */
 lunr.Query.prototype.isNegated = function () {
-  for (var i = 0; i < this.clauses.length; i++) {
-    if (this.clauses[i].presence != lunr.Query.presence.PROHIBITED) {
-      return false
-    }
-  }
+   for (var i = 0; i < this.clauses.length; i++) {
+      if (this.clauses[i].presence != lunr.Query.presence.PROHIBITED) {
+         return false
+      }
+   }
 
-  return true
+   return true
 }
 
 /**
@@ -2960,117 +2959,117 @@ lunr.Query.prototype.isNegated = function () {
  * query.term(lunr.tokenizer("foo bar"))
  */
 lunr.Query.prototype.term = function (term, options) {
-  if (Array.isArray(term)) {
-    term.forEach(function (t) { this.term(t, lunr.utils.clone(options)) }, this)
-    return this
-  }
+   if (Array.isArray(term)) {
+      term.forEach(function (t) { this.term(t, lunr.utils.clone(options)) }, this)
+      return this
+   }
 
-  var clause = options || {}
-  clause.term = term.toString()
+   var clause = options || {}
+   clause.term = term.toString()
 
-  this.clause(clause)
+   this.clause(clause)
 
-  return this
+   return this
 }
 lunr.QueryParseError = function (message, start, end) {
-  this.name = "QueryParseError"
-  this.message = message
-  this.start = start
-  this.end = end
+   this.name = "QueryParseError"
+   this.message = message
+   this.start = start
+   this.end = end
 }
 
 lunr.QueryParseError.prototype = new Error
 lunr.QueryLexer = function (str) {
-  this.lexemes = []
-  this.str = str
-  this.length = str.length
-  this.pos = 0
-  this.start = 0
-  this.escapeCharPositions = []
+   this.lexemes = []
+   this.str = str
+   this.length = str.length
+   this.pos = 0
+   this.start = 0
+   this.escapeCharPositions = []
 }
 
 lunr.QueryLexer.prototype.run = function () {
-  var state = lunr.QueryLexer.lexText
+   var state = lunr.QueryLexer.lexText
 
-  while (state) {
-    state = state(this)
-  }
+   while (state) {
+      state = state(this)
+   }
 }
 
 lunr.QueryLexer.prototype.sliceString = function () {
-  var subSlices = [],
-      sliceStart = this.start,
-      sliceEnd = this.pos
+   var subSlices = [],
+       sliceStart = this.start,
+       sliceEnd = this.pos
 
-  for (var i = 0; i < this.escapeCharPositions.length; i++) {
-    sliceEnd = this.escapeCharPositions[i]
-    subSlices.push(this.str.slice(sliceStart, sliceEnd))
-    sliceStart = sliceEnd + 1
-  }
+   for (var i = 0; i < this.escapeCharPositions.length; i++) {
+      sliceEnd = this.escapeCharPositions[i]
+      subSlices.push(this.str.slice(sliceStart, sliceEnd))
+      sliceStart = sliceEnd + 1
+   }
 
-  subSlices.push(this.str.slice(sliceStart, this.pos))
-  this.escapeCharPositions.length = 0
+   subSlices.push(this.str.slice(sliceStart, this.pos))
+   this.escapeCharPositions.length = 0
 
-  return subSlices.join('')
+   return subSlices.join('')
 }
 
 lunr.QueryLexer.prototype.emit = function (type) {
-  this.lexemes.push({
-    type: type,
-    str: this.sliceString(),
-    start: this.start,
-    end: this.pos
-  })
+   this.lexemes.push({
+      type: type,
+      str: this.sliceString(),
+      start: this.start,
+      end: this.pos
+   })
 
-  this.start = this.pos
+   this.start = this.pos
 }
 
 lunr.QueryLexer.prototype.escapeCharacter = function () {
-  this.escapeCharPositions.push(this.pos - 1)
-  this.pos += 1
+   this.escapeCharPositions.push(this.pos - 1)
+   this.pos += 1
 }
 
 lunr.QueryLexer.prototype.next = function () {
-  if (this.pos >= this.length) {
-    return lunr.QueryLexer.EOS
-  }
+   if (this.pos >= this.length) {
+      return lunr.QueryLexer.EOS
+   }
 
-  var char = this.str.charAt(this.pos)
-  this.pos += 1
-  return char
+   var char = this.str.charAt(this.pos)
+   this.pos += 1
+   return char
 }
 
 lunr.QueryLexer.prototype.width = function () {
-  return this.pos - this.start
+   return this.pos - this.start
 }
 
 lunr.QueryLexer.prototype.ignore = function () {
-  if (this.start == this.pos) {
-    this.pos += 1
-  }
+   if (this.start == this.pos) {
+      this.pos += 1
+   }
 
-  this.start = this.pos
+   this.start = this.pos
 }
 
 lunr.QueryLexer.prototype.backup = function () {
-  this.pos -= 1
+   this.pos -= 1
 }
 
 lunr.QueryLexer.prototype.acceptDigitRun = function () {
-  var char, charCode
+   var char, charCode
 
-  do {
-    char = this.next()
-    charCode = char.charCodeAt(0)
-  } while (charCode > 47 && charCode < 58)
+   do {
+      char = this.next()
+      charCode = char.charCodeAt(0)
+   } while (charCode > 47 && charCode < 58)
 
-  if (char != lunr.QueryLexer.EOS) {
-    this.backup()
-  }
+   if (char != lunr.QueryLexer.EOS) {
+      this.backup()
+   }
 }
 
 lunr.QueryLexer.prototype.more = function () {
-  return this.pos < this.length
+   return this.pos < this.length
 }
 
 lunr.QueryLexer.EOS = 'EOS'
@@ -3081,43 +3080,43 @@ lunr.QueryLexer.BOOST = 'BOOST'
 lunr.QueryLexer.PRESENCE = 'PRESENCE'
 
 lunr.QueryLexer.lexField = function (lexer) {
-  lexer.backup()
-  lexer.emit(lunr.QueryLexer.FIELD)
-  lexer.ignore()
-  return lunr.QueryLexer.lexText
+   lexer.backup()
+   lexer.emit(lunr.QueryLexer.FIELD)
+   lexer.ignore()
+   return lunr.QueryLexer.lexText
 }
 
 lunr.QueryLexer.lexTerm = function (lexer) {
-  if (lexer.width() > 1) {
-    lexer.backup()
-    lexer.emit(lunr.QueryLexer.TERM)
-  }
+   if (lexer.width() > 1) {
+      lexer.backup()
+      lexer.emit(lunr.QueryLexer.TERM)
+   }
 
-  lexer.ignore()
+   lexer.ignore()
 
-  if (lexer.more()) {
-    return lunr.QueryLexer.lexText
-  }
+   if (lexer.more()) {
+      return lunr.QueryLexer.lexText
+   }
 }
 
 lunr.QueryLexer.lexEditDistance = function (lexer) {
-  lexer.ignore()
-  lexer.acceptDigitRun()
-  lexer.emit(lunr.QueryLexer.EDIT_DISTANCE)
-  return lunr.QueryLexer.lexText
+   lexer.ignore()
+   lexer.acceptDigitRun()
+   lexer.emit(lunr.QueryLexer.EDIT_DISTANCE)
+   return lunr.QueryLexer.lexText
 }
 
 lunr.QueryLexer.lexBoost = function (lexer) {
-  lexer.ignore()
-  lexer.acceptDigitRun()
-  lexer.emit(lunr.QueryLexer.BOOST)
-  return lunr.QueryLexer.lexText
+   lexer.ignore()
+   lexer.acceptDigitRun()
+   lexer.emit(lunr.QueryLexer.BOOST)
+   return lunr.QueryLexer.lexText
 }
 
 lunr.QueryLexer.lexEOS = function (lexer) {
-  if (lexer.width() > 0) {
-    lexer.emit(lunr.QueryLexer.TERM)
-  }
+   if (lexer.width() > 0) {
+      lexer.emit(lunr.QueryLexer.TERM)
+   }
 }
 
 // This matches the separator used when tokenising fields
@@ -3134,342 +3133,342 @@ lunr.QueryLexer.lexEOS = function (lexer) {
 lunr.QueryLexer.termSeparator = lunr.tokenizer.separator
 
 lunr.QueryLexer.lexText = function (lexer) {
-  while (true) {
-    var char = lexer.next()
+   while (true) {
+      var char = lexer.next()
 
-    if (char == lunr.QueryLexer.EOS) {
-      return lunr.QueryLexer.lexEOS
-    }
-
-    // Escape character is '\'
-    if (char.charCodeAt(0) == 92) {
-      lexer.escapeCharacter()
-      continue
-    }
-
-    if (char == ":") {
-      return lunr.QueryLexer.lexField
-    }
-
-    if (char == "~") {
-      lexer.backup()
-      if (lexer.width() > 0) {
-        lexer.emit(lunr.QueryLexer.TERM)
+      if (char == lunr.QueryLexer.EOS) {
+         return lunr.QueryLexer.lexEOS
       }
-      return lunr.QueryLexer.lexEditDistance
-    }
 
-    if (char == "^") {
-      lexer.backup()
-      if (lexer.width() > 0) {
-        lexer.emit(lunr.QueryLexer.TERM)
+      // Escape character is '\'
+      if (char.charCodeAt(0) == 92) {
+         lexer.escapeCharacter()
+         continue
       }
-      return lunr.QueryLexer.lexBoost
-    }
 
-    // "+" indicates term presence is required
-    // checking for length to ensure that only
-    // leading "+" are considered
-    if (char == "+" && lexer.width() === 1) {
-      lexer.emit(lunr.QueryLexer.PRESENCE)
-      return lunr.QueryLexer.lexText
-    }
+      if (char == ":") {
+         return lunr.QueryLexer.lexField
+      }
 
-    // "-" indicates term presence is prohibited
-    // checking for length to ensure that only
-    // leading "-" are considered
-    if (char == "-" && lexer.width() === 1) {
-      lexer.emit(lunr.QueryLexer.PRESENCE)
-      return lunr.QueryLexer.lexText
-    }
+      if (char == "~") {
+         lexer.backup()
+         if (lexer.width() > 0) {
+            lexer.emit(lunr.QueryLexer.TERM)
+         }
+         return lunr.QueryLexer.lexEditDistance
+      }
 
-    if (char.match(lunr.QueryLexer.termSeparator)) {
-      return lunr.QueryLexer.lexTerm
-    }
-  }
+      if (char == "^") {
+         lexer.backup()
+         if (lexer.width() > 0) {
+            lexer.emit(lunr.QueryLexer.TERM)
+         }
+         return lunr.QueryLexer.lexBoost
+      }
+
+      // "+" indicates term presence is required
+      // checking for length to ensure that only
+      // leading "+" are considered
+      if (char == "+" && lexer.width() === 1) {
+         lexer.emit(lunr.QueryLexer.PRESENCE)
+         return lunr.QueryLexer.lexText
+      }
+
+      // "-" indicates term presence is prohibited
+      // checking for length to ensure that only
+      // leading "-" are considered
+      if (char == "-" && lexer.width() === 1) {
+         lexer.emit(lunr.QueryLexer.PRESENCE)
+         return lunr.QueryLexer.lexText
+      }
+
+      if (char.match(lunr.QueryLexer.termSeparator)) {
+         return lunr.QueryLexer.lexTerm
+      }
+   }
 }
 
 lunr.QueryParser = function (str, query) {
-  this.lexer = new lunr.QueryLexer (str)
-  this.query = query
-  this.currentClause = {}
-  this.lexemeIdx = 0
+   this.lexer = new lunr.QueryLexer (str)
+   this.query = query
+   this.currentClause = {}
+   this.lexemeIdx = 0
 }
 
 lunr.QueryParser.prototype.parse = function () {
-  this.lexer.run()
-  this.lexemes = this.lexer.lexemes
+   this.lexer.run()
+   this.lexemes = this.lexer.lexemes
 
-  var state = lunr.QueryParser.parseClause
+   var state = lunr.QueryParser.parseClause
 
-  while (state) {
-    state = state(this)
-  }
+   while (state) {
+      state = state(this)
+   }
 
-  return this.query
+   return this.query
 }
 
 lunr.QueryParser.prototype.peekLexeme = function () {
-  return this.lexemes[this.lexemeIdx]
+   return this.lexemes[this.lexemeIdx]
 }
 
 lunr.QueryParser.prototype.consumeLexeme = function () {
-  var lexeme = this.peekLexeme()
-  this.lexemeIdx += 1
-  return lexeme
+   var lexeme = this.peekLexeme()
+   this.lexemeIdx += 1
+   return lexeme
 }
 
 lunr.QueryParser.prototype.nextClause = function () {
-  var completedClause = this.currentClause
-  this.query.clause(completedClause)
-  this.currentClause = {}
+   var completedClause = this.currentClause
+   this.query.clause(completedClause)
+   this.currentClause = {}
 }
 
 lunr.QueryParser.parseClause = function (parser) {
-  var lexeme = parser.peekLexeme()
+   var lexeme = parser.peekLexeme()
 
-  if (lexeme == undefined) {
-    return
-  }
+   if (lexeme == undefined) {
+      return
+   }
 
-  switch (lexeme.type) {
-    case lunr.QueryLexer.PRESENCE:
-      return lunr.QueryParser.parsePresence
-    case lunr.QueryLexer.FIELD:
-      return lunr.QueryParser.parseField
-    case lunr.QueryLexer.TERM:
-      return lunr.QueryParser.parseTerm
-    default:
-      var errorMessage = "expected either a field or a term, found " + lexeme.type
+   switch (lexeme.type) {
+      case lunr.QueryLexer.PRESENCE:
+         return lunr.QueryParser.parsePresence
+      case lunr.QueryLexer.FIELD:
+         return lunr.QueryParser.parseField
+      case lunr.QueryLexer.TERM:
+         return lunr.QueryParser.parseTerm
+      default:
+         var errorMessage = "expected either a field or a term, found " + lexeme.type
 
-      if (lexeme.str.length >= 1) {
-        errorMessage += " with value '" + lexeme.str + "'"
-      }
+         if (lexeme.str.length >= 1) {
+            errorMessage += " with value '" + lexeme.str + "'"
+         }
 
-      throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
-  }
+         throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
+   }
 }
 
 lunr.QueryParser.parsePresence = function (parser) {
-  var lexeme = parser.consumeLexeme()
+   var lexeme = parser.consumeLexeme()
 
-  if (lexeme == undefined) {
-    return
-  }
+   if (lexeme == undefined) {
+      return
+   }
 
-  switch (lexeme.str) {
-    case "-":
-      parser.currentClause.presence = lunr.Query.presence.PROHIBITED
-      break
-    case "+":
-      parser.currentClause.presence = lunr.Query.presence.REQUIRED
-      break
-    default:
-      var errorMessage = "unrecognised presence operator'" + lexeme.str + "'"
+   switch (lexeme.str) {
+      case "-":
+         parser.currentClause.presence = lunr.Query.presence.PROHIBITED
+         break
+      case "+":
+         parser.currentClause.presence = lunr.Query.presence.REQUIRED
+         break
+      default:
+         var errorMessage = "unrecognised presence operator'" + lexeme.str + "'"
+         throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
+   }
+
+   var nextLexeme = parser.peekLexeme()
+
+   if (nextLexeme == undefined) {
+      var errorMessage = "expecting term or field, found nothing"
       throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
-  }
+   }
 
-  var nextLexeme = parser.peekLexeme()
-
-  if (nextLexeme == undefined) {
-    var errorMessage = "expecting term or field, found nothing"
-    throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
-  }
-
-  switch (nextLexeme.type) {
-    case lunr.QueryLexer.FIELD:
-      return lunr.QueryParser.parseField
-    case lunr.QueryLexer.TERM:
-      return lunr.QueryParser.parseTerm
-    default:
-      var errorMessage = "expecting term or field, found '" + nextLexeme.type + "'"
-      throw new lunr.QueryParseError (errorMessage, nextLexeme.start, nextLexeme.end)
-  }
+   switch (nextLexeme.type) {
+      case lunr.QueryLexer.FIELD:
+         return lunr.QueryParser.parseField
+      case lunr.QueryLexer.TERM:
+         return lunr.QueryParser.parseTerm
+      default:
+         var errorMessage = "expecting term or field, found '" + nextLexeme.type + "'"
+         throw new lunr.QueryParseError (errorMessage, nextLexeme.start, nextLexeme.end)
+   }
 }
 
 lunr.QueryParser.parseField = function (parser) {
-  var lexeme = parser.consumeLexeme()
+   var lexeme = parser.consumeLexeme()
 
-  if (lexeme == undefined) {
-    return
-  }
+   if (lexeme == undefined) {
+      return
+   }
 
-  if (parser.query.allFields.indexOf(lexeme.str) == -1) {
-    var possibleFields = parser.query.allFields.map(function (f) { return "'" + f + "'" }).join(', '),
+   if (parser.query.allFields.indexOf(lexeme.str) == -1) {
+      var possibleFields = parser.query.allFields.map(function (f) { return "'" + f + "'" }).join(', '),
         errorMessage = "unrecognised field '" + lexeme.str + "', possible fields: " + possibleFields
 
-    throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
-  }
+      throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
+   }
 
-  parser.currentClause.fields = [lexeme.str]
+   parser.currentClause.fields = [lexeme.str]
 
-  var nextLexeme = parser.peekLexeme()
+   var nextLexeme = parser.peekLexeme()
 
-  if (nextLexeme == undefined) {
-    var errorMessage = "expecting term, found nothing"
-    throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
-  }
+   if (nextLexeme == undefined) {
+      var errorMessage = "expecting term, found nothing"
+      throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
+   }
 
-  switch (nextLexeme.type) {
-    case lunr.QueryLexer.TERM:
-      return lunr.QueryParser.parseTerm
-    default:
-      var errorMessage = "expecting term, found '" + nextLexeme.type + "'"
-      throw new lunr.QueryParseError (errorMessage, nextLexeme.start, nextLexeme.end)
-  }
+   switch (nextLexeme.type) {
+      case lunr.QueryLexer.TERM:
+         return lunr.QueryParser.parseTerm
+      default:
+         var errorMessage = "expecting term, found '" + nextLexeme.type + "'"
+         throw new lunr.QueryParseError (errorMessage, nextLexeme.start, nextLexeme.end)
+   }
 }
 
 lunr.QueryParser.parseTerm = function (parser) {
-  var lexeme = parser.consumeLexeme()
+   var lexeme = parser.consumeLexeme()
 
-  if (lexeme == undefined) {
-    return
-  }
+   if (lexeme == undefined) {
+      return
+   }
 
-  parser.currentClause.term = lexeme.str.toLowerCase()
+   parser.currentClause.term = lexeme.str.toLowerCase()
 
-  if (lexeme.str.indexOf("*") != -1) {
-    parser.currentClause.usePipeline = false
-  }
+   if (lexeme.str.indexOf("*") != -1) {
+      parser.currentClause.usePipeline = false
+   }
 
-  var nextLexeme = parser.peekLexeme()
+   var nextLexeme = parser.peekLexeme()
 
-  if (nextLexeme == undefined) {
-    parser.nextClause()
-    return
-  }
-
-  switch (nextLexeme.type) {
-    case lunr.QueryLexer.TERM:
+   if (nextLexeme == undefined) {
       parser.nextClause()
-      return lunr.QueryParser.parseTerm
-    case lunr.QueryLexer.FIELD:
-      parser.nextClause()
-      return lunr.QueryParser.parseField
-    case lunr.QueryLexer.EDIT_DISTANCE:
-      return lunr.QueryParser.parseEditDistance
-    case lunr.QueryLexer.BOOST:
-      return lunr.QueryParser.parseBoost
-    case lunr.QueryLexer.PRESENCE:
-      parser.nextClause()
-      return lunr.QueryParser.parsePresence
-    default:
-      var errorMessage = "Unexpected lexeme type '" + nextLexeme.type + "'"
-      throw new lunr.QueryParseError (errorMessage, nextLexeme.start, nextLexeme.end)
-  }
+      return
+   }
+
+   switch (nextLexeme.type) {
+      case lunr.QueryLexer.TERM:
+         parser.nextClause()
+         return lunr.QueryParser.parseTerm
+      case lunr.QueryLexer.FIELD:
+         parser.nextClause()
+         return lunr.QueryParser.parseField
+      case lunr.QueryLexer.EDIT_DISTANCE:
+         return lunr.QueryParser.parseEditDistance
+      case lunr.QueryLexer.BOOST:
+         return lunr.QueryParser.parseBoost
+      case lunr.QueryLexer.PRESENCE:
+         parser.nextClause()
+         return lunr.QueryParser.parsePresence
+      default:
+         var errorMessage = "Unexpected lexeme type '" + nextLexeme.type + "'"
+         throw new lunr.QueryParseError (errorMessage, nextLexeme.start, nextLexeme.end)
+   }
 }
 
 lunr.QueryParser.parseEditDistance = function (parser) {
-  var lexeme = parser.consumeLexeme()
+   var lexeme = parser.consumeLexeme()
 
-  if (lexeme == undefined) {
-    return
-  }
+   if (lexeme == undefined) {
+      return
+   }
 
-  var editDistance = parseInt(lexeme.str, 10)
+   var editDistance = parseInt(lexeme.str, 10)
 
-  if (isNaN(editDistance)) {
-    var errorMessage = "edit distance must be numeric"
-    throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
-  }
+   if (isNaN(editDistance)) {
+      var errorMessage = "edit distance must be numeric"
+      throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
+   }
 
-  parser.currentClause.editDistance = editDistance
+   parser.currentClause.editDistance = editDistance
 
-  var nextLexeme = parser.peekLexeme()
+   var nextLexeme = parser.peekLexeme()
 
-  if (nextLexeme == undefined) {
-    parser.nextClause()
-    return
-  }
-
-  switch (nextLexeme.type) {
-    case lunr.QueryLexer.TERM:
+   if (nextLexeme == undefined) {
       parser.nextClause()
-      return lunr.QueryParser.parseTerm
-    case lunr.QueryLexer.FIELD:
-      parser.nextClause()
-      return lunr.QueryParser.parseField
-    case lunr.QueryLexer.EDIT_DISTANCE:
-      return lunr.QueryParser.parseEditDistance
-    case lunr.QueryLexer.BOOST:
-      return lunr.QueryParser.parseBoost
-    case lunr.QueryLexer.PRESENCE:
-      parser.nextClause()
-      return lunr.QueryParser.parsePresence
-    default:
-      var errorMessage = "Unexpected lexeme type '" + nextLexeme.type + "'"
-      throw new lunr.QueryParseError (errorMessage, nextLexeme.start, nextLexeme.end)
-  }
+      return
+   }
+
+   switch (nextLexeme.type) {
+      case lunr.QueryLexer.TERM:
+         parser.nextClause()
+         return lunr.QueryParser.parseTerm
+      case lunr.QueryLexer.FIELD:
+         parser.nextClause()
+         return lunr.QueryParser.parseField
+      case lunr.QueryLexer.EDIT_DISTANCE:
+         return lunr.QueryParser.parseEditDistance
+      case lunr.QueryLexer.BOOST:
+         return lunr.QueryParser.parseBoost
+      case lunr.QueryLexer.PRESENCE:
+         parser.nextClause()
+         return lunr.QueryParser.parsePresence
+      default:
+         var errorMessage = "Unexpected lexeme type '" + nextLexeme.type + "'"
+         throw new lunr.QueryParseError (errorMessage, nextLexeme.start, nextLexeme.end)
+   }
 }
 
 lunr.QueryParser.parseBoost = function (parser) {
-  var lexeme = parser.consumeLexeme()
+   var lexeme = parser.consumeLexeme()
 
-  if (lexeme == undefined) {
-    return
-  }
+   if (lexeme == undefined) {
+      return
+   }
 
-  var boost = parseInt(lexeme.str, 10)
+   var boost = parseInt(lexeme.str, 10)
 
-  if (isNaN(boost)) {
-    var errorMessage = "boost must be numeric"
-    throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
-  }
+   if (isNaN(boost)) {
+      var errorMessage = "boost must be numeric"
+      throw new lunr.QueryParseError (errorMessage, lexeme.start, lexeme.end)
+   }
 
-  parser.currentClause.boost = boost
+   parser.currentClause.boost = boost
 
-  var nextLexeme = parser.peekLexeme()
+   var nextLexeme = parser.peekLexeme()
 
-  if (nextLexeme == undefined) {
-    parser.nextClause()
-    return
-  }
-
-  switch (nextLexeme.type) {
-    case lunr.QueryLexer.TERM:
+   if (nextLexeme == undefined) {
       parser.nextClause()
-      return lunr.QueryParser.parseTerm
-    case lunr.QueryLexer.FIELD:
-      parser.nextClause()
-      return lunr.QueryParser.parseField
-    case lunr.QueryLexer.EDIT_DISTANCE:
-      return lunr.QueryParser.parseEditDistance
-    case lunr.QueryLexer.BOOST:
-      return lunr.QueryParser.parseBoost
-    case lunr.QueryLexer.PRESENCE:
-      parser.nextClause()
-      return lunr.QueryParser.parsePresence
-    default:
-      var errorMessage = "Unexpected lexeme type '" + nextLexeme.type + "'"
-      throw new lunr.QueryParseError (errorMessage, nextLexeme.start, nextLexeme.end)
-  }
+      return
+   }
+
+   switch (nextLexeme.type) {
+      case lunr.QueryLexer.TERM:
+         parser.nextClause()
+         return lunr.QueryParser.parseTerm
+      case lunr.QueryLexer.FIELD:
+         parser.nextClause()
+         return lunr.QueryParser.parseField
+      case lunr.QueryLexer.EDIT_DISTANCE:
+         return lunr.QueryParser.parseEditDistance
+      case lunr.QueryLexer.BOOST:
+         return lunr.QueryParser.parseBoost
+      case lunr.QueryLexer.PRESENCE:
+         parser.nextClause()
+         return lunr.QueryParser.parsePresence
+      default:
+         var errorMessage = "Unexpected lexeme type '" + nextLexeme.type + "'"
+         throw new lunr.QueryParseError (errorMessage, nextLexeme.start, nextLexeme.end)
+   }
 }
 
   /**
    * export the module via AMD, CommonJS or as a browser global
    * Export code from https://github.com/umdjs/umd/blob/master/returnExports.js
    */
-  ;(function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-      // AMD. Register as an anonymous module.
-      define(factory)
-    } else if (typeof exports === 'object') {
+   ;(function (root, factory) {
+      if (typeof define === 'function' && define.amd) {
+         // AMD. Register as an anonymous module.
+         define(factory)
+      } else if (typeof exports === 'object') {
+         /**
+          * Node. Does not work with strict CommonJS, but
+          * only CommonJS-like enviroments that support module.exports,
+          * like Node.
+          */
+         module.exports = factory()
+      } else {
+         // Browser globals (root is window)
+         root.lunr = factory()
+      }
+   }(this, function () {
       /**
-       * Node. Does not work with strict CommonJS, but
-       * only CommonJS-like enviroments that support module.exports,
-       * like Node.
+       * Just return a value to define the module export.
+       * This example returns an object, but the module
+       * can return a function as the exported value.
        */
-      module.exports = factory()
-    } else {
-      // Browser globals (root is window)
-      root.lunr = factory()
-    }
-  }(this, function () {
-    /**
-     * Just return a value to define the module export.
-     * This example returns an object, but the module
-     * can return a function as the exported value.
-     */
-    return lunr
-  }))
+      return lunr
+   }))
 })();

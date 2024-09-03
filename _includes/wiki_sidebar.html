@@ -3,14 +3,27 @@
    {% if page.other_projects %}
 
       <section class="entry-other_projects">
+
          View in other collections:
+
          <ul>
+
             {% for item in page.other_projects %}
-               <li>
-                  <a href="/{{ item }}{{ page.url | remove_first: "/wiki" }}">{{ item | capitalize }}</a>
-               </li>
+
+               {% if other_projects == "grammars" %}
+                  <li>
+                     <a href="/{{ item }}{{ page.language | remove_first: "/wiki"  }}">{{ item | capitalize }}</a>
+                  </li>
+               {% else %}
+                  <li>
+                     <a href="/{{ item }}{{ page.url | remove_first: "/wiki" }}">{{ item | capitalize }}</a>
+                  </li>
+               {% endif %}
+
             {% endfor %}
+
          </ul>
+
       </section>
 
    {% endif %}
@@ -19,10 +32,15 @@
 
    {% if page.image %}
       <figure>
+
          <img src="{{ page.image }}" width=auto class="entry-image">
+
          {% if page.image_caption %}
-            <figcaption>{{ page.image_caption }}</figcaption>
+            <figcaption>
+               {{ page.image_caption }}
+            </figcaption>
          {% endif %}
+
       </figure>
    {% endif %}
 
@@ -33,20 +51,15 @@
       <section class="entry-quickstats">
 
          <table class="stats-table">
+            
+            <!-- This logic iterates through every "quickstats" key-value pair in the front matter and generates a table row for each one. -->
             {% for stat in page.quickstats %}
-               {% if stat[0] == "colspan_2" %}
-                  <tr>
-                     <td colspan="2" class="entry-quickstats_double">
-                        {{ stat[1] | replace: "_", " " | capitalize }}
-                     </td>
-                  </tr>
-               {% else %}
-                  <tr>
-                     <td>{{ stat[0] | replace: "_", " " | capitalize }}</td>
-                     <td>{{ stat[1] }}</td>
-                  </tr>
-               {% endif %}
+               <tr>
+                  <td>{{ stat[0] | replace: "_", " " | capitalize }}</td>
+                  <td>{{ stat[1] }}</td>
+               </tr>
             {% endfor %}
+
          </table>
 
       </section>

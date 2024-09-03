@@ -5,27 +5,34 @@
 {% include collections_header.html %}
 
 
+
 <section class="reference-desk">
 
-      <header class="collections-portals">
-         <nav class="collections-portals_grid">
+   <header class="collections-portals">
 
-            {% for item in site.data.projects %}
-               {% if page.url contains item.link %}
-                  {% for item in item.portals %}
-                     <a href="{{ item.link }}" class="collections-portal_card">
-                        <header>
-                           <i class="{{ item.icon }} portal-icon"></i>
-                           {{ item.portal }}
-                        </header>
-                        {{ item.summary }}
-                     </a>
-                  {% endfor %}
-               {% endif %}
-            {% endfor %}
+      <nav class="collections-portals_grid">
 
-         </nav>
-      </header>
+         {% for item in site.data.projects %}
+
+            {% if page.url contains item.link %}
+
+               {% for item in item.portals %}
+                  <a href="{{ item.link }}" class="collections-portal_card">
+                     <header>
+                        <i class="{{ item.icon }} portal-icon"></i>
+                        {{ item.portal }}
+                     </header>
+                     {{ item.summary }}
+                  </a>
+               {% endfor %}
+
+            {% endif %}
+
+         {% endfor %}
+
+      </nav>
+
+   </header>
 
    <!---
 

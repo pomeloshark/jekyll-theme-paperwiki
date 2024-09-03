@@ -3,6 +3,7 @@
 ---
 
 {% for item in site.data.portals_wiki %}
+
    {% if page.title contains item.name %}
 
       <ul class="portal-list">
@@ -10,25 +11,28 @@
          {% for item in item.categories %}
 
             <li class="portal-cat">
+
                <a href="{{ item.link }}">{{ item.cat }}</a>
 
                {% if item.subcategories %}
+
                   <ul class="portal-subcat_list">
 
                      {% for item in item.subcategories %}
-                           <li class="portal-subcat_inline">
-                              <a href="{{ item.link }}" class="portal-subcat">{{ item.subcat }}</a>
+                        <li class="portal-subcat_inline">
+                           <a href="{{ item.link }}" class="portal-subcat">{{ item.subcat }}</a>
 
-                              {% if item.tags %}
-                                 ⋅
-                                 {% for item in item.tags %}
-                                    <a href="" class="portal-tag">{{ item.tag }}</a>
-                                 {% endfor %}
-                              {% endif %}
-                           </li>
+                           {% if item.tags %}
+                              ⋅
+                              {% for item in item.tags %}
+                                 <a href="" class="portal-tag">{{ item.tag }}</a>
+                              {% endfor %}
+                           {% endif %}
+                        </li>
                      {% endfor %}
 
                   </ul>
+
                {% endif %}
 
             </li>
@@ -38,4 +42,5 @@
       </ul>
 
    {% endif %}
+
 {% endfor %}

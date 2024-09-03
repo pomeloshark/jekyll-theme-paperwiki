@@ -8,7 +8,7 @@
 {%- assign docs = site.documents -%}
 
 {%- if site.random_redirect.posts == true -%}
-  {%- assign docs = docs | concat: site.posts -%}
+   {%- assign docs = docs | concat: site.posts -%}
 {%- endif -%}
 
 {% include random_redirect.html %}

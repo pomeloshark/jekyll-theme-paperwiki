@@ -1,6 +1,7 @@
 /*------------------------------------*\
   # GLOBAL STYLING
-  # components universal to all pages
+  # components universal to all pages:
+  # header and footer
 \*------------------------------------*/
 
 .global-header,
@@ -15,6 +16,8 @@
    position: -webkit-sticky; /* Safari */
    position: sticky;
    top: 0;
+
+   z-index: 100;
 
    display: flex;
    align-items: center;
